@@ -1,4 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap') layer(base);
+
+/* Optimize font loading for better PageSpeed */
+@font-face {
+  font-family: 'Playfair Display';
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/playfairdisplay/v32/nuFiD-vYSZviVYUb_rj3ij__anPtgzWwO1GQrE9r60KM.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fQMQ.woff2') format('woff2');
+}
 
 @tailwind base;
 @tailwind components;

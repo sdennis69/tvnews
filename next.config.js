@@ -20,8 +20,20 @@ const nextConfig = {
   },
   // Enable ISR (Incremental Static Regeneration) for WP Engine
   experimental: {
-    isrMemoryCacheSize: 52 * 1024 * 1024, // 52MB
+    cacheMaxMemorySize: 52 * 1024 * 1024, // 52MB
   },
+  // Image optimization for better PageSpeed
+  images: {
+    ...nextConfig.images,
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+  // Optimize for modern browsers only
+  swcMinify: true,
+  compress: true,
+  // Enable automatic static optimization
+  optimizeFonts: true,
 }
 
 module.exports = nextConfig

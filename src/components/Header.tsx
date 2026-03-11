@@ -16,7 +16,7 @@ export default function Header() {
     { label: 'Sports', href: '/category/sports' },
     { label: 'Weather', href: '/weather' },
     { label: 'Entertainment', href: '/category/entertainment' },
-    { label: 'Live TV', href: '/live' },
+    { label: 'Live TV', href: '/livestream' },
     { label: 'About', href: '/about' },
   ]
 
