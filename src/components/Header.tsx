@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       {/* Top Header Bar - Maroon Background */}
-      <div className="bg-[#8B0000] py-3">
+      <div className="bg-[#003D7A] py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
@@ -45,7 +45,7 @@ export default function Header() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="block px-4 py-3.5 text-sm font-bold text-[#333333] hover:text-[#CC0000] border-b-4 border-transparent hover:border-[#CC0000] transition-all whitespace-nowrap"
+                    className="block px-4 py-3.5 text-sm font-bold text-[#333333] hover:text-[#00DD00] border-b-4 border-transparent hover:border-[#00DD00] transition-all whitespace-nowrap"
                   >
                     {item.label}
                   </a>
@@ -55,7 +55,7 @@ export default function Header() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden text-[#333333] hover:text-[#CC0000] transition-all p-2"
+              className="md:hidden text-[#333333] hover:text-[#00DD00] transition-all p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -78,7 +78,7 @@ export default function Header() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="block px-4 py-3 text-sm font-bold text-[#333333] hover:bg-[#F5F5F5] hover:text-[#CC0000] transition-all"
+                    className="block px-4 py-3 text-sm font-bold text-[#333333] hover:bg-[#F5F5F5] hover:text-[#00DD00] transition-all"
                   >
                     {item.label}
                   </a>

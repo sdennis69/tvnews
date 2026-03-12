@@ -124,7 +124,7 @@ export default function FeaturedArticles() {
                   {article.title}
                 </h3>
 
-                <p className="text-sm text-[#666666] mb-4 line-clamp-2">
+                <p className="text-sm text-[#555555] mb-4 line-clamp-2">
                   {article.excerpt}
                 </p>
 
@@ -140,7 +140,7 @@ export default function FeaturedArticles() {
 
         {/* Load More Button */}
         <div className="mt-12 text-center">
-          <button className="bg-[#cc0000] hover:bg-[#990000] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
+          <button className="bg-[#cc0000] hover:bg-[#00BB00] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
             <i className="fa fa-arrow-down"></i>
             Load More Stories
           </button>

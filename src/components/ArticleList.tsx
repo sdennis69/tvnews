@@ -148,15 +148,15 @@ export default function ArticleList() {
               <div className="flex-1 p-4 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="bg-[#CC0000] text-white text-xs font-bold px-2.5 py-1 rounded">
+                    <span className="bg-[#00DD00] text-white text-xs font-bold px-2.5 py-1 rounded">
                       {category.toUpperCase()}
                     </span>
                     <span className="text-xs text-[#999999]">{formattedDate}</span>
                   </div>
-                  <h3 className="text-base font-bold text-[#333333] group-hover:text-[#CC0000] transition-colors mb-2 line-clamp-2 leading-tight">
+                  <h3 className="text-base font-bold text-[#333333] group-hover:text-[#00DD00] transition-colors mb-2 line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-[#666666] line-clamp-2 leading-relaxed">
+                  <p className="text-sm text-[#555555] line-clamp-2 leading-relaxed">
                     {post.excerpt?.replace(/<[^>]*>/g, '') || 'Read the full story for more details.'}
                   </p>
                 </div>

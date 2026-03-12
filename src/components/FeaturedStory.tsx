@@ -76,7 +76,7 @@ export default function FeaturedStory() {
   if (!post) {
     return (
       <div className="bg-white rounded-lg overflow-hidden shadow-md p-6 text-center">
-        <p className="text-[#666666]">No featured posts available</p>
+        <p className="text-[#555555]">No featured posts available</p>
       </div>
     )
   }
@@ -107,16 +107,16 @@ export default function FeaturedStory() {
       <div className="p-6">
         {/* Category Badge */}
         <div className="mb-4">
-          <span className="bg-[#CC0000] text-white text-xs font-bold px-3 py-1.5 rounded inline-block">
+          <span className="bg-[#00DD00] text-white text-xs font-bold px-3 py-1.5 rounded inline-block">
             {category.toUpperCase()}
           </span>
         </div>
         {/* Title */}
-        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#CC0000] transition-colors cursor-pointer">
+        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#00DD00] transition-colors cursor-pointer">
           {post.title}
         </h2>
         {/* Excerpt */}
-        <p className="text-[#666666] text-base mb-4 leading-relaxed line-clamp-3">
+        <p className="text-[#555555] text-base mb-4 leading-relaxed line-clamp-3">
           {post.excerpt?.replace(/<[^>]*>/g, '') || 'Read the full story for more details.'}
         </p>
         {/* Metadata */}

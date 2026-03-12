@@ -119,10 +119,10 @@ export default function SidebarArticles() {
               </div>
               <div className="flex-1 p-3 flex flex-col justify-between">
                 <div>
-                  <span className="bg-[#CC0000] text-white text-xs font-bold px-2 py-1 rounded inline-block mb-1">
+                  <span className="bg-[#00DD00] text-white text-xs font-bold px-2 py-1 rounded inline-block mb-1">
                     {category.toUpperCase()}
                   </span>
-                  <h3 className="text-sm font-bold text-[#333333] group-hover:text-[#CC0000] transition-colors line-clamp-2 leading-tight">
+                  <h3 className="text-sm font-bold text-[#333333] group-hover:text-[#00DD00] transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
                 </div>

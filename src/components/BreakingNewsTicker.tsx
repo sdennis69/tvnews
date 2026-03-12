@@ -19,7 +19,7 @@ export default function BreakingNewsTicker() {
   }, [breakingNews.length])
 
   return (
-    <div className="bg-[#CC0000] py-3 overflow-hidden">
+    <div className="bg-[#00DD00] py-3 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Breaking News Label */}

@@ -30,7 +30,7 @@ export default function Home() {
             {/* Sidebar Featured Articles - Right Column (1/3 width) */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg p-4 shadow-sm border border-[#DDDDDD]">
-                <h3 className="text-sm font-bold text-white bg-[#CC0000] px-3 py-2 mb-4 uppercase tracking-wide">
+                <h3 className="text-sm font-bold text-white bg-[#00DD00] px-3 py-2 mb-4 uppercase tracking-wide">
                   Featured Stories
                 </h3>
                 <SidebarArticles />
@@ -40,9 +40,9 @@ export default function Home() {
 
           {/* Main Article List */}
           <div className="mb-12">
-            <div className="flex items-center justify-between mb-4 border-b-2 border-[#CC0000] pb-2">
+            <div className="flex items-center justify-between mb-4 border-b-2 border-[#00DD00] pb-2">
               <h2 className="text-xl font-bold text-[#333333] uppercase tracking-wide">Latest News</h2>
-              <a href="#" className="text-[#CC0000] hover:text-[#990000] font-semibold text-sm">
+              <a href="#" className="text-[#00DD00] hover:text-[#00BB00] font-semibold text-sm">
                 View All →
               </a>
             </div>
