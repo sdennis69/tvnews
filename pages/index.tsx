@@ -20,23 +20,22 @@ export default function Home() {
 
         {/* Main Content Area */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Featured Section Header */}
-          <div className="mb-6">
-            <h2 className="text-sm font-bold text-white bg-[#003D7A] px-4 py-2 inline-block uppercase tracking-wide">
-              Featured
-            </h2>
-          </div>
-
-          {/* Featured Section - 2 Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-            {/* Main Featured Story - Left Column (2/3 width) */}
-            <div className="lg:col-span-2">
-              <FeaturedStory />
+          {/* Featured Section */}
+          <div className="mb-12">
+            {/* FEATURED label */}
+            <div className="mb-4">
+              <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
+                Featured
+              </span>
             </div>
-
-            {/* Featured Stories List - Right Column (1/3 width) */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-[#DDDDDD] h-full">
+            {/* Two-column layout: large story left, 4 smaller right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Left: Large Featured Story */}
+              <div>
+                <FeaturedStory />
+              </div>
+              {/* Right: 4 Smaller Articles */}
+              <div>
                 <SidebarArticles />
               </div>
             </div>

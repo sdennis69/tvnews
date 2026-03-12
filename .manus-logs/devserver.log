@@ -312,3 +312,31 @@
 [2026-03-12T21:38:47.682Z] event - compiled successfully in 104 ms (149 modules)
 [2026-03-12T21:38:48.021Z] wait  - compiling / (client and server)...
 [2026-03-12T21:38:48.116Z] event - compiled client and server successfully in 95 ms (248 modules)
+[2026-03-12T21:44:00.671Z] wait  - compiling...
+[2026-03-12T21:44:00.957Z] event - compiled client and server successfully in 286 ms (248 modules)
+[2026-03-12T21:44:01.259Z] wait  - compiling /404 (client and server)...
+[2026-03-12T21:44:01.503Z] event - compiled client and server successfully in 244 ms (251 modules)
+[2026-03-12T21:44:07.074Z] wait  - compiling...
+[2026-03-12T21:44:07.238Z] event - compiled client and server successfully in 164 ms (251 modules)
+[2026-03-12T21:44:25.034Z] wait  - compiling...
+[2026-03-12T21:44:25.231Z] event - compiled client and server successfully in 198 ms (248 modules)
+[2026-03-12T21:44:26.591Z] wait  - compiling /404 (client and server)...
+[2026-03-12T21:44:26.659Z] event - compiled client and server successfully in 68 ms (251 modules)
+[2026-03-12T21:44:36.326Z] wait  - compiling...
+[2026-03-12T21:44:36.442Z] event - compiled client and server successfully in 117 ms (251 modules)
+[2026-03-12T21:44:42.321Z] Dev server process group stopped
+[2026-03-12T21:44:42.339Z] ELIFECYCLE  Command failed.
+[2026-03-12T21:44:42.343Z] Dev server exited with code -15
+[2026-03-12T21:44:45.326Z] Starting dev server with command: pnpm run dev
+[2026-03-12T21:44:45.612Z] 
+[2026-03-12T21:44:45.613Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T21:44:45.613Z] > next dev
+[2026-03-12T21:44:45.613Z] 
+[2026-03-12T21:44:45.709Z] (node:62532) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T21:44:45.710Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T21:44:45.712Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T21:44:47.279Z] event - compiled client and server successfully in 956 ms (175 modules)
+[2026-03-12T21:44:47.280Z] wait  - compiling...
+[2026-03-12T21:44:47.381Z] event - compiled successfully in 101 ms (149 modules)
+[2026-03-12T21:44:47.707Z] wait  - compiling / (client and server)...
+[2026-03-12T21:44:47.846Z] event - compiled client and server successfully in 138 ms (248 modules)

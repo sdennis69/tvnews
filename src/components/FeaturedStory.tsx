@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { getFeaturedPosts } from '@/lib/wordpress'
 
 interface Post {
@@ -7,34 +8,28 @@ interface Post {
   excerpt?: string
   slug: string
   date: string
-  featuredImage?: {
-    node: {
-      sourceUrl: string
-    }
-  }
-  author?: {
-    node: {
-      name: string
-    }
-  }
-  categories?: {
-    edges: Array<{
-      node: {
-        name: string
-      }
-    }>
-  }
+  featuredImage?: { node: { sourceUrl: string } }
+  author?: { node: { name: string } }
+  categories?: { edges: Array<{ node: { name: string } }> }
 }
 
 const MOCK_FEATURED: Post = {
   id: '1',
-  title: 'City Officials Announce Major Progress on Downtown Revitalization Initiative',
-  slug: 'city-revitalization',
-  excerpt: '<p>City officials have announced a major breakthrough in the downtown revitalization initiative, with plans to transform the urban core into a thriving hub for residents and businesses alike. The project is expected to create over 500 new jobs and bring significant economic growth to the region.</p>',
-  date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-  categories: { edges: [{ node: { name: 'Local News' } }] },
-  author: { node: { name: 'Jane Smith' } },
-  featuredImage: { node: { sourceUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop' } },
+  title: 'Cool Down For Thursday!',
+  slug: 'cool-down-thursday',
+  excerpt: '<p>Temperatures are expected to drop significantly heading into Thursday as a cold front pushes through the region. Residents should prepare for cooler conditions.</p>',
+  date: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+  categories: { edges: [{ node: { name: 'Weather' } }] },
+  author: { node: { name: 'Michael Sokell' } },
+  featuredImage: { node: { sourceUrl: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=800&h=520&fit=crop' } },
+}
+
+function timeAgo(dateStr: string): string {
+  const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000)
+  if (diff < 60) return `${diff} seconds ago`
+  if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`
+  if (diff < 86400) return `${Math.floor(diff / 3600)} hour${Math.floor(diff / 3600) > 1 ? 's' : ''} ago`
+  return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
 }
 
 export default function FeaturedStory() {
@@ -51,7 +46,6 @@ export default function FeaturedStory() {
           setPost(MOCK_FEATURED)
         }
       } catch (error) {
-        console.error('Error fetching featured post:', error)
         setPost(MOCK_FEATURED)
       } finally {
         setLoading(false)
@@ -62,71 +56,43 @@ export default function FeaturedStory() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg overflow-hidden shadow-md h-96 animate-pulse">
-        <div className="h-64 bg-[#E8E8E8]"></div>
-        <div className="p-6 space-y-3">
-          <div className="h-4 bg-[#E8E8E8] rounded w-1/4"></div>
-          <div className="h-6 bg-[#E8E8E8] rounded"></div>
-          <div className="h-4 bg-[#E8E8E8] rounded w-full"></div>
-        </div>
+      <div className="animate-pulse">
+        <div className="w-full h-80 bg-[#E8E8E8] rounded mb-3"></div>
+        <div className="h-6 bg-[#E8E8E8] rounded w-3/4 mb-2"></div>
+        <div className="h-4 bg-[#E8E8E8] rounded w-1/3"></div>
       </div>
     )
   }
 
-  if (!post) {
-    return (
-      <div className="bg-white rounded-lg overflow-hidden shadow-md p-6 text-center">
-        <p className="text-[#555555]">No featured posts available</p>
-      </div>
-    )
-  }
+  if (!post) return null
 
-  const category = post.categories?.edges?.[0]?.node?.name || 'NEWS'
   const author = post.author?.node?.name || 'Staff'
-  const image = post.featuredImage?.node?.sourceUrl || 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop'
-  const formattedDate = new Date(post.date).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  const image = post.featuredImage?.node?.sourceUrl || 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=800&h=520&fit=crop'
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-md">
-      {/* Featured Image */}
-      <div className="relative h-96 overflow-hidden bg-[#E8E8E8]">
-        <img
-          src={image}
-          alt={post.title}
-          className="w-full h-full object-cover hover:scale-105 transition-all duration-300"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      {/* Content */}
-      <div className="p-6">
-        {/* Category Badge */}
-        <div className="mb-4">
-          <span className="bg-[#003D7A] text-white text-xs font-bold px-3 py-1.5 rounded inline-block">
-            {category.toUpperCase()}
-          </span>
+    <Link href={`/article/${post.slug}`}>
+      <a className="block group">
+        {/* Large Image */}
+        <div className="w-full overflow-hidden rounded bg-[#E8E8E8] mb-3">
+          <img
+            src={image}
+            alt={post.title}
+            className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         {/* Title */}
-        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#003D7A] transition-colors cursor-pointer">
+        <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
           {post.title}
         </h2>
-        {/* Excerpt */}
-        <p className="text-[#555555] text-base mb-4 leading-relaxed line-clamp-3">
-          {post.excerpt?.replace(/<[^>]*>/g, '') || 'Read the full story for more details.'}
+        {/* Byline */}
+        <p className="text-sm text-[#888888]">
+          <span>by {author}</span>
+          <span className="mx-2">·</span>
+          <span>{timeAgo(post.date)}</span>
         </p>
-        {/* Metadata */}
-        <div className="flex items-center justify-between text-xs text-[#999999] border-t border-[#CCCCCC] pt-4">
-          <span>
-            <i className="fa fa-user mr-2"></i>By {author}
-          </span>
-          <span>{formattedDate}</span>
-        </div>
-      </div>
-    </div>
+      </a>
+    </Link>
   )
 }
