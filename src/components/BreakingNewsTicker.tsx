@@ -1,16 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function BreakingNewsTicker() {
   const [scrollPosition, setScrollPosition] = useState(0)
 
   const breakingNews = [
-    '🔴 BREAKING: City Council approves major development project',
-    '⚠️ WEATHER ALERT: Severe thunderstorms expected this evening',
-    '📺 LIVE: Mayor holds press conference on infrastructure',
-    '🏆 SPORTS: Local team advances to championship finals',
-    '📰 DEVELOPING: New business district announced downtown',
+    '🔴 BREAKING: City Council Approves Major Development Project',
+    '📰 DEVELOPING: New Business District Expansion Announced',
+    '⚠️ ALERT: Weather Warning Issued for Tonight',
+    '🏆 SPORTS: Local Team Advances to Championship Finals',
   ]
 
   useEffect(() => {
@@ -21,31 +20,25 @@ export default function BreakingNewsTicker() {
   }, [breakingNews.length])
 
   return (
-    <div className="bg-gradient-to-r from-[#cc0000] to-[#990000] py-3 overflow-hidden">
-      <div className="container-custom">
+    <div className="bg-[#CC0000] py-3 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Breaking News Label */}
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <div className="animate-pulse-live">
-              <span className="inline-block w-3 h-3 bg-white rounded-full"></span>
-            </div>
-            <span className="text-white font-bold text-sm uppercase tracking-wider">
-              BREAKING NEWS
-            </span>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+            <span className="text-white font-bold text-sm whitespace-nowrap">BREAKING NEWS</span>
           </div>
 
-          {/* Ticker */}
+          {/* Scrolling Ticker */}
           <div className="flex-1 overflow-hidden">
-            <div className="flex gap-8 whitespace-nowrap" style={{
-              transform: `translateX(${-scrollPosition}px)`,
-              transition: 'transform 0.1s linear'
-            }}>
-              {[...breakingNews, ...breakingNews].map((news, idx) => (
-                <span 
-                  key={idx} 
-                  className="text-white text-sm font-medium flex items-center gap-4"
-                >
-                  <span className="text-white">•</span>
+            <div
+              className="flex gap-8 whitespace-nowrap transition-transform"
+              style={{
+                transform: `translateX(-${scrollPosition}px)`,
+              }}
+            >
+              {breakingNews.concat(breakingNews).map((news, index) => (
+                <span key={index} className="text-white text-sm font-medium">
                   {news}
                 </span>
               ))}

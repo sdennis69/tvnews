@@ -22,7 +22,7 @@ export default function SidebarArticles() {
     {
       id: '2',
       title: 'Weather Alert: Storms Expected Tonight',
-      image: 'https://images.unsplash.com/photo-1527482797697-8795b1a55a45?w=300&h=200&fit=crop',
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=300&h=200&fit=crop',
       category: 'WEATHER',
       time: '30 min ago',
     },
@@ -35,31 +35,20 @@ export default function SidebarArticles() {
     },
   ]
 
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      'SPORTS': 'bg-[#ff6600]',
-      'WEATHER': 'bg-[#0066cc]',
-      'ENTERTAINMENT': 'bg-[#9933cc]',
-      'LOCAL NEWS': 'bg-[#cc0000]',
-      'NATIONAL': 'bg-[#cc0000]',
-    }
-    return colors[category] || 'bg-[#cc0000]'
-  }
-
   return (
     <div className="space-y-4">
       {articles.map((article) => (
         <Link
           key={article.id}
           href={`/article/${article.id}`}
-          className="flex gap-4 bg-[#ffffff] rounded-lg overflow-hidden hover:border-[#cc0000] border border-[#cccccc] transition-smooth group"
+          className="flex gap-3 bg-white rounded-lg overflow-hidden hover:shadow-lg border border-[#CCCCCC] transition-smooth group"
         >
           {/* Image */}
-          <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#e8e8e8]">
+          <div className="w-24 h-20 flex-shrink-0 overflow-hidden bg-[#E8E8E8]">
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
+              className="w-full h-full object-cover group-hover:scale-110 transition-smooth duration-300"
               loading="lazy"
               decoding="async"
             />
@@ -68,10 +57,10 @@ export default function SidebarArticles() {
           {/* Content */}
           <div className="flex-1 p-3 flex flex-col justify-between">
             <div>
-              <span className={`${getCategoryColor(article.category)} text-white text-xs font-bold px-2 py-1 rounded inline-block mb-2`}>
+              <span className="bg-[#CC0000] text-white text-xs font-bold px-2 py-1 rounded inline-block mb-1">
                 {article.category}
               </span>
-              <h3 className="text-sm font-bold text-white group-hover:text-[#cc0000] transition-smooth line-clamp-2">
+              <h3 className="text-sm font-bold text-[#333333] group-hover:text-[#CC0000] transition-smooth line-clamp-2 leading-tight">
                 {article.title}
               </h3>
             </div>

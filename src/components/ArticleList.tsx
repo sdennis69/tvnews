@@ -61,33 +61,20 @@ export default function ArticleList() {
     },
   ]
 
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      'LOCAL NEWS': 'bg-[#cc0000]',
-      'SPORTS': 'bg-[#ff6600]',
-      'WEATHER': 'bg-[#0066cc]',
-      'ENTERTAINMENT': 'bg-[#9933cc]',
-      'BUSINESS': 'bg-[#00aa00]',
-      'COMMUNITY': 'bg-[#cc6600]',
-      'NATIONAL': 'bg-[#cc0000]',
-    }
-    return colors[category] || 'bg-[#cc0000]'
-  }
-
   return (
     <div className="space-y-4">
       {articles.map((article) => (
         <Link
           key={article.id}
           href={`/article/${article.id}`}
-          className="flex gap-4 bg-[#ffffff] rounded-lg overflow-hidden hover:border-[#cc0000] border border-[#cccccc] transition-smooth group"
+          className="flex gap-4 bg-white rounded-lg overflow-hidden hover:shadow-lg border border-[#CCCCCC] transition-smooth group"
         >
           {/* Image */}
-          <div className="w-32 h-24 flex-shrink-0 overflow-hidden bg-[#e8e8e8]">
+          <div className="w-40 h-28 flex-shrink-0 overflow-hidden bg-[#E8E8E8]">
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
+              className="w-full h-full object-cover group-hover:scale-110 transition-smooth duration-300"
               loading="lazy"
               decoding="async"
             />
@@ -96,20 +83,23 @@ export default function ArticleList() {
           {/* Content */}
           <div className="flex-1 p-4 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className={`${getCategoryColor(article.category)} text-white text-xs font-bold px-2 py-1 rounded`}>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="bg-[#CC0000] text-white text-xs font-bold px-2.5 py-1 rounded">
                   {article.category}
                 </span>
                 <span className="text-xs text-[#999999]">{article.time}</span>
               </div>
-              <h3 className="text-base font-bold text-white group-hover:text-[#cc0000] transition-smooth mb-2 line-clamp-2">
+              <h3 className="text-base font-bold text-[#333333] group-hover:text-[#CC0000] transition-smooth mb-2 line-clamp-2 leading-tight">
                 {article.title}
               </h3>
-              <p className="text-sm text-[#666666] line-clamp-2">
+              <p className="text-sm text-[#666666] line-clamp-2 leading-relaxed">
                 {article.excerpt}
               </p>
             </div>
-            <span className="text-xs text-[#999999]"><i className="fa fa-user mr-1"></i>{article.author}</span>
+            <span className="text-xs text-[#999999]">
+              <i className="fa fa-user mr-1.5"></i>
+              {article.author}
+            </span>
           </div>
         </Link>
       ))}
