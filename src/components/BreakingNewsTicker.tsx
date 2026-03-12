@@ -18,7 +18,7 @@ export default function BreakingNewsTicker() {
       setScrollPosition((prev) => (prev + 1) % (breakingNews.length * 100))
     }, 30)
     return () => clearInterval(interval)
-  }, [])
+  }, [breakingNews.length])
 
   return (
     <div className="bg-gradient-to-r from-[#f01d4f] to-[#d41a45] py-3 overflow-hidden">

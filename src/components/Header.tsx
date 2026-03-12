@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   const stationName = process.env.NEXT_PUBLIC_STATION_NAME || 'TV Station'
   const stationLogo = process.env.NEXT_PUBLIC_STATION_LOGO
@@ -105,8 +104,6 @@ export default function Header() {
               <li 
                 key={item.label}
                 className="relative group"
-                onMouseEnter={() => setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={item.href}

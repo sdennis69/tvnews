@@ -27,7 +27,7 @@ const nextConfig = {
   },
   // Enable ISR (Incremental Static Regeneration) for WP Engine
   experimental: {
-    cacheMaxMemorySize: 52 * 1024 * 1024, // 52MB
+    // ISR configuration
   },
   // Optimize for modern browsers only
   swcMinify: true,
