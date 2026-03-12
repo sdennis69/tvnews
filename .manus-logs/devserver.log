@@ -256,3 +256,39 @@
 [2026-03-12T07:41:21.471Z] event - compiled successfully in 96 ms (149 modules)
 [2026-03-12T07:41:21.797Z] wait  - compiling / (client and server)...
 [2026-03-12T07:41:21.923Z] event - compiled client and server successfully in 126 ms (248 modules)
+[2026-03-12T21:29:07.489Z] Starting dev server with command: pnpm run dev
+[2026-03-12T21:29:07.770Z] 
+[2026-03-12T21:29:07.771Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T21:29:07.771Z] > next dev
+[2026-03-12T21:29:07.771Z] 
+[2026-03-12T21:29:07.864Z] (node:60260) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T21:29:07.865Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T21:29:07.867Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T21:29:09.495Z] event - compiled client and server successfully in 979 ms (175 modules)
+[2026-03-12T21:29:09.496Z] wait  - compiling...
+[2026-03-12T21:29:09.606Z] event - compiled successfully in 109 ms (149 modules)
+[2026-03-12T21:29:45.274Z] wait  - compiling / (client and server)...
+[2026-03-12T21:29:45.477Z] event - compiled client and server successfully in 203 ms (248 modules)
+[2026-03-12T21:30:02.107Z] wait  - compiling...
+[2026-03-12T21:30:02.370Z] event - compiled client and server successfully in 263 ms (248 modules)
+[2026-03-12T21:30:14.756Z] wait  - compiling...
+[2026-03-12T21:30:14.877Z] event - compiled client and server successfully in 122 ms (248 modules)
+[2026-03-12T21:30:18.885Z] Dev server process group stopped
+[2026-03-12T21:30:18.903Z] ELIFECYCLE  Command failed.
+[2026-03-12T21:30:18.909Z] Dev server exited with code -15
+[2026-03-12T21:30:21.906Z] Starting dev server with command: pnpm run dev
+[2026-03-12T21:30:22.190Z] 
+[2026-03-12T21:30:22.191Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T21:30:22.191Z] > next dev
+[2026-03-12T21:30:22.191Z] 
+[2026-03-12T21:30:22.287Z] (node:61154) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T21:30:22.288Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T21:30:22.290Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T21:30:24.014Z] event - compiled client and server successfully in 1070 ms (175 modules)
+[2026-03-12T21:30:24.015Z] wait  - compiling...
+[2026-03-12T21:30:24.147Z] event - compiled successfully in 132 ms (149 modules)
+[2026-03-12T21:30:24.485Z] wait  - compiling / (client and server)...
+[2026-03-12T21:30:24.646Z] event - compiled client and server successfully in 161 ms (248 modules)
+[2026-03-12T21:30:32.782Z] wait  - compiling /404 (client and server)...
+[2026-03-12T21:30:32.843Z] event - compiled client and server successfully in 61 ms (251 modules)
+[2026-03-12T21:30:32.926Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
