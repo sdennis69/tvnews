@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getFeaturedPosts } from '@/lib/wordpress'
+import { getFeaturedPosts, getPosts } from '@/lib/wordpress'
 
 interface Post {
   id: string
@@ -11,17 +11,6 @@ interface Post {
   featuredImage?: { node: { sourceUrl: string } }
   author?: { node: { name: string } }
   categories?: { edges: Array<{ node: { name: string } }> }
-}
-
-const MOCK_FEATURED: Post = {
-  id: '1',
-  title: 'Cool Down For Thursday!',
-  slug: 'cool-down-thursday',
-  excerpt: '<p>Temperatures are expected to drop significantly heading into Thursday as a cold front pushes through the region. Residents should prepare for cooler conditions.</p>',
-  date: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
-  categories: { edges: [{ node: { name: 'Weather' } }] },
-  author: { node: { name: 'Michael Sokell' } },
-  featuredImage: { node: { sourceUrl: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=800&h=520&fit=crop' } },
 }
 
 function timeAgo(dateStr: string): string {
@@ -39,14 +28,19 @@ export default function FeaturedStory() {
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        const response = await getFeaturedPosts(1)
-        if (response?.posts?.edges?.[0]?.node) {
-          setPost(response.posts.edges[0].node)
-        } else {
-          setPost(MOCK_FEATURED)
+        // Try sticky posts first
+        const sticky = await getFeaturedPosts(1)
+        if (sticky?.posts?.edges?.[0]?.node) {
+          setPost(sticky.posts.edges[0].node)
+          return
+        }
+        // Fall back to latest post if no sticky posts
+        const latest = await getPosts(1)
+        if (latest?.posts?.edges?.[0]?.node) {
+          setPost(latest.posts.edges[0].node)
         }
       } catch (error) {
-        setPost(MOCK_FEATURED)
+        console.error('Error fetching featured post:', error)
       } finally {
         setLoading(false)
       }
@@ -64,24 +58,32 @@ export default function FeaturedStory() {
     )
   }
 
-  if (!post) return null
+  if (!post) {
+    return (
+      <div className="text-center py-12 text-[#888888]">
+        <p>No posts available. Check your WordPress connection.</p>
+      </div>
+    )
+  }
 
   const author = post.author?.node?.name || 'Staff'
-  const image = post.featuredImage?.node?.sourceUrl || 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=800&h=520&fit=crop'
+  const image = post.featuredImage?.node?.sourceUrl || ''
 
   return (
     <Link href={`/article/${post.slug}`}>
       <a className="block group">
         {/* Large Image */}
-        <div className="w-full overflow-hidden rounded bg-[#E8E8E8] mb-3">
-          <img
-            src={image}
-            alt={post.title}
-            className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        {image && (
+          <div className="w-full overflow-hidden rounded bg-[#E8E8E8] mb-3">
+            <img
+              src={image}
+              alt={post.title}
+              className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
         {/* Title */}
         <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
           {post.title}

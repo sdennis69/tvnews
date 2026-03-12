@@ -1,44 +1,57 @@
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { getPosts } from '@/lib/wordpress'
 
 export default function BreakingNewsTicker() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-
-  const breakingNews = [
-    '🔴 BREAKING: City Council Approves Major Development Project',
-    '📰 DEVELOPING: New Business District Expansion Announced',
-    '⚠️ ALERT: Weather Warning Issued for Tonight',
-    '🏆 SPORTS: Local Team Advances to Championship Finals',
-  ]
+  const [headlines, setHeadlines] = useState<string[]>([])
+  const [offset, setOffset] = useState(0)
+  const tickerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await getPosts(6)
+        if (response?.posts?.edges && response.posts.edges.length > 0) {
+          setHeadlines(response.posts.edges.map((e: any) => e.node.title))
+        }
+      } catch (error) {
+        console.error('Error fetching ticker headlines:', error)
+      }
+    }
+    fetchHeadlines()
+  }, [])
+
+  useEffect(() => {
+    if (headlines.length === 0) return
     const interval = setInterval(() => {
-      setScrollPosition((prev) => (prev + 1) % (breakingNews.length * 100))
+      setOffset((prev) => prev + 1)
     }, 30)
     return () => clearInterval(interval)
-  }, [breakingNews.length])
+  }, [headlines.length])
+
+  if (headlines.length === 0) return null
+
+  const repeated = [...headlines, ...headlines]
 
   return (
-    <div className="bg-[#003D7A] py-3 overflow-hidden">
+    <div className="bg-[#003D7A] py-2.5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
-          {/* Breaking News Label */}
+          {/* Label */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-            <span className="text-white font-bold text-sm whitespace-nowrap">BREAKING NEWS</span>
+            <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
+            <span className="text-white font-bold text-xs uppercase tracking-wider whitespace-nowrap">Breaking News</span>
           </div>
-
+          {/* Divider */}
+          <div className="w-px h-4 bg-white/30 flex-shrink-0"></div>
           {/* Scrolling Ticker */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden" ref={tickerRef}>
             <div
-              className="flex gap-8 whitespace-nowrap transition-transform"
-              style={{
-                transform: `translateX(-${scrollPosition}px)`,
-              }}
+              className="flex gap-12 whitespace-nowrap"
+              style={{ transform: `translateX(-${offset % (headlines.length * 400)}px)` }}
             >
-              {breakingNews.concat(breakingNews).map((news, index) => (
+              {repeated.map((headline, index) => (
                 <span key={index} className="text-white text-sm font-medium">
-                  {news}
+                  {headline}
                 </span>
               ))}
             </div>
