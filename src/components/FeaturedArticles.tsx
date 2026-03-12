@@ -78,13 +78,13 @@ export default function FeaturedArticles() {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      'Local News': 'bg-[#f01d4f]',
+      'Local News': 'bg-[#cc0000]',
       'Sports': 'bg-[#ff6600]',
       'Weather': 'bg-[#0066cc]',
       'Entertainment': 'bg-[#9933cc]',
       'National': 'bg-[#cc0000]',
     }
-    return colors[category] || 'bg-[#f01d4f]'
+    return colors[category] || 'bg-[#cc0000]'
   }
 
   return (
@@ -93,7 +93,7 @@ export default function FeaturedArticles() {
         {/* Section Title */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-white mb-2">Latest News</h2>
-          <div className="w-16 h-1 bg-[#f01d4f]"></div>
+          <div className="w-16 h-1 bg-[#cc0000]"></div>
         </div>
 
         {/* Articles Grid */}
@@ -105,7 +105,7 @@ export default function FeaturedArticles() {
               className="article-card group"
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden bg-[#2a2a2a]">
+              <div className="relative h-48 overflow-hidden bg-[#e8e8e8]">
                 <img
                   src={article.image}
                   alt={article.title}
@@ -121,16 +121,16 @@ export default function FeaturedArticles() {
 
               {/* Content */}
               <div className="p-4">
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#f01d4f] transition-smooth line-clamp-2">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#cc0000] transition-smooth line-clamp-2">
                   {article.title}
                 </h3>
 
-                <p className="text-sm text-[#b0b0b0] mb-4 line-clamp-2">
+                <p className="text-sm text-[#666666] mb-4 line-clamp-2">
                   {article.excerpt}
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-[#808080] border-t border-[#333333] pt-3">
+                <div className="flex items-center justify-between text-xs text-[#999999] border-t border-[#cccccc] pt-3">
                   <span><i className="fa fa-clock-o mr-1"></i>{article.date}</span>
                   <span><i className="fa fa-user mr-1"></i>{article.author}</span>
                 </div>
@@ -141,7 +141,7 @@ export default function FeaturedArticles() {
 
         {/* Load More Button */}
         <div className="mt-12 text-center">
-          <button className="bg-[#f01d4f] hover:bg-[#d41a45] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
+          <button className="bg-[#cc0000] hover:bg-[#990000] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
             <i className="fa fa-arrow-down"></i>
             Load More Stories
           </button>

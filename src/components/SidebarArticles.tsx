@@ -40,10 +40,10 @@ export default function SidebarArticles() {
       'SPORTS': 'bg-[#ff6600]',
       'WEATHER': 'bg-[#0066cc]',
       'ENTERTAINMENT': 'bg-[#9933cc]',
-      'LOCAL NEWS': 'bg-[#f01d4f]',
+      'LOCAL NEWS': 'bg-[#cc0000]',
       'NATIONAL': 'bg-[#cc0000]',
     }
-    return colors[category] || 'bg-[#f01d4f]'
+    return colors[category] || 'bg-[#cc0000]'
   }
 
   return (
@@ -52,10 +52,10 @@ export default function SidebarArticles() {
         <Link
           key={article.id}
           href={`/article/${article.id}`}
-          className="flex gap-4 bg-[#1e1e1e] rounded-lg overflow-hidden hover:border-[#f01d4f] border border-[#333333] transition-smooth group"
+          className="flex gap-4 bg-[#ffffff] rounded-lg overflow-hidden hover:border-[#cc0000] border border-[#cccccc] transition-smooth group"
         >
           {/* Image */}
-          <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#2a2a2a]">
+          <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#e8e8e8]">
             <img
               src={article.image}
               alt={article.title}
@@ -71,11 +71,11 @@ export default function SidebarArticles() {
               <span className={`${getCategoryColor(article.category)} text-white text-xs font-bold px-2 py-1 rounded inline-block mb-2`}>
                 {article.category}
               </span>
-              <h3 className="text-sm font-bold text-white group-hover:text-[#f01d4f] transition-smooth line-clamp-2">
+              <h3 className="text-sm font-bold text-white group-hover:text-[#cc0000] transition-smooth line-clamp-2">
                 {article.title}
               </h3>
             </div>
-            <span className="text-xs text-[#808080]">{article.time}</span>
+            <span className="text-xs text-[#999999]">{article.time}</span>
           </div>
         </Link>
       ))}

@@ -21,7 +21,7 @@ export default function BreakingNewsTicker() {
   }, [breakingNews.length])
 
   return (
-    <div className="bg-gradient-to-r from-[#f01d4f] to-[#d41a45] py-3 overflow-hidden">
+    <div className="bg-gradient-to-r from-[#cc0000] to-[#990000] py-3 overflow-hidden">
       <div className="container-custom">
         <div className="flex items-center gap-4">
           {/* Breaking News Label */}

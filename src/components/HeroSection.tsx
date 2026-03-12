@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function HeroSection() {
   return (
-    <section className="relative h-96 md:h-[500px] overflow-hidden bg-[#1e1e1e]">
+    <section className="relative h-96 md:h-[500px] overflow-hidden bg-[#ffffff]">
       {/* Background Image with overlay */}
       <div className="absolute inset-0">
         <div 
@@ -42,12 +42,12 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/article/1"
-              className="bg-[#f01d4f] hover:bg-[#d41a45] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2"
+              className="bg-[#cc0000] hover:bg-[#990000] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2"
             >
               <i className="fa fa-play"></i>
               Read Full Story
             </Link>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-[#1e1e1e] font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
+            <button className="border-2 border-white text-white hover:bg-white hover:text-[#ffffff] font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
               <i className="fa fa-video-camera"></i>
               Watch Video
             </button>

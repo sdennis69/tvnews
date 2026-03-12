@@ -60,9 +60,9 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1e1e1e] border-b border-[#333333] shadow-lg">
+    <header className="sticky top-0 z-50 bg-[#ffffff] border-b border-[#cccccc] shadow-lg">
       {/* Top bar with logo and search */}
-      <div className="bg-[#121212] border-b border-[#333333]">
+      <div className="bg-[#f5f5f5] border-b border-[#cccccc]">
         <div className="container-custom py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
@@ -74,20 +74,20 @@ export default function Header() {
               />
             )}
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-white group-hover:text-[#f01d4f] transition-smooth">
+              <h1 className="text-xl font-bold text-white group-hover:text-[#cc0000] transition-smooth">
                 {stationName}
               </h1>
-              <p className="text-xs text-[#b0b0b0]">News • Weather • Sports</p>
+              <p className="text-xs text-[#666666]">News • Weather • Sports</p>
             </div>
           </Link>
 
           {/* Search and mobile menu toggle */}
           <div className="flex items-center gap-4">
-            <button className="text-[#b0b0b0] hover:text-[#f01d4f] transition-smooth hidden md:block">
+            <button className="text-[#666666] hover:text-[#cc0000] transition-smooth hidden md:block">
               <i className="fa fa-search text-lg"></i>
             </button>
             <button 
-              className="md:hidden text-[#b0b0b0] hover:text-[#f01d4f] transition-smooth"
+              className="md:hidden text-[#666666] hover:text-[#cc0000] transition-smooth"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <i className={`fa ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-lg`}></i>
@@ -97,7 +97,7 @@ export default function Header() {
       </div>
 
       {/* Primary Navigation */}
-      <nav className="hidden md:block bg-[#1e1e1e]">
+      <nav className="hidden md:block bg-[#ffffff]">
         <div className="container-custom">
           <ul className="flex items-center gap-0">
             {navItems.map((item) => (
@@ -107,7 +107,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-4 py-4 text-sm font-semibold text-[#f1f5f9] hover:text-[#f01d4f] border-b-4 border-transparent hover:border-[#f01d4f] transition-all"
+                  className="flex items-center gap-2 px-4 py-4 text-sm font-semibold text-[#cccccc] hover:text-[#cc0000] border-b-4 border-transparent hover:border-[#cc0000] transition-all"
                 >
                   {item.icon && <i className={`fa ${item.icon}`}></i>}
                   {item.label}
@@ -115,12 +115,12 @@ export default function Header() {
 
                 {/* Dropdown menu */}
                 {item.submenu && (
-                  <ul className="absolute left-0 top-full bg-[#2a2a2a] border border-[#333333] rounded-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-max">
+                  <ul className="absolute left-0 top-full bg-[#e8e8e8] border border-[#cccccc] rounded-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-max">
                     {item.submenu.map((subitem) => (
                       <li key={subitem.label}>
                         <Link
                           href={subitem.href}
-                          className="block px-4 py-3 text-sm text-[#f1f5f9] hover:text-[#f01d4f] hover:bg-[#1e1e1e] transition-all border-l-4 border-transparent hover:border-[#f01d4f]"
+                          className="block px-4 py-3 text-sm text-[#cccccc] hover:text-[#cc0000] hover:bg-[#ffffff] transition-all border-l-4 border-transparent hover:border-[#cc0000]"
                         >
                           {subitem.label}
                         </Link>
@@ -136,24 +136,24 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-[#2a2a2a] border-t border-[#333333]">
+        <nav className="md:hidden bg-[#e8e8e8] border-t border-[#cccccc]">
           <ul className="flex flex-col">
             {navItems.map((item) => (
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className="block px-4 py-3 text-sm font-semibold text-[#f1f5f9] hover:text-[#f01d4f] hover:bg-[#1e1e1e] border-l-4 border-transparent hover:border-[#f01d4f] transition-all"
+                  className="block px-4 py-3 text-sm font-semibold text-[#cccccc] hover:text-[#cc0000] hover:bg-[#ffffff] border-l-4 border-transparent hover:border-[#cc0000] transition-all"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
                 {item.submenu && (
-                  <ul className="bg-[#1e1e1e] border-t border-[#333333]">
+                  <ul className="bg-[#ffffff] border-t border-[#cccccc]">
                     {item.submenu.map((subitem) => (
                       <li key={subitem.label}>
                         <Link
                           href={subitem.href}
-                          className="block px-6 py-2 text-xs text-[#b0b0b0] hover:text-[#f01d4f] transition-all"
+                          className="block px-6 py-2 text-xs text-[#666666] hover:text-[#cc0000] transition-all"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {subitem.label}
