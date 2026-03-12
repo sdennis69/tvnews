@@ -14,7 +14,7 @@ export default function LivestreamPage() {
         <Header />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-6 border-b-2 border-[#00DD00] pb-2">
+          <div className="mb-6 border-b-2 border-[#003D7A] pb-2">
             <h1 className="text-2xl font-bold text-[#333333] uppercase tracking-wide">Watch Live</h1>
             <p className="text-[#555555] text-sm mt-1">Live news coverage and breaking news updates</p>
           </div>
@@ -26,7 +26,7 @@ export default function LivestreamPage() {
 
               {/* Broadcasting Schedule */}
               <div className="mt-8 bg-white rounded-lg p-6 shadow-sm border border-[#DDDDDD]">
-                <h2 className="text-sm font-bold text-white bg-[#00DD00] px-3 py-2 mb-4 uppercase tracking-wide">
+                <h2 className="text-sm font-bold text-white bg-[#003D7A] px-3 py-2 mb-4 uppercase tracking-wide">
                   Broadcasting Schedule
                 </h2>
                 <div className="space-y-4">
@@ -37,9 +37,9 @@ export default function LivestreamPage() {
                     { time: '6:00 PM – 6:30 PM', show: 'Sports Report', desc: 'Local and national sports highlights' },
                     { time: '10:00 PM – 10:30 PM', show: 'Late News', desc: 'End your day with the latest headlines' },
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-4 items-start border-l-4 border-[#00DD00] pl-4">
+                    <div key={i} className="flex gap-4 items-start border-l-4 border-[#003D7A] pl-4">
                       <div>
-                        <p className="text-sm font-bold text-[#00DD00]">{item.time}</p>
+                        <p className="text-sm font-bold text-[#003D7A]">{item.time}</p>
                         <p className="font-bold text-[#333333]">{item.show}</p>
                         <p className="text-sm text-[#555555]">{item.desc}</p>
                       </div>
@@ -52,12 +52,12 @@ export default function LivestreamPage() {
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-white rounded-lg p-6 shadow-sm border border-[#DDDDDD]">
-                <h3 className="text-sm font-bold text-white bg-[#00DD00] px-3 py-2 mb-4 uppercase tracking-wide">
+                <h3 className="text-sm font-bold text-white bg-[#003D7A] px-3 py-2 mb-4 uppercase tracking-wide">
                   Stream Info
                 </h3>
                 <div className="space-y-3 text-sm text-[#555555]">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-[#00DD00] rounded-full animate-pulse"></span>
+                    <span className="w-2 h-2 bg-[#003D7A] rounded-full animate-pulse"></span>
                     <span>Live 24/7 News Coverage</span>
                   </div>
                   <p>Our live stream brings you continuous news coverage from your local community and around the world.</p>
@@ -66,7 +66,7 @@ export default function LivestreamPage() {
               </div>
 
               <div className="bg-white rounded-lg p-6 shadow-sm border border-[#DDDDDD]">
-                <h3 className="text-sm font-bold text-white bg-[#00DD00] px-3 py-2 mb-4 uppercase tracking-wide">
+                <h3 className="text-sm font-bold text-white bg-[#003D7A] px-3 py-2 mb-4 uppercase tracking-wide">
                   Contact Us
                 </h3>
                 <div className="space-y-2 text-sm text-[#555555]">

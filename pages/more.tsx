@@ -16,7 +16,7 @@ export default function MorePage() {
         <div className="bg-[#003D7A] py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold text-white mb-2">More</h1>
-            <p className="text-[#00DD00]">Additional content and features</p>
+            <p className="text-[#003D7A]">Additional content and features</p>
           </div>
         </div>
 
@@ -59,7 +59,7 @@ export default function MorePage() {
                 <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{item.icon}</div>
                 <h3 className="text-xl font-bold text-[#333333] mb-2">{item.title}</h3>
                 <p className="text-[#555555]">{item.description}</p>
-                <div className="mt-4 text-[#00DD00] font-bold text-sm group-hover:text-[#00BB00]">
+                <div className="mt-4 text-[#003D7A] font-bold text-sm group-hover:text-[#002A5A]">
                   Learn More →
                 </div>
               </div>

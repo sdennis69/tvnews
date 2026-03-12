@@ -16,7 +16,7 @@ export default function VideosPage() {
         <div className="bg-[#003D7A] py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold text-white mb-2">Videos</h1>
-            <p className="text-[#00DD00]">Watch our latest video stories and coverage</p>
+            <p className="text-[#003D7A]">Watch our latest video stories and coverage</p>
           </div>
         </div>
 
@@ -33,7 +33,7 @@ export default function VideosPage() {
             ].map((item, idx) => (
               <div key={idx} className="bg-white rounded-lg overflow-hidden shadow-sm border border-[#DDDDDD] hover:shadow-md transition-shadow group cursor-pointer">
                 <div className="relative h-40 bg-gradient-to-br from-[#003D7A] to-[#004A9A] flex items-center justify-center">
-                  <div className="w-16 h-16 bg-[#00DD00] rounded-full flex items-center justify-center group-hover:bg-[#00BB00] transition-colors">
+                  <div className="w-16 h-16 bg-[#003D7A] rounded-full flex items-center justify-center group-hover:bg-[#002A5A] transition-colors">
                     <svg className="w-8 h-8 text-[#003D7A]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                     </svg>

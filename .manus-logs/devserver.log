@@ -140,3 +140,99 @@
 [2026-03-12T07:09:30.555Z] 3:09:30 AM [vite] (client) page reload .next/export/404.html
 [2026-03-12T07:09:30.555Z] 3:09:30 AM [vite] (client) page reload .next/export/index.html
 [2026-03-12T07:09:30.555Z] 3:09:30 AM [vite] (client) page reload .next/export/livestream.html
+[2026-03-12T07:18:18.590Z] Dev server process group stopped
+[2026-03-12T07:18:18.592Z] ELIFECYCLE  Command failed.
+[2026-03-12T07:18:18.663Z] Dev server exited with code -15
+[2026-03-12T07:18:21.599Z] Starting dev server with command: pnpm run dev
+[2026-03-12T07:18:21.988Z] 
+[2026-03-12T07:18:21.988Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T07:18:21.989Z] > next dev
+[2026-03-12T07:18:21.989Z] 
+[2026-03-12T07:18:22.082Z] (node:54403) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T07:18:22.082Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T07:18:22.084Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T07:18:24.547Z] event - compiled client and server successfully in 1853 ms (175 modules)
+[2026-03-12T07:18:24.547Z] wait  - compiling...
+[2026-03-12T07:18:24.640Z] event - compiled successfully in 93 ms (149 modules)
+[2026-03-12T07:18:24.968Z] wait  - compiling / (client and server)...
+[2026-03-12T07:18:25.325Z] event - compiled client and server successfully in 357 ms (248 modules)
+[2026-03-12T07:29:53.250Z] Dev server process group stopped
+[2026-03-12T07:29:53.267Z] ELIFECYCLE  Command failed.
+[2026-03-12T07:29:53.272Z] Dev server exited with code -15
+[2026-03-12T07:29:56.272Z] Starting dev server with command: pnpm run dev
+[2026-03-12T07:29:56.583Z] 
+[2026-03-12T07:29:56.584Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T07:29:56.584Z] > next dev
+[2026-03-12T07:29:56.584Z] 
+[2026-03-12T07:29:56.680Z] (node:55346) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T07:29:56.680Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T07:29:56.683Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T07:29:58.257Z] event - compiled client and server successfully in 969 ms (175 modules)
+[2026-03-12T07:29:58.258Z] wait  - compiling...
+[2026-03-12T07:29:58.366Z] event - compiled successfully in 108 ms (149 modules)
+[2026-03-12T07:29:58.723Z] wait  - compiling / (client and server)...
+[2026-03-12T07:29:58.846Z] event - compiled client and server successfully in 123 ms (248 modules)
+[2026-03-12T07:30:12.390Z] wait  - compiling /weather (client and server)...
+[2026-03-12T07:30:12.510Z] event - compiled client and server successfully in 120 ms (251 modules)
+[2026-03-12T07:30:12.601Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:30:12.602Z] TypeError: Failed to fetch
+[2026-03-12T07:30:12.602Z] at __webpack_require__.hmrM (https://3000-inb030zeihb1zs2f47u89-86401c46.us1.manus.computer/_next/static/chunks/webpack.js?ts=1773300599450:1186:20)
+[2026-03-12T07:30:19.586Z] wait  - compiling /sports (client and server)...
+[2026-03-12T07:30:19.663Z] event - compiled client and server successfully in 77 ms (254 modules)
+[2026-03-12T07:30:19.747Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:30:19.747Z] TypeError: Failed to fetch
+[2026-03-12T07:30:19.748Z] at __webpack_require__.hmrM (https://3000-inb030zeihb1zs2f47u89-86401c46.us1.manus.computer/_next/static/chunks/webpack.js?ts=1773300612525:1186:20)
+[2026-03-12T07:30:25.569Z] wait  - compiling /videos (client and server)...
+[2026-03-12T07:30:25.647Z] event - compiled client and server successfully in 78 ms (257 modules)
+[2026-03-12T07:30:25.735Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:30:25.736Z] TypeError: Failed to fetch
+[2026-03-12T07:30:25.736Z] at __webpack_require__.hmrM (https://3000-inb030zeihb1zs2f47u89-86401c46.us1.manus.computer/_next/static/chunks/webpack.js?ts=1773300619678:1186:20)
+[2026-03-12T07:30:28.972Z] wait  - compiling /livestream (client and server)...
+[2026-03-12T07:30:29.083Z] event - compiled client and server successfully in 111 ms (262 modules)
+[2026-03-12T07:30:29.177Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:30:29.178Z] TypeError: Failed to fetch
+[2026-03-12T07:30:29.178Z] at __webpack_require__.hmrM (https://3000-inb030zeihb1zs2f47u89-86401c46.us1.manus.computer/_next/static/chunks/webpack.js?ts=1773300625660:1186:20)
+[2026-03-12T07:30:32.644Z] wait  - compiling /news (client and server)...
+[2026-03-12T07:30:32.713Z] event - compiled client and server successfully in 69 ms (265 modules)
+[2026-03-12T07:30:32.796Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:30:32.796Z] TypeError: Failed to fetch
+[2026-03-12T07:30:32.797Z] at __webpack_require__.hmrM (https://3000-inb030zeihb1zs2f47u89-86401c46.us1.manus.computer/_next/static/chunks/webpack.js?ts=1773300629097:1186:20)
+[2026-03-12T07:36:44.077Z] wait  - compiling...
+[2026-03-12T07:36:44.372Z] event - compiled client and server successfully in 295 ms (248 modules)
+[2026-03-12T07:36:48.328Z] Dev server process group stopped
+[2026-03-12T07:36:48.345Z] ELIFECYCLE  Command failed.
+[2026-03-12T07:36:48.350Z] Dev server exited with code -15
+[2026-03-12T07:36:51.347Z] Starting dev server with command: pnpm run dev
+[2026-03-12T07:36:51.630Z] 
+[2026-03-12T07:36:51.631Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T07:36:51.631Z] > next dev
+[2026-03-12T07:36:51.632Z] 
+[2026-03-12T07:36:51.725Z] (node:55701) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T07:36:51.726Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T07:36:51.728Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T07:36:53.319Z] event - compiled client and server successfully in 964 ms (175 modules)
+[2026-03-12T07:36:53.320Z] wait  - compiling...
+[2026-03-12T07:36:53.416Z] event - compiled successfully in 96 ms (149 modules)
+[2026-03-12T07:36:53.761Z] wait  - compiling / (client and server)...
+[2026-03-12T07:36:53.881Z] event - compiled client and server successfully in 120 ms (248 modules)
+[2026-03-12T07:37:08.276Z] wait  - compiling...
+[2026-03-12T07:37:08.639Z] event - compiled client and server successfully in 363 ms (248 modules)
+[2026-03-12T07:37:12.813Z] Dev server process group stopped
+[2026-03-12T07:37:12.830Z] ELIFECYCLE  Command failed.
+[2026-03-12T07:37:12.835Z] Dev server exited with code -15
+[2026-03-12T07:37:15.832Z] Starting dev server with command: pnpm run dev
+[2026-03-12T07:37:16.114Z] 
+[2026-03-12T07:37:16.114Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T07:37:16.115Z] > next dev
+[2026-03-12T07:37:16.115Z] 
+[2026-03-12T07:37:16.207Z] (node:55866) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T07:37:16.208Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T07:37:16.210Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T07:37:17.837Z] event - compiled client and server successfully in 1030 ms (175 modules)
+[2026-03-12T07:37:17.838Z] wait  - compiling...
+[2026-03-12T07:37:17.965Z] event - compiled successfully in 127 ms (149 modules)
+[2026-03-12T07:37:18.299Z] wait  - compiling / (client and server)...
+[2026-03-12T07:37:18.474Z] event - compiled client and server successfully in 175 ms (248 modules)
+[2026-03-12T07:37:26.446Z] wait  - compiling /404 (client and server)...
+[2026-03-12T07:37:26.532Z] event - compiled client and server successfully in 86 ms (251 modules)
+[2026-03-12T07:37:26.615Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works

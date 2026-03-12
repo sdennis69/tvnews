@@ -21,10 +21,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">News</h4>
             <ul className="space-y-2">
-              <li><Link href="/category/local" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Local News</Link></li>
-              <li><Link href="/category/national" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">National</Link></li>
-              <li><Link href="/category/sports" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Sports</Link></li>
-              <li><Link href="/category/entertainment" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Entertainment</Link></li>
+              <li><Link href="/category/local" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Local News</Link></li>
+              <li><Link href="/category/national" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">National</Link></li>
+              <li><Link href="/category/sports" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Sports</Link></li>
+              <li><Link href="/category/entertainment" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Entertainment</Link></li>
             </ul>
           </div>
 
@@ -32,10 +32,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Resources</h4>
             <ul className="space-y-2">
-              <li><Link href="/weather" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Weather</Link></li>
-              <li><Link href="/livestream" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Live TV</Link></li>
-              <li><Link href="/about" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">About Us</Link></li>
-              <li><Link href="/contact" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-sm">Contact</Link></li>
+              <li><Link href="/weather" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Weather</Link></li>
+              <li><Link href="/livestream" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Live TV</Link></li>
+              <li><Link href="/about" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">About Us</Link></li>
+              <li><Link href="/contact" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Contact</Link></li>
             </ul>
           </div>
 
@@ -43,16 +43,16 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-[#CCCCCC] hover:text-[#00DD00] transition-smooth text-lg">
+              <a href="#" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-lg">
                 <i className="fa fa-facebook"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#00DD00] hover:bg-[#cc0000] hover:text-white transition-smooth">
+              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
                 <i className="fa fa-twitter"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#00DD00] hover:bg-[#cc0000] hover:text-white transition-smooth">
+              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
                 <i className="fa fa-instagram"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#00DD00] hover:bg-[#cc0000] hover:text-white transition-smooth">
+              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
                 <i className="fa fa-youtube"></i>
               </a>
             </div>
@@ -65,11 +65,11 @@ export default function Footer() {
             &copy; {currentYear} {stationName}. All rights reserved.
           </p>
           <div className="flex justify-center gap-4 text-xs">
-            <Link href="/privacy" className="hover:text-[#00DD00] transition-smooth">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-[#003D7A] transition-smooth">Privacy Policy</Link>
             <span>|</span>
-            <Link href="/terms" className="hover:text-[#00DD00] transition-smooth">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-[#003D7A] transition-smooth">Terms of Service</Link>
             <span>|</span>
-            <Link href="/contact" className="hover:text-[#00DD00] transition-smooth">Contact</Link>
+            <Link href="/contact" className="hover:text-[#003D7A] transition-smooth">Contact</Link>
           </div>
         </div>
       </div>

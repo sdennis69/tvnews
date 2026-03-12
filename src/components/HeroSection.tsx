@@ -41,7 +41,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/article/1"
-              className="bg-[#cc0000] hover:bg-[#00BB00] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2"
+              className="bg-[#cc0000] hover:bg-[#002A5A] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2"
             >
               <i className="fa fa-play"></i>
               Read Full Story

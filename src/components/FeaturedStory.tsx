@@ -107,12 +107,12 @@ export default function FeaturedStory() {
       <div className="p-6">
         {/* Category Badge */}
         <div className="mb-4">
-          <span className="bg-[#00DD00] text-white text-xs font-bold px-3 py-1.5 rounded inline-block">
+          <span className="bg-[#003D7A] text-white text-xs font-bold px-3 py-1.5 rounded inline-block">
             {category.toUpperCase()}
           </span>
         </div>
         {/* Title */}
-        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#00DD00] transition-colors cursor-pointer">
+        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#003D7A] transition-colors cursor-pointer">
           {post.title}
         </h2>
         {/* Excerpt */}
