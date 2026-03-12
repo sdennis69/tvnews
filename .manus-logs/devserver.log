@@ -236,3 +236,23 @@
 [2026-03-12T07:37:26.446Z] wait  - compiling /404 (client and server)...
 [2026-03-12T07:37:26.532Z] event - compiled client and server successfully in 86 ms (251 modules)
 [2026-03-12T07:37:26.615Z] warn  - Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/basic-features/fast-refresh#how-it-works
+[2026-03-12T07:41:12.023Z] wait  - compiling...
+[2026-03-12T07:41:12.224Z] event - compiled client and server successfully in 201 ms (248 modules)
+[2026-03-12T07:41:12.508Z] wait  - compiling /404 (client and server)...
+[2026-03-12T07:41:12.578Z] event - compiled client and server successfully in 69 ms (251 modules)
+[2026-03-12T07:41:16.447Z] Dev server process group stopped
+[2026-03-12T07:41:16.464Z] ELIFECYCLE  Command failed.
+[2026-03-12T07:41:16.468Z] Dev server exited with code -15
+[2026-03-12T07:41:19.467Z] Starting dev server with command: pnpm run dev
+[2026-03-12T07:41:19.748Z] 
+[2026-03-12T07:41:19.749Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-12T07:41:19.749Z] > next dev
+[2026-03-12T07:41:19.750Z] 
+[2026-03-12T07:41:19.844Z] (node:56867) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-12T07:41:19.845Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-12T07:41:19.847Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-12T07:41:21.375Z] event - compiled client and server successfully in 939 ms (175 modules)
+[2026-03-12T07:41:21.375Z] wait  - compiling...
+[2026-03-12T07:41:21.471Z] event - compiled successfully in 96 ms (149 modules)
+[2026-03-12T07:41:21.797Z] wait  - compiling / (client and server)...
+[2026-03-12T07:41:21.923Z] event - compiled client and server successfully in 126 ms (248 modules)

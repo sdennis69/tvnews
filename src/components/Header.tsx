@@ -20,10 +20,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <div className="flex items-baseline">
-              <span className="text-4xl font-bold text-white leading-none">41</span>
-              <span className="text-lg font-bold text-white ml-1">NBC</span>
-            </div>
+            <img src="/wcbi-logo.png" alt="WCBI Logo" className="h-12 object-contain" />
           </a>
 
           {/* Search Icon */}
