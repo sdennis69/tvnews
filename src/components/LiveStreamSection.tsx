@@ -1,4 +1,3 @@
-'use client'
 
 export default function LiveStreamSection() {
   const liveStreamUrl = process.env.NEXT_PUBLIC_LIVE_STREAM_URL || 'https://www.youtube.com/embed/dQw4w9WgXcQ'

@@ -1,4 +1,3 @@
-'use client'
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -6,7 +5,7 @@ import { useEffect, useState } from 'react'
 interface Article {
   id: string
   title: string
-  excerpt: string
+  excerpt?: string
   category: string
   image: string
   author: string

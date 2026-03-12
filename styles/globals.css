@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   41NBC-STYLE DESIGN SYSTEM
+   Design: Professional News Site
+   Theme: Light background, red accents
+   Colors: Background #F5F5F5, Accent #CC0000, Text #333333
+   ============================================ */
+
+/* Base font settings */
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F5F5F5;
+  color: #333333;
+}
+
+/* Headline font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+}
+
+/* ============================================
+   BREAKING NEWS TICKER
+   ============================================ */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   ARTICLE CARDS
+   ============================================ */
+.article-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.article-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   CATEGORY BADGES
+   ============================================ */
+.badge-local { background-color: #CC0000; color: white; }
+.badge-national { background-color: #1a56db; color: white; }
+.badge-sports { background-color: #057a55; color: white; }
+.badge-weather { background-color: #7e3af2; color: white; }
+.badge-entertainment { background-color: #e3a008; color: white; }
+.badge-community { background-color: #0694a2; color: white; }
+.badge-default { background-color: #6b7280; color: white; }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  border-top: 3px solid #CC0000;
+}
+
+.nav-item:hover .nav-dropdown {
+  display: block;
+}
+
+/* ============================================
+   SECTION HEADERS (41NBC style red bar)
+   ============================================ */
+.section-header {
+  background-color: #CC0000;
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   FEATURED STORY IMAGE OVERLAY
+   ============================================ */
+.featured-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CC0000;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #990000;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+@media (max-width: 768px) {
+  .ticker-scroll {
+    animation-duration: 20s;
+  }
+}

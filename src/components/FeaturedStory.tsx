@@ -1,4 +1,3 @@
-'use client'
 
 import { useEffect, useState } from 'react'
 import { getFeaturedPosts } from '@/lib/wordpress'
@@ -6,7 +5,7 @@ import { getFeaturedPosts } from '@/lib/wordpress'
 interface Post {
   id: string
   title: string
-  excerpt: string
+  excerpt?: string
   slug: string
   date: string
   featuredImage?: {

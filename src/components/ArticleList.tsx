@@ -1,4 +1,3 @@
-'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -8,7 +7,7 @@ interface Post {
   id: string
   title: string
   slug: string
-  excerpt: string
+  excerpt?: string
   date: string
   featuredImage?: {
     node: {

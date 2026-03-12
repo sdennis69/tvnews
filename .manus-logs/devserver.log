@@ -1,3 +1,27 @@
 [2026-03-11T16:13:35.406Z] 12:13:35 PM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
 [2026-03-11T16:13:35.417Z] 12:13:35 PM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
 [2026-03-11T16:47:34.714Z] 12:47:34 PM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-03-12T05:58:02.922Z] 1:58:02 AM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-03-12T06:10:30.804Z] 2:10:30 AM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-03-12T06:12:55.441Z] 2:12:55 AM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-03-12T06:28:04.302Z] 2:28:04 AM [vite] changed tsconfig file detected: /home/ubuntu/tv-station-website/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-03-12T06:28:09.993Z] 2:28:09 AM [vite] (client) page reload .next/export/test.html
+[2026-03-12T06:28:09.994Z] 2:28:09 AM [vite] (client) page reload .next/export/test.html
+[2026-03-12T06:28:09.994Z] 2:28:09 AM [vite] (client) page reload .next/export/500.html
+[2026-03-12T06:28:09.995Z] 2:28:09 AM [vite] (client) page reload .next/export/500.html
+[2026-03-12T06:28:09.996Z] 2:28:09 AM [vite] (client) page reload .next/export/404.html
+[2026-03-12T06:28:09.996Z] 2:28:09 AM [vite] (client) page reload .next/export/404.html
+[2026-03-12T06:28:10.004Z] 2:28:10 AM [vite] (client) page reload .next/export/livestream.html
+[2026-03-12T06:28:10.005Z] 2:28:10 AM [vite] (client) page reload .next/export/livestream.html
+[2026-03-12T06:28:10.006Z] 2:28:10 AM [vite] (client) page reload .next/export/index.html
+[2026-03-12T06:28:10.007Z] 2:28:10 AM [vite] (client) page reload .next/export/index.html
+[2026-03-12T06:28:10.018Z] 2:28:10 AM [vite] (client) page reload .next/server/pages/500.html
+[2026-03-12T06:28:10.019Z] 2:28:10 AM [vite] (client) page reload .next/server/pages/404.html
+[2026-03-12T06:28:10.020Z] 2:28:10 AM [vite] (client) page reload .next/server/pages/index.html
+[2026-03-12T06:28:10.020Z] 2:28:10 AM [vite] (client) page reload .next/server/pages/livestream.html
+[2026-03-12T06:28:10.020Z] 2:28:10 AM [vite] (client) page reload .next/server/pages/test.html
+[2026-03-12T06:28:10.119Z] 2:28:10 AM [vite] (client) page reload .next/export/500.html
+[2026-03-12T06:28:10.120Z] 2:28:10 AM [vite] (client) page reload .next/export/test.html
+[2026-03-12T06:28:10.121Z] 2:28:10 AM [vite] (client) page reload .next/export/404.html
+[2026-03-12T06:28:10.121Z] 2:28:10 AM [vite] (client) page reload .next/export/index.html
+[2026-03-12T06:28:10.121Z] 2:28:10 AM [vite] (client) page reload .next/export/livestream.html
