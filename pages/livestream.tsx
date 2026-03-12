@@ -7,7 +7,7 @@ export default function LivestreamPage() {
   return (
     <>
       <Head>
-        <title>Watch Live - {process.env.NEXT_PUBLIC_STATION_NAME || 'TV News'}</title>
+        <title>{`Watch Live - ${process.env.NEXT_PUBLIC_STATION_NAME || 'TV News'}`}</title>
         <meta name="description" content="Watch live news coverage and breaking news updates." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">

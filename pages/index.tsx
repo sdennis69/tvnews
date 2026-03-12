@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_STATION_NAME || 'TV News'} - Local News, Weather & More</title>
+        <title>{`${process.env.NEXT_PUBLIC_STATION_NAME || 'TV News'} - Local News, Weather & More`}</title>
         <meta name="description" content="Your local source for breaking news, weather, sports, and community stories." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

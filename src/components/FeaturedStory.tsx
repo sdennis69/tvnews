@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { getFeaturedPosts } from '@/lib/wordpress'
 
@@ -27,6 +26,17 @@ interface Post {
   }
 }
 
+const MOCK_FEATURED: Post = {
+  id: '1',
+  title: 'City Officials Announce Major Progress on Downtown Revitalization Initiative',
+  slug: 'city-revitalization',
+  excerpt: '<p>City officials have announced a major breakthrough in the downtown revitalization initiative, with plans to transform the urban core into a thriving hub for residents and businesses alike. The project is expected to create over 500 new jobs and bring significant economic growth to the region.</p>',
+  date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  categories: { edges: [{ node: { name: 'Local News' } }] },
+  author: { node: { name: 'Jane Smith' } },
+  featuredImage: { node: { sourceUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop' } },
+}
+
 export default function FeaturedStory() {
   const [post, setPost] = useState<Post | null>(null)
   const [loading, setLoading] = useState(true)
@@ -37,14 +47,16 @@ export default function FeaturedStory() {
         const response = await getFeaturedPosts(1)
         if (response?.posts?.edges?.[0]?.node) {
           setPost(response.posts.edges[0].node)
+        } else {
+          setPost(MOCK_FEATURED)
         }
       } catch (error) {
         console.error('Error fetching featured post:', error)
+        setPost(MOCK_FEATURED)
       } finally {
         setLoading(false)
       }
     }
-
     fetchFeatured()
   }, [])
 
@@ -86,12 +98,11 @@ export default function FeaturedStory() {
         <img
           src={image}
           alt={post.title}
-          className="w-full h-full object-cover hover:scale-105 transition-smooth duration-300"
+          className="w-full h-full object-cover hover:scale-105 transition-all duration-300"
           loading="lazy"
           decoding="async"
         />
       </div>
-
       {/* Content */}
       <div className="p-6">
         {/* Category Badge */}
@@ -100,17 +111,14 @@ export default function FeaturedStory() {
             {category.toUpperCase()}
           </span>
         </div>
-
         {/* Title */}
-        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#CC0000] transition-smooth">
+        <h2 className="text-3xl font-bold text-[#333333] mb-3 leading-tight hover:text-[#CC0000] transition-colors cursor-pointer">
           {post.title}
         </h2>
-
         {/* Excerpt */}
         <p className="text-[#666666] text-base mb-4 leading-relaxed line-clamp-3">
           {post.excerpt?.replace(/<[^>]*>/g, '') || 'Read the full story for more details.'}
         </p>
-
         {/* Metadata */}
         <div className="flex items-center justify-between text-xs text-[#999999] border-t border-[#CCCCCC] pt-4">
           <span>
