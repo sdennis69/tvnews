@@ -29,7 +29,7 @@ export default function Home() {
               </span>
             </div>
             {/* Two-column layout: large story left, 4 smaller right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="grid grid-cols-2 gap-8 items-start">
               {/* Left: Large Featured Story */}
               <div>
                 <FeaturedStory />
