@@ -12,6 +12,71 @@ interface GraphQLResponse<T> {
   errors?: Array<{ message: string }>
 }
 
+interface PostNode {
+  id: string
+  title: string
+  slug: string
+  excerpt?: string
+  date: string
+  featuredImage?: {
+    node: {
+      sourceUrl: string
+    }
+  }
+  author?: {
+    node: {
+      name: string
+      description?: string
+    }
+  }
+  categories?: {
+    edges: Array<{
+      node: {
+        name: string
+        slug: string
+      }
+    }>
+  }
+  content?: string
+}
+
+interface PostsResponse {
+  posts: {
+    edges: Array<{
+      node: PostNode
+    }>
+    pageInfo: {
+      hasNextPage: boolean
+      endCursor?: string
+    }
+  }
+}
+
+interface PostBySlugResponse {
+  postBy: PostNode
+}
+
+interface CategoriesResponse {
+  categories: {
+    edges: Array<{
+      node: {
+        id: string
+        name: string
+        slug: string
+        description?: string
+      }
+    }>
+  }
+}
+
+interface SiteSettingsResponse {
+  generalSettings: {
+    title: string
+    description: string
+    url: string
+  }
+}
+
 /**
  * Execute a GraphQL query against the WordPress backend
  */
@@ -92,7 +157,7 @@ export async function getPosts(first: number = 10, after?: string) {
     }
   `
 
-  return queryWordPress(query, { first, after })
+  return queryWordPress<PostsResponse>(query, { first, after })
 }
 
 /**
@@ -131,7 +196,7 @@ export async function getPostBySlug(slug: string) {
     }
   `
 
-  return queryWordPress(query, { slug })
+  return queryWordPress<PostBySlugResponse>(query, { slug })
 }
 
 /**
@@ -164,7 +229,7 @@ export async function getPostsByCategory(categorySlug: string, first: number = 1
     }
   `
 
-  return queryWordPress(query, { categorySlug, first })
+  return queryWordPress<PostsResponse>(query, { categorySlug, first })
 }
 
 /**
@@ -186,7 +251,7 @@ export async function getCategories() {
     }
   `
 
-  return queryWordPress(query)
+  return queryWordPress<CategoriesResponse>(query)
 }
 
 /**
@@ -213,13 +278,21 @@ export async function getFeaturedPosts(first: number = 5) {
                 name
               }
             }
+            categories {
+              edges {
+                node {
+                  name
+                  slug
+                }
+              }
+            }
           }
         }
       }
     }
   `
 
-  return queryWordPress(query, { first })
+  return queryWordPress<PostsResponse>(query, { first })
 }
 
 /**
@@ -247,7 +320,7 @@ export async function searchPosts(search: string, first: number = 10) {
     }
   `
 
-  return queryWordPress(query, { search, first })
+  return queryWordPress<PostsResponse>(query, { search, first })
 }
 
 /**
@@ -264,5 +337,5 @@ export async function getSiteSettings() {
     }
   `
 
-  return queryWordPress(query)
+  return queryWordPress<SiteSettingsResponse>(query)
 }
