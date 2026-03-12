@@ -1,14 +1,13 @@
 import Header from '@/components/Header'
 import BreakingNewsTicker from '@/components/BreakingNewsTicker'
 import HeroSection from '@/components/HeroSection'
-
 import FeaturedArticles from '@/components/FeaturedArticles'
 import WeatherWidget from '@/components/WeatherWidget'
 import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-secondary">
+    <main className="min-h-screen bg-[#121212]">
       <Header />
       <BreakingNewsTicker />
       <HeroSection />

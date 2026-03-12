@@ -16,7 +16,6 @@ interface Article {
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState<Article[]>([])
 
-  // Mock data - will be replaced with WordPress GraphQL queries
   useEffect(() => {
     const mockArticles: Article[] = [
       {
@@ -48,11 +47,29 @@ export default function FeaturedArticles() {
       },
       {
         id: '4',
-        title: 'New Movie Theater Opens Downtown',
-        excerpt: 'State-of-the-art cinema brings entertainment to the heart of the city...',
+        title: 'New Entertainment Venue Opens Downtown',
+        excerpt: 'A new state-of-the-art entertainment complex officially opens its doors...',
         category: 'Entertainment',
-        image: 'https://images.unsplash.com/photo-1489599849228-bed2db80bd74?w=600&h=400&fit=crop',
-        author: 'Tom Brown',
+        image: 'https://images.unsplash.com/photo-1611339555312-e607c04352fa?w=600&h=400&fit=crop',
+        author: 'Tom Davis',
+        date: '3 hours ago',
+      },
+      {
+        id: '5',
+        title: 'Business District Expansion Announced',
+        excerpt: 'City leaders reveal plans for major business district expansion project...',
+        category: 'Local News',
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop',
+        author: 'Emma Wilson',
+        date: '5 hours ago',
+      },
+      {
+        id: '6',
+        title: 'School District Receives State Recognition',
+        excerpt: 'Local school district receives prestigious state education award...',
+        category: 'Local News',
+        image: 'https://images.unsplash.com/photo-1427504494785-cdec0f72a52b?w=600&h=400&fit=crop',
+        author: 'Robert Brown',
         date: '6 hours ago',
       },
     ]
@@ -60,29 +77,35 @@ export default function FeaturedArticles() {
   }, [])
 
   const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string } = {
-      'Local News': 'bg-blue-600',
-      'National News': 'bg-purple-600',
-      'Sports': 'bg-green-600',
-      'Weather': 'bg-cyan-600',
-      'Entertainment': 'bg-pink-600',
+    const colors: Record<string, string> = {
+      'Local News': 'bg-[#f01d4f]',
+      'Sports': 'bg-[#ff6600]',
+      'Weather': 'bg-[#0066cc]',
+      'Entertainment': 'bg-[#9933cc]',
+      'National': 'bg-[#cc0000]',
     }
-    return colors[category] || 'bg-gray-600'
+    return colors[category] || 'bg-[#f01d4f]'
   }
 
   return (
-    <section>
-      <h2 className="text-3xl font-bold text-white mb-8 font-display">Latest News</h2>
-      
-      <div className="space-y-6">
-        {articles.map((article) => (
-          <article 
-            key={article.id}
-            className="bg-secondary-light rounded-lg overflow-hidden hover:shadow-lg-custom transition-smooth group cursor-pointer"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+    <section className="py-12">
+      <div className="container-custom">
+        {/* Section Title */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-white mb-2">Latest News</h2>
+          <div className="w-16 h-1 bg-[#f01d4f]"></div>
+        </div>
+
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/article/${article.id}`}
+              className="article-card group"
+            >
               {/* Image */}
-              <div className="md:col-span-1 h-48 md:h-auto rounded-lg overflow-hidden bg-black">
+              <div className="relative h-48 overflow-hidden bg-[#2a2a2a]">
                 <img
                   src={article.image}
                   alt={article.title}
@@ -90,45 +113,39 @@ export default function FeaturedArticles() {
                   loading="lazy"
                   decoding="async"
                 />
+                {/* Category Badge */}
+                <div className={`absolute top-3 left-3 ${getCategoryColor(article.category)} text-white text-xs font-bold px-3 py-1 rounded`}>
+                  {article.category}
+                </div>
               </div>
 
               {/* Content */}
-              <div className="md:col-span-2 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`${getCategoryColor(article.category)} text-white text-xs font-bold px-3 py-1 rounded-full uppercase`}>
-                      {article.category}
-                    </span>
-                  </div>
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#f01d4f] transition-smooth line-clamp-2">
+                  {article.title}
+                </h3>
 
-                  <Link href={`/article/${article.id}`}>
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-smooth font-display">
-                      {article.title}
-                    </h3>
-                  </Link>
+                <p className="text-sm text-[#b0b0b0] mb-4 line-clamp-2">
+                  {article.excerpt}
+                </p>
 
-                  <p className="text-gray-400 text-sm mb-4">
-                    {article.excerpt}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between text-xs text-gray-500">
-                  <span>{article.author}</span>
-                  <span>{article.date}</span>
+                {/* Footer */}
+                <div className="flex items-center justify-between text-xs text-[#808080] border-t border-[#333333] pt-3">
+                  <span><i className="fa fa-clock-o mr-1"></i>{article.date}</span>
+                  <span><i className="fa fa-user mr-1"></i>{article.author}</span>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
+            </Link>
+          ))}
+        </div>
 
-      <div className="mt-8 text-center">
-        <Link
-          href="/articles"
-          className="inline-block bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-sm transition-smooth"
-        >
-          View All Articles
-        </Link>
+        {/* Load More Button */}
+        <div className="mt-12 text-center">
+          <button className="bg-[#f01d4f] hover:bg-[#d41a45] text-white font-bold py-3 px-8 rounded transition-smooth inline-flex items-center gap-2">
+            <i className="fa fa-arrow-down"></i>
+            Load More Stories
+          </button>
+        </div>
       </div>
     </section>
   )
