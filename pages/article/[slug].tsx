@@ -96,7 +96,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
 
           {/* Article + Sidebar Layout */}
           {post && (
-            <div className="flex gap-8 items-start">
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
 
               {/* ── LEFT: Main Article ── */}
               <div className="flex-1 min-w-0">
@@ -134,7 +134,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
                 <div className="text-[#333333] text-base leading-relaxed">
                   {/* Featured image floated right — explicit dimensions prevent layout shift */}
                   {image && (
-                    <div className="float-right ml-6 mb-4 w-64 sm:w-80 flex-shrink-0 clear-right" style={{ width: '320px', height: '240px', position: 'relative' }}>
+                    <div className="hidden sm:block float-right ml-6 mb-4 flex-shrink-0 clear-right" style={{ width: '320px', height: '240px', position: 'relative' }}>
                       <Image
                         src={image}
                         alt={post.title}
@@ -147,7 +147,21 @@ export default function ArticlePage({ post, related, notFound }: Props) {
                     </div>
                   )}
 
-                  {/* Article content */}
+                  {/* Featured image — full width on mobile only */}
+                  {image && (
+                    <div className="block sm:hidden w-full mb-4 relative rounded overflow-hidden" style={{ height: '220px' }}>
+                      <Image
+                        src={image}
+                        alt={post.title}
+                        fill
+                        sizes="100vw"
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
+                  )}
+
+                  {/* Article content */
                   <div
                     className="prose prose-base max-w-none
                       prose-headings:text-[#111111] prose-headings:font-bold
@@ -214,7 +228,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
                     <h2 className="text-sm font-bold text-white bg-[#003D7A] px-4 py-2 uppercase tracking-wider inline-block mb-5">
                       More Stories
                     </h2>
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {related.map((rel) => (
                         <Link key={rel.id} href={`/article/${rel.slug}`}>
                           <a className="group flex gap-3 bg-[#F9F9F9] rounded-lg overflow-hidden border border-[#EEEEEE] hover:shadow-md transition-shadow p-3">
@@ -256,7 +270,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
               </div>
 
               {/* ── RIGHT: Sidebar ── */}
-              <aside className="w-72 flex-shrink-0 space-y-6 sticky top-4">
+              <aside className="w-full lg:w-72 lg:flex-shrink-0 space-y-6 lg:sticky lg:top-4">
 
                 {/* Revcontent Widget Slot 1 */}
                 <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
