@@ -56,12 +56,22 @@ export default function ArticlePage({ post, related, notFound }: Props) {
   const image = post?.featuredImage?.node?.sourceUrl || ''
 
   useEffect(() => {
-    // Load Revcontent widget script once on mount
-    if (!document.querySelector('script[src="https://delivery.revcontent.com/155408/289858/widget.js"]')) {
-      const script = document.createElement('script')
-      script.src = 'https://delivery.revcontent.com/155408/289858/widget.js'
-      script.async = true
-      document.body.appendChild(script)
+    // Defer Revcontent until after the page has fully loaded (LCP image rendered)
+    // This prevents the widget's forced-reflow from blocking LCP and TBT
+    const loadRevcontent = () => {
+      if (!document.querySelector('script[src="https://delivery.revcontent.com/155408/289858/widget.js"]')) {
+        const script = document.createElement('script')
+        script.src = 'https://delivery.revcontent.com/155408/289858/widget.js'
+        script.async = true
+        document.body.appendChild(script)
+      }
+    }
+    if (document.readyState === 'complete') {
+      // Page already loaded (e.g. client-side navigation)
+      loadRevcontent()
+    } else {
+      window.addEventListener('load', loadRevcontent, { once: true })
+      return () => window.removeEventListener('load', loadRevcontent)
     }
   }, [])
 
