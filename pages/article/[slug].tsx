@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -28,6 +27,12 @@ interface RelatedPost {
   categories?: { edges: Array<{ node: { name: string } }> }
 }
 
+interface Props {
+  post: Post | null
+  related: RelatedPost[]
+  notFound: boolean
+}
+
 function timeAgo(dateStr: string): string {
   const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000)
   if (diff < 60) return `${diff} seconds ago`
@@ -44,45 +49,7 @@ function formatDate(dateStr: string): string {
   })
 }
 
-export default function ArticlePage() {
-  const router = useRouter()
-  const { slug } = router.query
-
-  const [post, setPost] = useState<Post | null>(null)
-  const [related, setRelated] = useState<RelatedPost[]>([])
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
-
-  useEffect(() => {
-    if (!slug || typeof slug !== 'string') return
-    const fetchPost = async () => {
-      setLoading(true)
-      setNotFound(false)
-      try {
-        const response = await getPostBySlug(slug)
-        if (response?.postBy) {
-          setPost(response.postBy)
-          const latestResponse = await getPosts(6)
-          if (latestResponse?.posts?.edges) {
-            const others = latestResponse.posts.edges
-              .map((e: any) => e.node)
-              .filter((p: RelatedPost) => p.slug !== slug)
-              .slice(0, 4)
-            setRelated(others)
-          }
-        } else {
-          setNotFound(true)
-        }
-      } catch (error) {
-        console.error('Error fetching post:', error)
-        setNotFound(true)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchPost()
-  }, [slug])
-
+export default function ArticlePage({ post, related, notFound }: Props) {
   const category = post?.categories?.edges?.[0]?.node?.name || 'News'
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
@@ -92,9 +59,21 @@ export default function ArticlePage() {
       <Head>
         <title>{post ? `${post.title} - WCBI` : 'Article - WCBI'}</title>
         {post?.excerpt && (
-          <meta name="description" content={post.excerpt.replace(/<[^>]*>/g, '')} />
+          <meta name="description" content={post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160)} />
         )}
-        {image && <meta property="og:image" content={image} />}
+        {image && (
+          <>
+            <meta property="og:image" content={image} />
+            {/* Preload the LCP image so browser discovers it immediately */}
+            <link rel="preload" as="image" href={image} />
+          </>
+        )}
+        {post && (
+          <>
+            <meta property="og:title" content={post.title} />
+            <meta property="og:type" content="article" />
+          </>
+        )}
       </Head>
 
       <main className="min-h-screen bg-white">
@@ -102,32 +81,8 @@ export default function ArticlePage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-          {/* Loading State */}
-          {loading && (
-            <div className="flex gap-8">
-              <div className="flex-1 animate-pulse space-y-5">
-                <div className="h-3 bg-[#E8E8E8] rounded w-1/4"></div>
-                <div className="h-8 bg-[#E8E8E8] rounded w-full"></div>
-                <div className="h-8 bg-[#E8E8E8] rounded w-3/4"></div>
-                <div className="h-3 bg-[#E8E8E8] rounded w-1/3"></div>
-                <div className="flex gap-6">
-                  <div className="flex-1 space-y-3">
-                    <div className="h-4 bg-[#E8E8E8] rounded w-full"></div>
-                    <div className="h-4 bg-[#E8E8E8] rounded w-full"></div>
-                    <div className="h-4 bg-[#E8E8E8] rounded w-5/6"></div>
-                  </div>
-                  <div className="w-72 h-48 bg-[#E8E8E8] rounded flex-shrink-0"></div>
-                </div>
-              </div>
-              <div className="w-72 flex-shrink-0 space-y-4">
-                <div className="h-64 bg-[#E8E8E8] rounded"></div>
-                <div className="h-64 bg-[#E8E8E8] rounded"></div>
-              </div>
-            </div>
-          )}
-
           {/* Not Found State */}
-          {!loading && notFound && (
+          {notFound && (
             <div className="py-24 text-center">
               <h1 className="text-3xl font-bold text-[#333333] mb-4">Article Not Found</h1>
               <p className="text-[#888888] mb-8">This article may have been removed or the link is incorrect.</p>
@@ -140,7 +95,7 @@ export default function ArticlePage() {
           )}
 
           {/* Article + Sidebar Layout */}
-          {!loading && post && (
+          {post && (
             <div className="flex gap-8 items-start">
 
               {/* ── LEFT: Main Article ── */}
@@ -177,16 +132,17 @@ export default function ArticlePage() {
 
                 {/* Article body with image floated right */}
                 <div className="text-[#333333] text-base leading-relaxed">
-                  {/* Featured image floated right */}
+                  {/* Featured image floated right — explicit dimensions prevent layout shift */}
                   {image && (
-                    <div className="float-right ml-6 mb-4 w-64 sm:w-80 flex-shrink-0 clear-right relative" style={{ aspectRatio: '4/3' }}>
+                    <div className="float-right ml-6 mb-4 w-64 sm:w-80 flex-shrink-0 clear-right" style={{ width: '320px', height: '240px', position: 'relative' }}>
                       <Image
                         src={image}
                         alt={post.title}
                         fill
-                        sizes="(max-width: 640px) 256px, 320px"
+                        sizes="320px"
                         className="rounded shadow-sm object-cover"
                         priority
+                        fetchPriority="high"
                       />
                     </div>
                   )}
@@ -263,7 +219,7 @@ export default function ArticlePage() {
                         <Link key={rel.id} href={`/article/${rel.slug}`}>
                           <a className="group flex gap-3 bg-[#F9F9F9] rounded-lg overflow-hidden border border-[#EEEEEE] hover:shadow-md transition-shadow p-3">
                             {rel.featuredImage?.node?.sourceUrl && (
-                              <div className="w-24 h-16 flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]">
+                              <div className="flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]" style={{ width: '96px', height: '64px' }}>
                                 <Image
                                   src={rel.featuredImage.node.sourceUrl}
                                   alt={rel.title}
@@ -308,12 +264,10 @@ export default function ArticlePage() {
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
                     <span className="text-white/60 text-xs">Ads By Revcontent</span>
                   </div>
-                  {/* ↓ Paste your Revcontent embed code here ↓ */}
                   <div
                     id="revcontent-widget-1"
                     className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
                   >
-                    {/* Revcontent widget will load here */}
                     <span>Revcontent Widget 1<br />(paste embed code in article/[slug].tsx → revcontent-widget-1)</span>
                   </div>
                 </div>
@@ -324,12 +278,10 @@ export default function ArticlePage() {
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Sponsored</span>
                     <span className="text-white/60 text-xs">Ads By Revcontent</span>
                   </div>
-                  {/* ↓ Paste your Revcontent embed code here ↓ */}
                   <div
                     id="revcontent-widget-2"
                     className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
                   >
-                    {/* Revcontent widget will load here */}
                     <span>Revcontent Widget 2<br />(paste embed code in article/[slug].tsx → revcontent-widget-2)</span>
                   </div>
                 </div>
@@ -343,7 +295,6 @@ export default function ArticlePage() {
                     id="sidebar-ad-slot-1"
                     className="min-h-[250px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
                   >
-                    {/* 300×250 or 300×600 ad unit goes here */}
                     <span>Ad Unit<br />(300×250 or 300×600)</span>
                   </div>
                 </div>
@@ -358,4 +309,34 @@ export default function ArticlePage() {
       </main>
     </>
   )
+}
+
+// Server-side rendering: fetch article data on the server so the HTML is complete
+// when it reaches the browser — eliminates the 980ms LCP resource load delay
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { slug } = context.params as { slug: string }
+
+  try {
+    const [postResponse, latestResponse] = await Promise.all([
+      getPostBySlug(slug),
+      getPosts(6),
+    ])
+
+    if (!postResponse?.postBy) {
+      return { props: { post: null, related: [], notFound: true } }
+    }
+
+    const post = postResponse.postBy
+    const related = (latestResponse?.posts?.edges || [])
+      .map((e: any) => e.node)
+      .filter((p: RelatedPost) => p.slug !== slug)
+      .slice(0, 4)
+
+    return {
+      props: { post, related, notFound: false },
+    }
+  } catch (error) {
+    console.error('Error fetching article:', error)
+    return { props: { post: null, related: [], notFound: true } }
+  }
 }
