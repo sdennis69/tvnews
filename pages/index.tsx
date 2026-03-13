@@ -22,7 +22,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
           {/* Featured Section — full width above the sidebar layout */}
-          <div className="mb-10">
+          <div className="mb-[30px]">
             {/* FEATURED label */}
             <div className="mb-4">
               <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
@@ -47,11 +47,10 @@ export default function Home() {
 
             {/* Latest News (main column) */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between mb-4 border-b-2 border-[#003D7A] pb-2">
-                <h2 className="text-xl font-bold text-[#333333] uppercase tracking-wide">Latest News</h2>
-                <a href="/news" className="text-[#003D7A] hover:text-[#002A5A] font-semibold text-sm">
-                  View All →
-                </a>
+              <div className="mb-4">
+                <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
+                  Latest News
+                </span>
               </div>
               <ArticleList />
             </div>
