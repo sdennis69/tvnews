@@ -161,7 +161,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
                     </div>
                   )}
 
-                  {/* Article content */
+                  {/* Article content */}
                   <div
                     className="prose prose-base max-w-none
                       prose-headings:text-[#111111] prose-headings:font-bold
