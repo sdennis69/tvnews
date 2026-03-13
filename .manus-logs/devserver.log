@@ -368,3 +368,74 @@
 [2026-03-12T22:07:29.137Z] event - compiled client and server successfully in 152 ms (248 modules)
 [2026-03-12T22:07:40.004Z] wait  - compiling...
 [2026-03-12T22:07:40.456Z] event - compiled client and server successfully in 452 ms (254 modules)
+[2026-03-13T02:51:55.062Z] wait  - compiling /404 (client and server)...
+[2026-03-13T02:51:55.353Z] event - compiled client and server successfully in 291 ms (257 modules)
+[2026-03-13T02:51:55.650Z] error - Error: ENOENT: no such file or directory, open '/home/ubuntu/tv-station-website/.next/server/pages/index.js'
+[2026-03-13T02:51:55.651Z] at Object.readFileSync (node:fs:442:20)
+[2026-03-13T02:51:55.654Z] at getMaybeCachedSource (node:internal/modules/cjs/loader:1585:18)
+[2026-03-13T02:51:55.655Z] at Object..js (node:internal/modules/cjs/loader:1660:19)
+[2026-03-13T02:51:55.658Z] at Module.load (node:internal/modules/cjs/loader:1313:32)
+[2026-03-13T02:51:55.660Z] at Function._load (node:internal/modules/cjs/loader:1123:12)
+[2026-03-13T02:51:55.662Z] at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+[2026-03-13T02:51:55.662Z] at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+[2026-03-13T02:51:55.663Z] at Module.require (node:internal/modules/cjs/loader:1335:12)
+[2026-03-13T02:51:55.663Z] at require (node:internal/modules/helpers:136:16)
+[2026-03-13T02:51:55.664Z] at Object.requirePage (/home/ubuntu/tv-station-website/node_modules/next/dist/server/require.js:58:12) {
+[2026-03-13T02:51:55.664Z] errno: -2,
+[2026-03-13T02:51:55.664Z] code: 'ENOENT',
+[2026-03-13T02:51:55.665Z] syscall: 'open',
+[2026-03-13T02:51:55.665Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
+[2026-03-13T02:51:55.665Z] page: '/'
+[2026-03-13T02:51:55.665Z] }
+[2026-03-13T02:51:55.666Z] wait  - compiling /_error (client and server)...
+[2026-03-13T02:51:55.723Z] event - compiled client and server successfully in 70 ms (258 modules)
+[2026-03-13T02:51:57.268Z] error - Error: ENOENT: no such file or directory, open '/home/ubuntu/tv-station-website/.next/server/pages/index.js'
+[2026-03-13T02:51:57.269Z] at Object.readFileSync (node:fs:442:20)
+[2026-03-13T02:51:57.269Z] at getMaybeCachedSource (node:internal/modules/cjs/loader:1585:18)
+[2026-03-13T02:51:57.269Z] at Object..js (node:internal/modules/cjs/loader:1660:19)
+[2026-03-13T02:51:57.269Z] at Module.load (node:internal/modules/cjs/loader:1313:32)
+[2026-03-13T02:51:57.270Z] at Function._load (node:internal/modules/cjs/loader:1123:12)
+[2026-03-13T02:51:57.270Z] at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+[2026-03-13T02:51:57.270Z] at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+[2026-03-13T02:51:57.270Z] at Module.require (node:internal/modules/cjs/loader:1335:12)
+[2026-03-13T02:51:57.271Z] at require (node:internal/modules/helpers:136:16)
+[2026-03-13T02:51:57.271Z] at Object.requirePage (/home/ubuntu/tv-station-website/node_modules/next/dist/server/require.js:58:12) {
+[2026-03-13T02:51:57.271Z] errno: -2,
+[2026-03-13T02:51:57.271Z] code: 'ENOENT',
+[2026-03-13T02:51:57.271Z] syscall: 'open',
+[2026-03-13T02:51:57.272Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
+[2026-03-13T02:51:57.272Z] page: '/'
+[2026-03-13T02:51:57.272Z] }
+[2026-03-13T02:52:00.359Z] error - Error: ENOENT: no such file or directory, open '/home/ubuntu/tv-station-website/.next/server/pages/index.js'
+[2026-03-13T02:52:00.360Z] at Object.readFileSync (node:fs:442:20)
+[2026-03-13T02:52:00.360Z] at getMaybeCachedSource (node:internal/modules/cjs/loader:1585:18)
+[2026-03-13T02:52:00.360Z] at Object..js (node:internal/modules/cjs/loader:1660:19)
+[2026-03-13T02:52:00.360Z] at Module.load (node:internal/modules/cjs/loader:1313:32)
+[2026-03-13T02:52:00.361Z] at Function._load (node:internal/modules/cjs/loader:1123:12)
+[2026-03-13T02:52:00.361Z] at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+[2026-03-13T02:52:00.361Z] at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+[2026-03-13T02:52:00.361Z] at Module.require (node:internal/modules/cjs/loader:1335:12)
+[2026-03-13T02:52:00.361Z] at require (node:internal/modules/helpers:136:16)
+[2026-03-13T02:52:00.361Z] at Object.requirePage (/home/ubuntu/tv-station-website/node_modules/next/dist/server/require.js:58:12) {
+[2026-03-13T02:52:00.362Z] errno: -2,
+[2026-03-13T02:52:00.362Z] code: 'ENOENT',
+[2026-03-13T02:52:00.362Z] syscall: 'open',
+[2026-03-13T02:52:00.362Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
+[2026-03-13T02:52:00.362Z] page: '/'
+[2026-03-13T02:52:00.363Z] }
+[2026-03-13T02:52:01.539Z] Dev server process group stopped
+[2026-03-13T02:52:01.557Z] ELIFECYCLE  Command failed.
+[2026-03-13T02:52:01.562Z] Dev server exited with code -15
+[2026-03-13T02:52:04.543Z] Starting dev server with command: pnpm run dev
+[2026-03-13T02:52:04.827Z] 
+[2026-03-13T02:52:04.828Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-13T02:52:04.828Z] > next dev
+[2026-03-13T02:52:04.829Z] 
+[2026-03-13T02:52:04.924Z] (node:67852) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-13T02:52:04.924Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-13T02:52:04.927Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-13T02:52:06.514Z] event - compiled client and server successfully in 970 ms (175 modules)
+[2026-03-13T02:52:06.515Z] wait  - compiling...
+[2026-03-13T02:52:06.656Z] event - compiled successfully in 140 ms (149 modules)
+[2026-03-13T02:52:06.989Z] wait  - compiling / (client and server)...
+[2026-03-13T02:52:07.105Z] event - compiled client and server successfully in 116 ms (254 modules)
