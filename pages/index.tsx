@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -267,10 +267,11 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts }: Props)
   )
 }
 
-// Server-side rendering: fetch ALL homepage data on the server so the LCP image
-// URL is in the HTML from the start — browser can begin downloading it immediately
-// without waiting for React hydration + client-side API calls.
-export const getServerSideProps: GetServerSideProps = async () => {
+// Static generation with ISR: page is pre-built at deploy time and regenerated
+// in the background every 60 seconds when a new request comes in.
+// This serves pure static HTML with zero server processing time per request,
+// eliminating the React hydration delay that was causing the 1,100ms LCP render delay.
+export const getStaticProps: GetStaticProps = async () => {
   try {
     // Fetch featured post (sticky) and latest posts in parallel
     const [stickyResponse, latestResponse] = await Promise.all([
@@ -309,6 +310,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
         sidebarPosts,
         latestPosts,
       },
+      // Regenerate the page in the background at most once every 60 seconds
+      // when a new request comes in — keeps content fresh without SSR overhead
+      revalidate: 60,
     }
   } catch (error) {
     console.error('Error fetching homepage data:', error)
@@ -318,6 +322,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         sidebarPosts: [],
         latestPosts: [],
       },
+      revalidate: 30,
     }
   }
 }
