@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -53,6 +54,16 @@ export default function ArticlePage({ post, related, notFound }: Props) {
   const category = post?.categories?.edges?.[0]?.node?.name || 'News'
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
+
+  useEffect(() => {
+    // Load Revcontent widget script once on mount
+    if (!document.querySelector('script[src="https://delivery.revcontent.com/155408/289858/widget.js"]')) {
+      const script = document.createElement('script')
+      script.src = 'https://delivery.revcontent.com/155408/289858/widget.js'
+      script.async = true
+      document.body.appendChild(script)
+    }
+  }, [])
 
   return (
     <>
@@ -272,31 +283,18 @@ export default function ArticlePage({ post, related, notFound }: Props) {
               {/* ── RIGHT: Sidebar ── */}
               <aside className="w-full lg:w-72 lg:flex-shrink-0 space-y-6 lg:sticky lg:top-4">
 
-                {/* Revcontent Widget Slot 1 */}
+                {/* Revcontent Widget */}
                 <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
                   <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
                     <span className="text-white/60 text-xs">Ads By Revcontent</span>
                   </div>
-                  <div
-                    id="revcontent-widget-1"
-                    className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
-                  >
-                    <span>Revcontent Widget 1<br />(paste embed code in article/[slug].tsx → revcontent-widget-1)</span>
-                  </div>
-                </div>
-
-                {/* Revcontent Widget Slot 2 */}
-                <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
-                  <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
-                    <span className="text-white text-xs font-bold uppercase tracking-wider">Sponsored</span>
-                    <span className="text-white/60 text-xs">Ads By Revcontent</span>
-                  </div>
-                  <div
-                    id="revcontent-widget-2"
-                    className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
-                  >
-                    <span>Revcontent Widget 2<br />(paste embed code in article/[slug].tsx → revcontent-widget-2)</span>
+                  <div className="p-2">
+                    <div
+                      data-widget-host="revcontent"
+                      data-pub-id="155408"
+                      data-widget-id="289858"
+                    />
                   </div>
                 </div>
 
