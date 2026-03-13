@@ -20,8 +20,9 @@ export default function Home() {
 
         {/* Main Content Area */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Featured Section */}
-          <div className="mb-12">
+
+          {/* Featured Section — full width above the sidebar layout */}
+          <div className="mb-10">
             {/* FEATURED label */}
             <div className="mb-4">
               <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
@@ -41,16 +42,69 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Main Article List */}
-          <div className="mb-12">
-            <div className="flex items-center justify-between mb-4 border-b-2 border-[#003D7A] pb-2">
-              <h2 className="text-xl font-bold text-[#333333] uppercase tracking-wide">Latest News</h2>
-              <a href="#" className="text-[#003D7A] hover:text-[#002A5A] font-semibold text-sm">
-                View All →
-              </a>
+          {/* Latest News + Right Sidebar */}
+          <div className="flex gap-8 items-start">
+
+            {/* Latest News (main column) */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-4 border-b-2 border-[#003D7A] pb-2">
+                <h2 className="text-xl font-bold text-[#333333] uppercase tracking-wide">Latest News</h2>
+                <a href="/news" className="text-[#003D7A] hover:text-[#002A5A] font-semibold text-sm">
+                  View All →
+                </a>
+              </div>
+              <ArticleList />
             </div>
-            <ArticleList />
+
+            {/* Right Sidebar */}
+            <aside className="w-72 flex-shrink-0 space-y-6 sticky top-4">
+
+              {/* Revcontent Widget Slot 1 */}
+              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
+                <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
+                  <span className="text-white/60 text-xs">Ads By Revcontent</span>
+                </div>
+                {/* ↓ Paste your Revcontent embed code here ↓ */}
+                <div
+                  id="revcontent-widget-home-1"
+                  className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
+                >
+                  <span>Revcontent Widget 1<br />(paste embed code in index.tsx → revcontent-widget-home-1)</span>
+                </div>
+              </div>
+
+              {/* Revcontent Widget Slot 2 */}
+              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
+                <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Sponsored</span>
+                  <span className="text-white/60 text-xs">Ads By Revcontent</span>
+                </div>
+                {/* ↓ Paste your Revcontent embed code here ↓ */}
+                <div
+                  id="revcontent-widget-home-2"
+                  className="min-h-[300px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
+                >
+                  <span>Revcontent Widget 2<br />(paste embed code in index.tsx → revcontent-widget-home-2)</span>
+                </div>
+              </div>
+
+              {/* Generic Ad / Widget Slot */}
+              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
+                <div className="bg-[#003D7A] px-3 py-2">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Advertisement</span>
+                </div>
+                <div
+                  id="homepage-ad-slot-1"
+                  className="min-h-[250px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
+                >
+                  <span>Ad Unit<br />(300×250 or 300×600)</span>
+                </div>
+              </div>
+
+            </aside>
           </div>
+
         </div>
 
         <Footer />
