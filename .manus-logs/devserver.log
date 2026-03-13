@@ -664,3 +664,7 @@
 [2026-03-13T14:33:17.557Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
 [2026-03-13T14:33:17.557Z] page: '/'
 [2026-03-13T14:33:17.558Z] }
+[2026-03-13T14:46:06.087Z] wait  - compiling...
+[2026-03-13T14:46:06.202Z] event - compiled client and server successfully in 116 ms (233 modules)
+[2026-03-13T14:46:06.732Z] wait  - compiling /404 (client and server)...
+[2026-03-13T14:46:06.809Z] event - compiled client and server successfully in 76 ms (236 modules)

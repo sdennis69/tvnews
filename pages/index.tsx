@@ -43,7 +43,7 @@ export default function Home() {
           </div>
 
           {/* Latest News + Right Sidebar */}
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
 
             {/* Latest News (main column) */}
             <div className="flex-1 min-w-0">
@@ -56,7 +56,7 @@ export default function Home() {
             </div>
 
             {/* Right Sidebar */}
-            <aside className="w-full lg:w-72 lg:flex-shrink-0 space-y-6 lg:sticky lg:top-4">
+            <aside className="w-full md:w-72 md:flex-shrink-0 space-y-6 md:sticky md:top-4">
 
               {/* Revcontent Widget Slot 1 */}
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
