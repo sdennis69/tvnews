@@ -51,7 +51,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <Image src="/wcbi-logo.png" alt="WCBI Logo" width={220} height={48} className="h-12 w-auto object-contain" priority />
+            <Image src="/wcbi-logo.png" alt="WCBI Logo" width={256} height={70} className="object-contain" priority />
           </a>
 
           {/* 728x90 Leaderboard Ad */}
