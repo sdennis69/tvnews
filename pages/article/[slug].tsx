@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next'
-import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../../src/components/Header'
 import Footer from '../../src/components/Footer'
+import RevcontentWidget from '../../src/components/RevcontentWidget'
 import { getPostBySlug, getPosts } from '../../src/lib/wordpress'
 
 interface Post {
@@ -54,26 +54,6 @@ export default function ArticlePage({ post, related, notFound }: Props) {
   const category = post?.categories?.edges?.[0]?.node?.name || 'News'
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
-
-  useEffect(() => {
-    // Defer Revcontent until after the page has fully loaded (LCP image rendered)
-    // This prevents the widget's forced-reflow from blocking LCP and TBT
-    const loadRevcontent = () => {
-      if (!document.querySelector('script[src="https://delivery.revcontent.com/155408/289858/widget.js"]')) {
-        const script = document.createElement('script')
-        script.src = 'https://delivery.revcontent.com/155408/289858/widget.js'
-        script.async = true
-        document.body.appendChild(script)
-      }
-    }
-    if (document.readyState === 'complete') {
-      // Page already loaded (e.g. client-side navigation)
-      loadRevcontent()
-    } else {
-      window.addEventListener('load', loadRevcontent, { once: true })
-      return () => window.removeEventListener('load', loadRevcontent)
-    }
-  }, [])
 
   return (
     <>
@@ -300,13 +280,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
                     <span className="text-white/60 text-xs">Ads By Revcontent</span>
                   </div>
-                  <div className="p-2" style={{ minHeight: '600px', contain: 'layout' }}>
-                    <div
-                      data-widget-host="revcontent"
-                      data-pub-id="155408"
-                      data-widget-id="289858"
-                    />
-                  </div>
+                  <RevcontentWidget className="p-2" />
                 </div>
 
                 {/* Generic Ad / Widget Slot 3 */}
