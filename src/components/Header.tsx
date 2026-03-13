@@ -54,6 +54,16 @@ export default function Header() {
             <Image src="/wcbi-logo.png" alt="WCBI Logo" width={220} height={48} className="h-12 w-auto object-contain" priority />
           </a>
 
+          {/* 728x90 Leaderboard Ad */}
+          <div
+            id="header-leaderboard-ad"
+            className="hidden md:flex items-center justify-center bg-[#F0F0F0] border border-[#DDDDDD] text-[#AAAAAA] text-xs font-medium"
+            style={{ width: '728px', height: '90px', flexShrink: 0 }}
+          >
+            {/* Paste your 728×90 Google Ad code here */}
+            728 × 90 Advertisement
+          </div>
+
           {/* Search Icon */}
           <button className="text-[#003D7A] hover:opacity-80 transition-all hidden md:block" aria-label="Search">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
