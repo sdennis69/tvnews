@@ -493,3 +493,19 @@
 [2026-03-13T02:56:06.217Z] event - compiled successfully in 109 ms (149 modules)
 [2026-03-13T02:56:06.606Z] wait  - compiling / (client and server)...
 [2026-03-13T02:56:06.741Z] event - compiled client and server successfully in 134 ms (254 modules)
+[2026-03-13T03:30:43.785Z] Dev server process group stopped
+[2026-03-13T03:30:43.804Z] ELIFECYCLE  Command failed.
+[2026-03-13T03:30:43.809Z] Dev server exited with code -15
+[2026-03-13T03:30:46.791Z] Starting dev server with command: pnpm run dev
+[2026-03-13T03:30:47.080Z] 
+[2026-03-13T03:30:47.081Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-13T03:30:47.081Z] > next dev
+[2026-03-13T03:30:47.082Z] 
+[2026-03-13T03:30:47.185Z] (node:69774) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-13T03:30:47.186Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-13T03:30:47.189Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-13T03:30:48.860Z] event - compiled client and server successfully in 997 ms (175 modules)
+[2026-03-13T03:30:48.862Z] wait  - compiling...
+[2026-03-13T03:30:48.981Z] event - compiled successfully in 119 ms (149 modules)
+[2026-03-13T03:30:49.317Z] wait  - compiling / (client and server)...
+[2026-03-13T03:30:49.464Z] event - compiled client and server successfully in 147 ms (254 modules)
