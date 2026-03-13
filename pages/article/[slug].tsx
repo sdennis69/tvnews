@@ -117,10 +117,10 @@ export default function ArticlePage({ post, related, notFound }: Props) {
 
           {/* Article + Sidebar Layout */}
           {post && (
-            <div className="flex flex-col lg:flex-row gap-8 items-start">
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
               {/* ── LEFT: Main Article ── */}
-              <div className="flex-1 min-w-0">
+              <div style={{ flex: '1 1 500px', minWidth: 0 }}>
 
                 {/* Breadcrumb */}
                 <nav className="flex items-center gap-2 text-xs text-[#888888] mb-4">
@@ -291,7 +291,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
               </div>
 
               {/* ── RIGHT: Sidebar ── */}
-              <aside className="w-full lg:w-72 lg:flex-shrink-0 space-y-6 lg:sticky lg:top-4">
+              <aside className="space-y-6" style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
 
                 {/* Revcontent Widget */}
                 {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
