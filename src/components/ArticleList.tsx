@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getPosts } from '@/lib/wordpress'
 
 interface Post {
@@ -78,13 +79,13 @@ export default function ArticleList() {
           <Link key={post.id} href={`/article/${post.slug}`}>
             <a className="flex gap-4 bg-white rounded-lg overflow-hidden hover:shadow-lg border border-[#CCCCCC] transition-all duration-200 group">
               {image && (
-                <div className="w-40 h-28 flex-shrink-0 overflow-hidden bg-[#E8E8E8]">
-                  <img
+                <div className="w-40 h-28 flex-shrink-0 relative overflow-hidden bg-[#E8E8E8]">
+                  <Image
                     src={image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-300"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    sizes="160px"
+                    className="object-cover group-hover:scale-110 transition-all duration-300"
                   />
                 </div>
               )}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from '../../src/components/Header'
 import Footer from '../../src/components/Footer'
 import { getPostBySlug, getPosts } from '../../src/lib/wordpress'
@@ -178,13 +179,14 @@ export default function ArticlePage() {
                 <div className="text-[#333333] text-base leading-relaxed">
                   {/* Featured image floated right */}
                   {image && (
-                    <div className="float-right ml-6 mb-4 w-64 sm:w-80 flex-shrink-0 clear-right">
-                      <img
+                    <div className="float-right ml-6 mb-4 w-64 sm:w-80 flex-shrink-0 clear-right relative" style={{ aspectRatio: '4/3' }}>
+                      <Image
                         src={image}
                         alt={post.title}
-                        className="w-full rounded shadow-sm object-cover"
-                        loading="eager"
-                        decoding="async"
+                        fill
+                        sizes="(max-width: 640px) 256px, 320px"
+                        className="rounded shadow-sm object-cover"
+                        priority
                       />
                     </div>
                   )}
@@ -261,12 +263,13 @@ export default function ArticlePage() {
                         <Link key={rel.id} href={`/article/${rel.slug}`}>
                           <a className="group flex gap-3 bg-[#F9F9F9] rounded-lg overflow-hidden border border-[#EEEEEE] hover:shadow-md transition-shadow p-3">
                             {rel.featuredImage?.node?.sourceUrl && (
-                              <div className="w-24 h-16 flex-shrink-0 overflow-hidden rounded">
-                                <img
+                              <div className="w-24 h-16 flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]">
+                                <Image
                                   src={rel.featuredImage.node.sourceUrl}
                                   alt={rel.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                  loading="lazy"
+                                  fill
+                                  sizes="96px"
+                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                               </div>
                             )}

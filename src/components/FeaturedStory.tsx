@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getFeaturedPosts, getPosts } from '@/lib/wordpress'
 
 interface Post {
@@ -28,13 +29,11 @@ export default function FeaturedStory() {
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        // Try sticky posts first
         const sticky = await getFeaturedPosts(1)
         if (sticky?.posts?.edges?.[0]?.node) {
           setPost(sticky.posts.edges[0].node)
           return
         }
-        // Fall back to latest post if no sticky posts
         const latest = await getPosts(1)
         if (latest?.posts?.edges?.[0]?.node) {
           setPost(latest.posts.edges[0].node)
@@ -72,23 +71,21 @@ export default function FeaturedStory() {
   return (
     <Link href={`/article/${post.slug}`}>
       <a className="block group">
-        {/* Large Image */}
         {image && (
-          <div className="w-full overflow-hidden rounded bg-[#E8E8E8] mb-3">
-            <img
+          <div className="w-full relative overflow-hidden rounded bg-[#E8E8E8] mb-3" style={{ aspectRatio: '16/9' }}>
+            <Image
               src={image}
               alt={post.title}
-              className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-              loading="lazy"
-              decoding="async"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              priority
             />
           </div>
         )}
-        {/* Title */}
         <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
           {post.title}
         </h2>
-        {/* Byline */}
         <p className="text-sm text-[#888888]">
           <span>by {author}</span>
           <span className="mx-2">·</span>

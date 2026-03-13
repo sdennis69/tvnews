@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getFeaturedPosts, getPosts } from '@/lib/wordpress'
 
 interface Post {
@@ -27,13 +28,11 @@ export default function SidebarArticles() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Try sticky posts first (skip index 0 — that's the featured story)
         const sticky = await getFeaturedPosts(5)
         if (sticky?.posts?.edges && sticky.posts.edges.length > 1) {
           setPosts(sticky.posts.edges.slice(1, 5).map((e: any) => e.node))
           return
         }
-        // Fall back to latest posts (skip first post — that's the featured story)
         const latest = await getPosts(5)
         if (latest?.posts?.edges && latest.posts.edges.length > 1) {
           setPosts(latest.posts.edges.slice(1, 5).map((e: any) => e.node))
@@ -82,19 +81,17 @@ export default function SidebarArticles() {
         return (
           <Link key={post.id} href={`/article/${post.slug}`}>
             <a className="flex gap-4 py-4 first:pt-0 last:pb-0 group hover:bg-[#F9F9F9] transition-colors -mx-4 px-4">
-              {/* Thumbnail */}
               {image && (
-                <div className="w-28 h-20 flex-shrink-0 overflow-hidden rounded bg-[#E8E8E8]">
-                  <img
+                <div className="w-28 h-20 flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]">
+                  <Image
                     src={image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    sizes="112px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}
-              {/* Text */}
               <div className="flex-1 flex flex-col justify-between">
                 <h3 className="text-sm font-semibold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug line-clamp-3">
                   {post.title}

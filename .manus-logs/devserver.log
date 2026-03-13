@@ -529,3 +529,55 @@
 [2026-03-13T03:57:27.473Z] event - compiled successfully in 139 ms (149 modules)
 [2026-03-13T03:57:27.822Z] wait  - compiling / (client and server)...
 [2026-03-13T03:57:27.975Z] event - compiled client and server successfully in 153 ms (254 modules)
+[2026-03-13T04:14:19.162Z] wait  - compiling /404 (client and server)...
+[2026-03-13T04:14:19.296Z] event - compiled client and server successfully in 134 ms (257 modules)
+[2026-03-13T04:14:19.567Z] error - Error: ENOENT: no such file or directory, open '/home/ubuntu/tv-station-website/.next/server/pages/index.js'
+[2026-03-13T04:14:19.568Z] at Object.readFileSync (node:fs:442:20)
+[2026-03-13T04:14:19.569Z] at getMaybeCachedSource (node:internal/modules/cjs/loader:1585:18)
+[2026-03-13T04:14:19.569Z] at Object..js (node:internal/modules/cjs/loader:1660:19)
+[2026-03-13T04:14:19.569Z] at Module.load (node:internal/modules/cjs/loader:1313:32)
+[2026-03-13T04:14:19.570Z] at Function._load (node:internal/modules/cjs/loader:1123:12)
+[2026-03-13T04:14:19.570Z] at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+[2026-03-13T04:14:19.571Z] at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+[2026-03-13T04:14:19.571Z] at Module.require (node:internal/modules/cjs/loader:1335:12)
+[2026-03-13T04:14:19.571Z] at require (node:internal/modules/helpers:136:16)
+[2026-03-13T04:14:19.572Z] at Object.requirePage (/home/ubuntu/tv-station-website/node_modules/next/dist/server/require.js:58:12) {
+[2026-03-13T04:14:19.572Z] errno: -2,
+[2026-03-13T04:14:19.572Z] code: 'ENOENT',
+[2026-03-13T04:14:19.573Z] syscall: 'open',
+[2026-03-13T04:14:19.573Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
+[2026-03-13T04:14:19.573Z] page: '/'
+[2026-03-13T04:14:19.573Z] }
+[2026-03-13T04:14:19.574Z] wait  - compiling /_error (client and server)...
+[2026-03-13T04:14:19.622Z] event - compiled client and server successfully in 54 ms (258 modules)
+[2026-03-13T04:14:22.420Z] 
+[2026-03-13T04:14:22.420Z] > Found a change in next.config.js. Restart the server to see the changes in effect.
+[2026-03-13T04:14:23.876Z] error - Error: ENOENT: no such file or directory, open '/home/ubuntu/tv-station-website/.next/server/pages/index.js'
+[2026-03-13T04:14:23.877Z] at Object.readFileSync (node:fs:442:20)
+[2026-03-13T04:14:23.877Z] at getMaybeCachedSource (node:internal/modules/cjs/loader:1585:18)
+[2026-03-13T04:14:23.878Z] at Object..js (node:internal/modules/cjs/loader:1660:19)
+[2026-03-13T04:14:23.878Z] at Module.load (node:internal/modules/cjs/loader:1313:32)
+[2026-03-13T04:14:23.878Z] at Function._load (node:internal/modules/cjs/loader:1123:12)
+[2026-03-13T04:14:23.879Z] at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+[2026-03-13T04:14:23.879Z] at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+[2026-03-13T04:14:23.879Z] at Module.require (node:internal/modules/cjs/loader:1335:12)
+[2026-03-13T04:14:23.879Z] at require (node:internal/modules/helpers:136:16)
+[2026-03-13T04:14:23.880Z] at Object.requirePage (/home/ubuntu/tv-station-website/node_modules/next/dist/server/require.js:58:12) {
+[2026-03-13T04:14:23.880Z] errno: -2,
+[2026-03-13T04:14:23.880Z] code: 'ENOENT',
+[2026-03-13T04:14:23.880Z] syscall: 'open',
+[2026-03-13T04:14:23.880Z] path: '/home/ubuntu/tv-station-website/.next/server/pages/index.js',
+[2026-03-13T04:14:23.881Z] page: '/'
+[2026-03-13T04:14:23.881Z] }
+[2026-03-13T04:14:46.624Z] wait  - compiling...
+[2026-03-13T04:14:47.438Z] event - compiled client and server successfully in 814 ms (267 modules)
+[2026-03-13T04:14:47.553Z] wait  - compiling /404 (client and server)...
+[2026-03-13T04:14:47.625Z] event - compiled client and server successfully in 73 ms (270 modules)
+[2026-03-13T04:15:03.753Z] wait  - compiling...
+[2026-03-13T04:15:03.957Z] event - compiled client and server successfully in 204 ms (270 modules)
+[2026-03-13T04:15:23.001Z] wait  - compiling...
+[2026-03-13T04:15:23.211Z] event - compiled client and server successfully in 210 ms (267 modules)
+[2026-03-13T04:15:23.491Z] wait  - compiling /404 (client and server)...
+[2026-03-13T04:15:23.563Z] event - compiled client and server successfully in 71 ms (270 modules)
+[2026-03-13T04:15:55.190Z] wait  - compiling...
+[2026-03-13T04:15:55.388Z] event - compiled client and server successfully in 198 ms (270 modules)
