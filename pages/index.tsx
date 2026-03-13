@@ -54,10 +54,10 @@ export default function Home() {
           </div>
 
           {/* Latest News + Right Sidebar */}
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
             {/* Latest News (main column) */}
-            <div className="flex-1 min-w-0">
+            <div style={{ flex: '1 1 500px', minWidth: 0 }}>
               <div className="mb-4">
                 <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
                   Latest News
@@ -67,7 +67,7 @@ export default function Home() {
             </div>
 
             {/* Right Sidebar */}
-            <aside className="w-full md:w-72 md:min-w-[288px] md:flex-shrink-0 space-y-6 md:sticky md:top-4">
+            <aside className="space-y-6" style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
 
               {/* Revcontent Widget */}
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
