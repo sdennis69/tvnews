@@ -107,7 +107,7 @@ export default function ArticlePage() {
 
         {/* Loading State */}
         {loading && (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="animate-pulse space-y-6">
               <div className="h-4 bg-[#E8E8E8] rounded w-1/4"></div>
               <div className="h-8 bg-[#E8E8E8] rounded w-3/4"></div>
@@ -124,7 +124,7 @@ export default function ArticlePage() {
 
         {/* Not Found State */}
         {!loading && notFound && (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
             <h1 className="text-3xl font-bold text-[#333333] mb-4">Article Not Found</h1>
             <p className="text-[#888888] mb-8">This article may have been removed or the link is incorrect.</p>
             <Link href="/">
@@ -137,7 +137,7 @@ export default function ArticlePage() {
 
         {/* Article Content */}
         {!loading && post && (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-[#888888] mb-6">
