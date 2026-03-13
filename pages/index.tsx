@@ -67,7 +67,7 @@ export default function Home() {
             </div>
 
             {/* Right Sidebar */}
-            <aside className="w-full md:w-72 md:flex-shrink-0 space-y-6 md:sticky md:top-4">
+            <aside className="w-full md:w-72 md:min-w-[288px] md:flex-shrink-0 space-y-6 md:sticky md:top-4">
 
               {/* Revcontent Widget */}
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
