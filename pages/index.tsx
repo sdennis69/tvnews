@@ -80,12 +80,13 @@ export default function Home() {
             <aside className="space-y-6" style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
 
               {/* Revcontent Widget */}
+              {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
                 <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
                   <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
                   <span className="text-white/60 text-xs">Ads By Revcontent</span>
                 </div>
-                <div className="p-2">
+                <div className="p-2" style={{ minHeight: '600px', contain: 'layout' }}>
                   <div
                     data-widget-host="revcontent"
                     data-pub-id="155408"
