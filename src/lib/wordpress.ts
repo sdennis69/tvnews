@@ -169,7 +169,7 @@ export async function getPostBySlug(slug: string) {
       postBy(slug: $slug) {
         id
         title
-        content
+        content(format: RENDERED)
         slug
         excerpt
         date
