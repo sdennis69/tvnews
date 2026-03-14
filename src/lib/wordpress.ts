@@ -324,6 +324,71 @@ export async function searchPosts(search: string, first: number = 10) {
 }
 
 /**
+ * Fetch navigation menu items by menu location or name
+ * Requires WPGraphQL Menu plugin or WPGraphQL (v0.9+) with menu support
+ */
+export async function getMenuItems(menuLocation: string = 'PRIMARY') {
+  const query = `
+    query GetMenuItems($location: MenuLocationEnum) {
+      menuItems(where: { location: $location }, first: 50) {
+        edges {
+          node {
+            id
+            label
+            url
+            parentId
+            childItems {
+              edges {
+                node {
+                  id
+                  label
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const result = await queryWordPress<{
+    menuItems: {
+      edges: Array<{
+        node: {
+          id: string
+          label: string
+          url: string
+          parentId: string | null
+          childItems: {
+            edges: Array<{
+              node: { id: string; label: string; url: string }
+            }>
+          }
+        }
+      }>
+    }
+  }>(query, { location: menuLocation })
+
+  if (!result?.menuItems?.edges) return []
+
+  // Return only top-level items (no parentId) with their children
+  return result.menuItems.edges
+    .map((e) => e.node)
+    .filter((item) => !item.parentId)
+    .map((item) => ({
+      id: item.id,
+      label: item.label,
+      url: item.url,
+      children: item.childItems?.edges?.map((c) => ({
+        id: c.node.id,
+        label: c.node.label,
+        url: c.node.url,
+      })) || [],
+    }))
+}
+
+/**
  * Fetch site settings
  */
 export async function getSiteSettings() {

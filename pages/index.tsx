@@ -19,10 +19,13 @@ interface Post {
   categories?: { edges: Array<{ node: { name: string } }> }
 }
 
+import type { NavItem } from './_app'
+
 interface Props {
   featuredPost: Post | null
   sidebarPosts: Post[]
   latestPosts: Post[]
+  navItems?: NavItem[]
 }
 
 function timeAgo(dateStr: string): string {
@@ -33,7 +36,7 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
 }
 
-export default function Home({ featuredPost, sidebarPosts, latestPosts }: Props) {
+export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems }: Props) {
   const lcpImageUrl = featuredPost?.featuredImage?.node?.sourceUrl || ''
 
   return (
@@ -54,7 +57,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts }: Props)
         )}
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
-        <Header />
+        <Header navItems={navItems} />
         <BreakingNewsTicker />
 
         {/* Main Content Area */}

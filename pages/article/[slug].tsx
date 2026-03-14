@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Header from '../../src/components/Header'
 import Footer from '../../src/components/Footer'
 import RevcontentWidget from '../../src/components/RevcontentWidget'
+import type { NavItem } from '../_app'
 import { getPostBySlug, getPosts } from '../../src/lib/wordpress'
 
 interface Post {
@@ -32,6 +33,7 @@ interface Props {
   post: Post | null
   related: RelatedPost[]
   notFound: boolean
+  navItems?: NavItem[]
 }
 
 function timeAgo(dateStr: string): string {
@@ -50,7 +52,7 @@ function formatDate(dateStr: string): string {
   })
 }
 
-export default function ArticlePage({ post, related, notFound }: Props) {
+export default function ArticlePage({ post, related, notFound, navItems }: Props) {
   const category = post?.categories?.edges?.[0]?.node?.name || 'News'
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
@@ -78,7 +80,7 @@ export default function ArticlePage({ post, related, notFound }: Props) {
       </Head>
 
       <main className="min-h-screen bg-white">
-        <Header />
+        <Header navItems={navItems} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 

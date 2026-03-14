@@ -1,18 +1,38 @@
+/**
+ * Header component
+ *
+ * Renders the site header with:
+ * - Top utility bar (weather, social links)
+ * - Logo + leaderboard ad
+ * - Primary navigation bar (driven by WordPress Appearance > Menus)
+ *
+ * navItems are fetched server-side in _app.tsx getInitialProps and passed
+ * down as props. Falls back to hardcoded items if WordPress menu is empty.
+ */
+
 import { useState } from 'react'
 import Image from 'next/image'
+import type { NavItem } from '../../pages/_app'
 
-export default function Header() {
+interface Props {
+  navItems?: NavItem[]
+}
+
+// Hardcoded fallback — only used if _app.tsx hasn't passed navItems yet
+const DEFAULT_NAV: NavItem[] = [
+  { id: 'home', label: 'HOME', url: '/', children: [] },
+  { id: 'news', label: 'NEWS', url: '/news', children: [] },
+  { id: 'weather', label: 'WEATHER', url: '/weather', children: [] },
+  { id: 'sports', label: 'SPORTS', url: '/sports', children: [] },
+  { id: 'videos', label: 'VIDEOS', url: '/videos', children: [] },
+  { id: 'livestream', label: 'LIVESTREAM', url: '/livestream', children: [] },
+]
+
+export default function Header({ navItems }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
-  const navItems = [
-    { label: 'HOME', href: '/' },
-    { label: 'NEWS', href: '/news' },
-    { label: 'WEATHER', href: '/weather' },
-    { label: 'SPORTS', href: '/sports' },
-    { label: 'VIDEOS', href: '/videos' },
-    { label: 'LIVESTREAM', href: '/livestream' },
-    { label: 'MORE', href: '/more' },
-  ]
+  const items = navItems && navItems.length > 0 ? navItems : DEFAULT_NAV
 
   return (
     <header className="sticky top-0 z-50">
@@ -77,21 +97,46 @@ export default function Header() {
       <nav className="bg-[#003D7A] border-b border-[#002A5A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center h-14 relative">
-            {/* Desktop Navigation - Centered */}
+
+            {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-0 justify-center">
-              {navItems.map((item) => (
-                <li key={item.label}>
+              {items.map((item) => (
+                <li
+                  key={item.id}
+                  className="relative"
+                  onMouseEnter={() => item.children.length > 0 && setActiveDropdown(item.id)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
                   <a
-                    href={item.href}
-                    className="block px-4 py-3.5 text-sm font-bold text-white hover:bg-[#004A9A] border-b-4 border-transparent hover:border-[#003D7A] transition-all whitespace-nowrap"
+                    href={item.url}
+                    className="block px-4 py-3.5 text-sm font-bold text-white hover:bg-[#004A9A] border-b-4 border-transparent hover:border-white transition-all whitespace-nowrap"
                   >
-                    {item.label}
+                    {item.label.toUpperCase()}
+                    {item.children.length > 0 && (
+                      <span className="ml-1 text-xs opacity-70">▾</span>
+                    )}
                   </a>
+
+                  {/* Dropdown for items with children */}
+                  {item.children.length > 0 && activeDropdown === item.id && (
+                    <ul className="absolute top-full left-0 bg-[#002A5A] shadow-lg min-w-[180px] py-1 z-50">
+                      {item.children.map((child) => (
+                        <li key={child.id}>
+                          <a
+                            href={child.url}
+                            className="block px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#004A9A] transition-colors whitespace-nowrap"
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
 
-            {/* Mobile Menu Dropdown Toggle */}
+            {/* Mobile Menu Toggle */}
             <div className="md:hidden relative w-full">
               <button
                 className="w-full flex items-center justify-center text-white hover:bg-[#004A9A] transition-all p-2 font-bold"
@@ -99,34 +144,46 @@ export default function Header() {
                 aria-label="Toggle menu"
               >
                 <span className="mr-2">MENU</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className={`h-5 w-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-5 w-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </button>
 
-              {/* Mobile Dropdown Navigation */}
+              {/* Mobile Dropdown */}
               {dropdownOpen && (
-                <ul className="absolute top-full left-0 right-0 bg-[#004A9A] border-t border-[#002A5A] py-2 shadow-lg">
-                  {navItems.map((item) => (
-                    <li key={item.label}>
+                <ul className="absolute top-full left-0 right-0 bg-[#004A9A] border-t border-[#002A5A] py-2 shadow-lg z-50">
+                  {items.map((item) => (
+                    <li key={item.id}>
                       <a
-                        href={item.href}
+                        href={item.url}
                         className="block px-4 py-3 text-sm font-bold text-white hover:bg-[#003D7A] transition-all"
                         onClick={() => setDropdownOpen(false)}
                       >
-                        {item.label}
+                        {item.label.toUpperCase()}
                       </a>
+                      {/* Mobile sub-items */}
+                      {item.children.map((child) => (
+                        <a
+                          key={child.id}
+                          href={child.url}
+                          className="block px-8 py-2 text-sm text-white/80 hover:bg-[#003D7A] transition-all"
+                          onClick={() => setDropdownOpen(false)}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
                     </li>
                   ))}
                 </ul>
               )}
             </div>
+
           </div>
         </div>
       </nav>
