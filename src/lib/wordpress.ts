@@ -472,3 +472,50 @@ export async function getPageBySlug(slug: string) {
 
   return result?.pageBy || null
 }
+
+// ── ISR helpers ────────────────────────────────────────────────────────────────
+
+/**
+ * Fetch the most recent post slugs for getStaticPaths.
+ * Pre-builds the top N articles at deploy time; older articles are built
+ * on first request (fallback: 'blocking') and then cached via ISR.
+ */
+export async function getAllPostSlugs(first: number = 200): Promise<string[]> {
+  const data = await queryWordPress<{
+    posts: { nodes: { slug: string }[] }
+  }>(`
+    query GetAllPostSlugs($first: Int!) {
+      posts(first: $first, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `, { first })
+
+  if (!data?.posts?.nodes) return []
+  return data.posts.nodes.map((n) => n.slug)
+}
+
+/**
+ * Fetch all published page slugs for getStaticPaths on [wppage].
+ * Excludes the homepage (slug: 'home') since that has its own route.
+ */
+export async function getAllPageSlugs(): Promise<string[]> {
+  const data = await queryWordPress<{
+    pages: { nodes: { slug: string }[] }
+  }>(`
+    query GetAllPageSlugs {
+      pages(first: 500, where: { status: PUBLISH }) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `)
+
+  if (!data?.pages?.nodes) return []
+  return data.pages.nodes
+    .map((n) => n.slug)
+    .filter((slug) => slug !== 'home' && slug !== 'sample-page')
+}

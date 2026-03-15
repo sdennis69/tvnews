@@ -13,14 +13,14 @@
  * Appearance > Menus without any code changes needed.
  */
 
-import { GetServerSideProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
 import RevcontentWidget from '../src/components/RevcontentWidget'
 import type { NavItem } from './_app'
-import { getPageBySlug } from '../src/lib/wordpress'
+import { getPageBySlug, getAllPageSlugs } from '../src/lib/wordpress'
 
 interface WPPage {
   id: string
@@ -119,7 +119,20 @@ export default function WordPressPage({ page, navItems }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+/**
+ * ISR: Pre-build all published WordPress pages at deploy time.
+ * New pages added in WordPress are built on first request, then cached.
+ * All pages revalidate every 60 seconds in the background.
+ */
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = await getAllPageSlugs()
+  return {
+    paths: slugs.map((slug) => ({ params: { wppage: slug } })),
+    fallback: 'blocking', // Build new WP pages on first request, then cache
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.wppage as string
 
   try {
@@ -131,6 +144,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     return {
       props: { page },
+      revalidate: 60, // Rebuild in background every 60 seconds
     }
   } catch (err) {
     console.error('Error fetching WP page:', err)

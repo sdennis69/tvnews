@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -6,7 +5,7 @@ import Header from '../../src/components/Header'
 import Footer from '../../src/components/Footer'
 import RevcontentWidget from '../../src/components/RevcontentWidget'
 import type { NavItem } from '../_app'
-import { getPostBySlug, getPosts } from '../../src/lib/wordpress'
+import { getPostBySlug, getPosts, getAllPostSlugs } from '../../src/lib/wordpress'
 
 interface Post {
   id: string
@@ -313,10 +312,21 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
   )
 }
 
-// Server-side rendering: fetch article data on the server so the HTML is complete
-// when it reaches the browser — eliminates the 980ms LCP resource load delay
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params as { slug: string }
+/**
+ * ISR: Pre-build the 200 most recent articles at deploy time.
+ * Older articles are built on first request (fallback: 'blocking') then cached.
+ * All pages revalidate every 60 seconds in the background.
+ */
+export async function getStaticPaths() {
+  const slugs = await getAllPostSlugs(200)
+  return {
+    paths: slugs.map((slug) => ({ params: { slug } })),
+    fallback: 'blocking', // Build unknown slugs on first request, then cache
+  }
+}
+
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const { slug } = params
 
   try {
     const [postResponse, latestResponse] = await Promise.all([
@@ -325,7 +335,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ])
 
     if (!postResponse?.postBy) {
-      return { props: { post: null, related: [], notFound: true } }
+      return { notFound: true }
     }
 
     const post = postResponse.postBy
@@ -336,9 +346,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: { post, related, notFound: false },
+      revalidate: 60, // Rebuild in background every 60 seconds
     }
   } catch (error) {
     console.error('Error fetching article:', error)
-    return { props: { post: null, related: [], notFound: true } }
+    return { notFound: true }
   }
 }
