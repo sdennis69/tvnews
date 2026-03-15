@@ -423,10 +423,6 @@ export async function getPageBySlug(slug: string) {
             sourceUrl
           }
         }
-        seo {
-          title
-          metaDesc
-        }
       }
     }
   `
@@ -438,7 +434,6 @@ export async function getPageBySlug(slug: string) {
       slug: string
       date: string
       featuredImage?: { node: { sourceUrl: string } }
-      seo?: { title?: string; metaDesc?: string }
     } | null
   }>(query, { slug })
 

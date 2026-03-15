@@ -29,7 +29,6 @@ interface WPPage {
   slug: string
   date: string
   featuredImage?: { node: { sourceUrl: string } }
-  seo?: { title?: string; metaDesc?: string }
 }
 
 interface Props {
@@ -40,8 +39,8 @@ interface Props {
 export default function WordPressPage({ page, navItems }: Props) {
   if (!page) return null // 404 handled by getServerSideProps notFound: true
 
-  const seoTitle = page.seo?.title || `${page.title} - WCBI`
-  const seoDesc = page.seo?.metaDesc || ''
+  const seoTitle = `${page.title} - WCBI`
+  const seoDesc = ''
   const image = page.featuredImage?.node?.sourceUrl || ''
 
   return (
