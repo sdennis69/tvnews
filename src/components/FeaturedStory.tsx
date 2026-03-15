@@ -59,7 +59,7 @@ export default function FeaturedStory() {
 
   if (!post) {
     return (
-      <div className="text-center py-12 text-[#888888]">
+      <div className="text-center py-12 text-[#555555]">
         <p>No posts available. Check your WordPress connection.</p>
       </div>
     )
@@ -87,7 +87,7 @@ export default function FeaturedStory() {
         <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
           {post.title}
         </h2>
-        <p className="text-sm text-[#888888]">
+        <p className="text-sm text-[#555555]">
           <span>by {author}</span>
           <span className="mx-2">·</span>
           <span>{timeAgo(post.date)}</span>

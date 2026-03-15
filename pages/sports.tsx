@@ -79,7 +79,7 @@ export default function SportsPage({ posts, navItems }: Props) {
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
                             <span className="bg-[#003D7A] text-white text-xs font-bold px-2.5 py-1 rounded">SPORTS</span>
-                            <span className="text-xs text-[#999999]">{timeAgo(featured.date)}</span>
+                            <span className="text-xs text-[#666666]">{timeAgo(featured.date)}</span>
                           </div>
                           <h2 className="text-xl font-bold text-[#333333] group-hover:text-[#003D7A] transition-colors mb-2 leading-tight">
                             {featured.title}
@@ -90,7 +90,7 @@ export default function SportsPage({ posts, navItems }: Props) {
                             </p>
                           )}
                         </div>
-                        <span className="text-xs text-[#999999] mt-2">by {featured.author?.node?.name || 'Staff'}</span>
+                        <span className="text-xs text-[#666666] mt-2">by {featured.author?.node?.name || 'Staff'}</span>
                       </div>
                     </a>
                   </Link>
@@ -132,7 +132,7 @@ export default function SportsPage({ posts, navItems }: Props) {
                               >
                                 {catName.toUpperCase()}
                               </span>
-                              <span className="text-xs text-[#999999]">{timeAgo(post.date)}</span>
+                              <span className="text-xs text-[#666666]">{timeAgo(post.date)}</span>
                             </div>
                             <h3 className="text-base font-bold text-[#333333] group-hover:text-[#003D7A] transition-colors mb-2 leading-tight" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                               {post.title}
@@ -143,7 +143,7 @@ export default function SportsPage({ posts, navItems }: Props) {
                               </p>
                             )}
                           </div>
-                          <span className="text-xs text-[#999999] mt-2">by {post.author?.node?.name || 'Staff'}</span>
+                          <span className="text-xs text-[#666666] mt-2">by {post.author?.node?.name || 'Staff'}</span>
                         </div>
                       </a>
                     </Link>
@@ -152,7 +152,7 @@ export default function SportsPage({ posts, navItems }: Props) {
               </div>
 
               {posts.length === 0 && (
-                <div className="text-center py-16 text-[#999999]">
+                <div className="text-center py-16 text-[#666666]">
                   <p>No sports stories found. Check back soon.</p>
                 </div>
               )}

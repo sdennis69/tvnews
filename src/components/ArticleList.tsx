@@ -62,7 +62,7 @@ export default function ArticleList() {
 
   if (posts.length === 0) {
     return (
-      <div className="text-center py-12 text-[#888888]">
+      <div className="text-center py-12 text-[#555555]">
         <p className="text-lg font-medium mb-2">No articles found</p>
         <p className="text-sm">Make sure your WordPress site is connected and has published posts.</p>
       </div>
@@ -95,7 +95,7 @@ export default function ArticleList() {
                     <span className="bg-[#003D7A] text-white text-xs font-bold px-2.5 py-1 rounded">
                       {category.toUpperCase()}
                     </span>
-                    <span className="text-xs text-[#999999]">{timeAgo(post.date)}</span>
+                    <span className="text-xs text-[#666666]">{timeAgo(post.date)}</span>
                   </div>
                   <h3 className="text-base font-bold text-[#333333] group-hover:text-[#003D7A] transition-colors mb-2 line-clamp-2 leading-tight">
                     {post.title}
@@ -104,7 +104,7 @@ export default function ArticleList() {
                     {post.excerpt?.replace(/<[^>]*>/g, '') || ''}
                   </p>
                 </div>
-                <span className="text-xs text-[#999999] mt-2">by {author}</span>
+                <span className="text-xs text-[#666666] mt-2">by {author}</span>
               </div>
             </a>
           </Link>

@@ -90,7 +90,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
           {notFound && (
             <div className="py-24 text-center">
               <h1 className="text-3xl font-bold text-[#333333] mb-4">Article Not Found</h1>
-              <p className="text-[#888888] mb-8">This article may have been removed or the link is incorrect.</p>
+              <p className="text-[#555555] mb-8">This article may have been removed or the link is incorrect.</p>
               <Link href="/">
                 <a className="bg-[#003D7A] text-white px-6 py-3 rounded font-semibold hover:bg-[#002A5A] transition-colors">
                   ← Back to Home
@@ -107,7 +107,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
               <div style={{ flex: '1 1 500px', minWidth: 0 }}>
 
                 {/* Breadcrumb */}
-                <nav className="flex items-center gap-2 text-xs text-[#888888] mb-4">
+                <nav className="flex items-center gap-2 text-xs text-[#555555] mb-4">
                   <Link href="/"><a className="hover:text-[#003D7A] transition-colors">Home</a></Link>
                   <span>/</span>
                   <Link href="/news"><a className="hover:text-[#003D7A] transition-colors">{category}</a></Link>
@@ -132,7 +132,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                   {formatDate(post.date)}
                   {' · '}
                   <span className="font-medium">by {author}</span>
-                  <span className="text-[#AAAAAA] ml-2">({timeAgo(post.date)})</span>
+                  <span className="text-[#666666] ml-2">({timeAgo(post.date)})</span>
                 </p>
 
                 {/* Article body with image floated right */}
@@ -255,7 +255,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                               <h3 className="text-sm font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug line-clamp-3">
                                 {rel.title}
                               </h3>
-                              <p className="text-xs text-[#888888] mt-1">{timeAgo(rel.date)}</p>
+                              <p className="text-xs text-[#555555] mt-1">{timeAgo(rel.date)}</p>
                             </div>
                           </a>
                         </Link>
@@ -294,7 +294,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                   </div>
                   <div
                     id="sidebar-ad-slot-1"
-                    className="min-h-[250px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
+                    className="min-h-[250px] flex items-center justify-center text-[#666666] text-xs p-4 text-center"
                   >
                     <span>Ad Unit<br />(300×250 or 300×600)</span>
                   </div>

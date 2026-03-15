@@ -129,7 +129,7 @@ export default function FeaturedArticles() {
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-[#999999] border-t border-[#cccccc] pt-3">
+                <div className="flex items-center justify-between text-xs text-[#666666] border-t border-[#cccccc] pt-3">
                   <span><i className="fa fa-clock-o mr-1"></i>{article.date}</span>
                   <span><i className="fa fa-user mr-1"></i>{article.author}</span>
                 </div>

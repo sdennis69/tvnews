@@ -67,7 +67,7 @@ export default function SidebarArticles() {
 
   if (posts.length === 0) {
     return (
-      <div className="text-center py-8 text-[#888888] text-sm">
+      <div className="text-center py-8 text-[#555555] text-sm">
         <p>No articles available.</p>
       </div>
     )
@@ -96,7 +96,7 @@ export default function SidebarArticles() {
                 <h3 className="text-sm font-semibold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug line-clamp-3">
                   {post.title}
                 </h3>
-                <p className="text-xs text-[#888888] mt-1">
+                <p className="text-xs text-[#555555] mt-1">
                   <span className="font-medium">by {author}</span>
                   <span className="mx-1">·</span>
                   <span>{timeAgo(post.date)}</span>

@@ -12,7 +12,7 @@ export default function Footer() {
           {/* About */}
           <div>
             <h4 className="text-lg font-bold mb-4">{stationName}</h4>
-            <p className="text-[#CCCCCC] text-sm leading-relaxed">
+            <p className="text-[#DDDDDD] text-sm leading-relaxed">
               Your trusted source for local news, weather, and entertainment.
             </p>
           </div>
@@ -21,10 +21,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">News</h4>
             <ul className="space-y-2">
-              <li><Link href="/category/local" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Local News</Link></li>
-              <li><Link href="/category/national" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">National</Link></li>
-              <li><Link href="/category/sports" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Sports</Link></li>
-              <li><Link href="/category/entertainment" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Entertainment</Link></li>
+              <li><Link href="/category/local" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Local News</Link></li>
+              <li><Link href="/category/national" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">National</Link></li>
+              <li><Link href="/category/sports" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Sports</Link></li>
+              <li><Link href="/category/entertainment" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Entertainment</Link></li>
             </ul>
           </div>
 
@@ -32,10 +32,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Resources</h4>
             <ul className="space-y-2">
-              <li><Link href="/weather" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Weather</Link></li>
-              <li><Link href="/livestream" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Live TV</Link></li>
-              <li><Link href="/about-wcbi" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">About Us</Link></li>
-              <li><Link href="/about-wcbi/contact-us" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Contact</Link></li>
+              <li><Link href="/weather" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Weather</Link></li>
+              <li><Link href="/livestream" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Live TV</Link></li>
+              <li><Link href="/about-wcbi" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">About Us</Link></li>
+              <li><Link href="/about-wcbi/contact-us" className="text-[#DDDDDD] hover:text-white transition-smooth text-sm">Contact</Link></li>
             </ul>
           </div>
 
@@ -43,24 +43,24 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-lg">
-                <i className="fa fa-facebook"></i>
+              <a href="https://www.facebook.com/wcbitv" target="_blank" rel="noopener noreferrer" aria-label="WCBI on Facebook" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-lg">
+                <i className="fa fa-facebook" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
-                <i className="fa fa-twitter"></i>
+              <a href="https://twitter.com/WCBINEWS" target="_blank" rel="noopener noreferrer" aria-label="WCBI on Twitter" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center hover:bg-[#cc0000] hover:text-white transition-smooth">
+                <i className="fa fa-twitter" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
-                <i className="fa fa-instagram"></i>
+              <a href="https://www.instagram.com/wcbi" target="_blank" rel="noopener noreferrer" aria-label="WCBI on Instagram" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center hover:bg-[#cc0000] hover:text-white transition-smooth">
+                <i className="fa fa-instagram" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center text-[#003D7A] hover:bg-[#cc0000] hover:text-white transition-smooth">
-                <i className="fa fa-youtube"></i>
+              <a href="https://www.youtube.com/user/wcbitv1" target="_blank" rel="noopener noreferrer" aria-label="WCBI on YouTube" className="w-10 h-10 text-[#CCCCCC] rounded-full flex items-center justify-center hover:bg-[#cc0000] hover:text-white transition-smooth">
+                <i className="fa fa-youtube" aria-hidden="true"></i>
               </a>
             </div>
           </div>
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-[#555555] pt-8 text-center text-sm text-[#CCCCCC]">
+        <div className="border-t border-[#555555] pt-8 text-center text-sm text-[#DDDDDD]">
           <p className="mb-2">
             &copy; {currentYear} {stationName}. All rights reserved.
           </p>

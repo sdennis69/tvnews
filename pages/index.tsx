@@ -93,7 +93,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                       <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
                         {featuredPost.title}
                       </h2>
-                      <p className="text-sm text-[#888888]">
+                      <p className="text-sm text-[#555555]">
                         <span>by {featuredPost.author?.node?.name || 'Staff'}</span>
                         <span className="mx-2">·</span>
                         <span>{timeAgo(featuredPost.date)}</span>
@@ -101,7 +101,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                     </a>
                   </Link>
                 ) : (
-                  <div className="text-center py-12 text-[#888888]">
+                  <div className="text-center py-12 text-[#555555]">
                     <p>No posts available. Check your WordPress connection.</p>
                   </div>
                 )}
@@ -129,7 +129,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                             <h3 className="text-sm font-semibold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug line-clamp-3">
                               {post.title}
                             </h3>
-                            <p className="text-xs text-[#888888] mt-1">
+                            <p className="text-xs text-[#555555] mt-1">
                               <span className="font-medium">by {post.author?.node?.name || 'Staff'}</span>
                               <span className="mx-1">·</span>
                               <span>{timeAgo(post.date)}</span>
@@ -140,7 +140,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-[#888888] text-sm">
+                  <div className="text-center py-8 text-[#555555] text-sm">
                     <p>No articles available.</p>
                   </div>
                 )}
@@ -184,7 +184,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                                 <span className="bg-[#003D7A] text-white text-xs font-bold px-2.5 py-1 rounded">
                                   {category.toUpperCase()}
                                 </span>
-                                <span className="text-xs text-[#999999]">{timeAgo(post.date)}</span>
+                                <span className="text-xs text-[#666666]">{timeAgo(post.date)}</span>
                               </div>
                               <h3 className="text-base font-bold text-[#333333] group-hover:text-[#003D7A] transition-colors mb-2 line-clamp-2 leading-tight">
                                 {post.title}
@@ -193,7 +193,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                                 {post.excerpt?.replace(/<[^>]*>/g, '') || ''}
                               </p>
                             </div>
-                            <span className="text-xs text-[#999999] mt-2">by {author}</span>
+                            <span className="text-xs text-[#666666] mt-2">by {author}</span>
                           </div>
                         </a>
                       </Link>
@@ -201,7 +201,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                   })}
                 </div>
               ) : (
-                <div className="text-center py-12 text-[#888888]">
+                <div className="text-center py-12 text-[#555555]">
                   <p className="text-lg font-medium mb-2">No articles found</p>
                   <p className="text-sm">Make sure your WordPress site is connected and has published posts.</p>
                 </div>
@@ -228,7 +228,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                 </div>
                 <div
                   id="homepage-ad-slot-1"
-                  className="min-h-[250px] flex items-center justify-center text-[#AAAAAA] text-xs p-4 text-center"
+                  className="min-h-[250px] flex items-center justify-center text-[#666666] text-xs p-4 text-center"
                 >
                   <span>Ad Unit<br />(300×250 or 300×600)</span>
                 </div>
