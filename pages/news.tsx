@@ -40,7 +40,7 @@ export default function NewsPage({ posts, navItems }: Props) {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex gap-8" style={{ alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 500px', minWidth: 0 }}>
               {featured && (
                 <Link href={`/article/${featured.slug}`}><a className="block mb-8 group">
@@ -87,7 +87,7 @@ export default function NewsPage({ posts, navItems }: Props) {
               </div>
               {posts.length === 0 && <div className="text-center py-16 text-[#999999]"><p>No stories found. Check back soon.</p></div>}
             </div>
-            <aside className="space-y-6 hidden lg:block" style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
+            <aside style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
                 <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
                   <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
