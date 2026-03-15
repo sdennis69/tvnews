@@ -34,8 +34,8 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/weather" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Weather</Link></li>
               <li><Link href="/livestream" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Live TV</Link></li>
-              <li><Link href="/about" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">About Us</Link></li>
-              <li><Link href="/contact" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Contact</Link></li>
+              <li><Link href="/about-wcbi" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">About Us</Link></li>
+              <li><Link href="/about-wcbi/contact-us" className="text-[#CCCCCC] hover:text-[#003D7A] transition-smooth text-sm">Contact</Link></li>
             </ul>
           </div>
 
@@ -65,11 +65,11 @@ export default function Footer() {
             &copy; {currentYear} {stationName}. All rights reserved.
           </p>
           <div className="flex justify-center gap-4 text-xs">
-            <Link href="/privacy" className="hover:text-[#003D7A] transition-smooth">Privacy Policy</Link>
+            <Link href="/about-wcbi/privacy-policy-2" className="hover:text-[#003D7A] transition-smooth">Privacy Policy</Link>
             <span>|</span>
-            <Link href="/terms" className="hover:text-[#003D7A] transition-smooth">Terms of Service</Link>
+            <Link href="/terms-of-use" className="hover:text-[#003D7A] transition-smooth">Terms of Service</Link>
             <span>|</span>
-            <Link href="/contact" className="hover:text-[#003D7A] transition-smooth">Contact</Link>
+            <Link href="/about-wcbi/contact-us" className="hover:text-[#003D7A] transition-smooth">Contact</Link>
           </div>
         </div>
       </div>
