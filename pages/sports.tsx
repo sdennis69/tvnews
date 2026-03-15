@@ -2,7 +2,7 @@
  * /sports — Sports category listing page (local, college, high school)
  * Layout: horizontal thumbnail-left cards matching homepage style
  */
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -176,7 +176,7 @@ export default function SportsPage({ posts, navItems }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const [local, college, hs] = await Promise.all([
       getPostsByCategory('local-sports', 10),
@@ -189,9 +189,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       ...(hs?.posts?.edges?.map((e: { node: Post }) => e.node) || []),
     ]
     allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    return { props: { posts: allPosts.slice(0, 25) } }
+    return { props: { posts: allPosts.slice(0, 25) }, revalidate: 60 }
   } catch (err) {
     console.error('Error fetching sports:', err)
-    return { props: { posts: [] } }
+    return { props: { posts: [] }, revalidate: 60 }
   }
 }

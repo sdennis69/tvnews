@@ -2,7 +2,7 @@
  * /weather-news — Weather News category listing page
  * Layout: horizontal thumbnail-left cards matching homepage style
  */
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -164,13 +164,13 @@ export default function WeatherNewsPage({ posts, navItems }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const result = await getPostsByCategory('wcbi-featured-weather', 25)
     const posts: Post[] = result?.posts?.edges?.map((e: { node: Post }) => e.node) || []
-    return { props: { posts } }
+    return { props: { posts }, revalidate: 60 }
   } catch (err) {
     console.error('Error fetching weather news:', err)
-    return { props: { posts: [] } }
+    return { props: { posts: [] }, revalidate: 60 }
   }
 }
