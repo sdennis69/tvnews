@@ -404,3 +404,43 @@ export async function getSiteSettings() {
 
   return queryWordPress<SiteSettingsResponse>(query)
 }
+
+/**
+ * Fetch a WordPress PAGE (not post) by its slug.
+ * Used by the catch-all page route to render any WP page linked from the nav.
+ */
+export async function getPageBySlug(slug: string) {
+  const query = `
+    query GetPageBySlug($slug: String!) {
+      pageBy(uri: $slug) {
+        id
+        title
+        content(format: RENDERED)
+        slug
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        seo {
+          title
+          metaDesc
+        }
+      }
+    }
+  `
+  const result = await queryWordPress<{
+    pageBy: {
+      id: string
+      title: string
+      content: string
+      slug: string
+      date: string
+      featuredImage?: { node: { sourceUrl: string } }
+      seo?: { title?: string; metaDesc?: string }
+    } | null
+  }>(query, { slug })
+
+  return result?.pageBy || null
+}
