@@ -111,8 +111,9 @@ export async function queryWordPress<T>(
     const result: GraphQLResponse<T> = await response.json()
 
     if (result.errors) {
-      console.error('GraphQL errors:', result.errors)
-      return null
+      console.error('GraphQL errors:', JSON.stringify(result.errors))
+      // Return partial data if available — don't bail on non-fatal errors
+      if (!result.data) return null
     }
 
     return result.data || null
