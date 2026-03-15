@@ -38,6 +38,13 @@ interface PostNode {
     }>
   }
   content?: string
+  seo?: {
+    title?: string
+    metaDesc?: string
+    opengraphTitle?: string
+    opengraphDescription?: string
+    opengraphImage?: { sourceUrl: string }
+  }
 }
 
 interface PostsResponse {
@@ -190,6 +197,15 @@ export async function getPostBySlug(slug: string) {
               name
               slug
             }
+          }
+        }
+        seo {
+          title
+          metaDesc
+          opengraphTitle
+          opengraphDescription
+          opengraphImage {
+            sourceUrl
           }
         }
       }
@@ -423,6 +439,15 @@ export async function getPageBySlug(slug: string) {
             sourceUrl
           }
         }
+        seo {
+          title
+          metaDesc
+          opengraphTitle
+          opengraphDescription
+          opengraphImage {
+            sourceUrl
+          }
+        }
       }
     }
   `
@@ -434,6 +459,13 @@ export async function getPageBySlug(slug: string) {
       slug: string
       date: string
       featuredImage?: { node: { sourceUrl: string } }
+      seo?: {
+        title?: string
+        metaDesc?: string
+        opengraphTitle?: string
+        opengraphDescription?: string
+        opengraphImage?: { sourceUrl: string }
+      }
     } | null
   }>(query, { slug })
 

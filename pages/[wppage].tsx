@@ -29,6 +29,13 @@ interface WPPage {
   slug: string
   date: string
   featuredImage?: { node: { sourceUrl: string } }
+  seo?: {
+    title?: string
+    metaDesc?: string
+    opengraphTitle?: string
+    opengraphDescription?: string
+    opengraphImage?: { sourceUrl: string }
+  }
 }
 
 interface Props {
@@ -39,9 +46,9 @@ interface Props {
 export default function WordPressPage({ page, navItems }: Props) {
   if (!page) return null // 404 handled by getServerSideProps notFound: true
 
-  const seoTitle = `${page.title} - WCBI`
-  const seoDesc = ''
-  const image = page.featuredImage?.node?.sourceUrl || ''
+  const seoTitle = page.seo?.title || `${page.title} - WCBI`
+  const seoDesc = page.seo?.metaDesc || page.seo?.opengraphDescription || ''
+  const image = page.featuredImage?.node?.sourceUrl || page.seo?.opengraphImage?.sourceUrl || ''
 
   return (
     <>
@@ -49,7 +56,8 @@ export default function WordPressPage({ page, navItems }: Props) {
         <title>{seoTitle}</title>
         {seoDesc && <meta name="description" content={seoDesc} />}
         {image && <meta property="og:image" content={image} />}
-        <meta property="og:title" content={page.title} />
+        <meta property="og:title" content={page.seo?.opengraphTitle || page.title} />
+        <meta property="og:description" content={page.seo?.opengraphDescription || seoDesc} />
         <meta property="og:type" content="website" />
       </Head>
 

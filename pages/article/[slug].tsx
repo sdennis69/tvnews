@@ -57,23 +57,26 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
 
+  const seoTitle = post?.seo?.title || (post ? `${post.title} - WCBI` : 'Article - WCBI')
+  const seoDesc = post?.seo?.metaDesc || (post?.excerpt ? post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160) : '')
+  const ogImage = post?.seo?.opengraphImage?.sourceUrl || image
+
   return (
     <>
       <Head>
-        <title>{post ? `${post.title} - WCBI` : 'Article - WCBI'}</title>
-        {post?.excerpt && (
-          <meta name="description" content={post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160)} />
-        )}
-        {image && (
+        <title>{seoTitle}</title>
+        {seoDesc && <meta name="description" content={seoDesc} />}
+        {ogImage && (
           <>
-            <meta property="og:image" content={image} />
+            <meta property="og:image" content={ogImage} />
             {/* Preload the LCP image so browser discovers it immediately */}
-            <link rel="preload" as="image" href={image} />
+            <link rel="preload" as="image" href={image || ogImage} />
           </>
         )}
         {post && (
           <>
-            <meta property="og:title" content={post.title} />
+            <meta property="og:title" content={post.seo?.opengraphTitle || post.title} />
+            <meta property="og:description" content={post.seo?.opengraphDescription || seoDesc} />
             <meta property="og:type" content="article" />
           </>
         )}
