@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState, useCallback } from 'react'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
 import RevcontentWidget from '../src/components/RevcontentWidget'
@@ -18,7 +19,43 @@ interface Post {
   author?: { node: { name: string } }
   categories?: { edges: Array<{ node: { name: string; slug: string } }> }
 }
-interface Props { posts: Post[]; navItems?: NavItem[] }
+interface Props {
+  posts: Post[]
+  initialEndCursor: string | null
+  initialHasNextPage: boolean
+  navItems?: NavItem[]
+}
+
+const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || ''
+const PAGE_SIZE = 10
+
+async function fetchMoreSports(after: string): Promise<{ posts: Post[]; endCursor: string | null; hasNextPage: boolean }> {
+  const query = `
+    query GetMoreSports($after: String) {
+      posts(first: ${PAGE_SIZE}, after: $after, where: { categoryName: "sports" }) {
+        edges { node {
+          id title slug excerpt date
+          featuredImage { node { sourceUrl } }
+          author { node { name } }
+          categories { edges { node { name slug } } }
+        }}
+        pageInfo { hasNextPage endCursor }
+      }
+    }
+  `
+  const res = await fetch(`${WORDPRESS_URL}/graphql`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables: { after } }),
+  })
+  const json = await res.json()
+  const data = json?.data?.posts
+  return {
+    posts: data?.edges?.map((e: { node: Post }) => e.node) || [],
+    endCursor: data?.pageInfo?.endCursor || null,
+    hasNextPage: data?.pageInfo?.hasNextPage || false,
+  }
+}
 
 const CAT_COLORS: Record<string, string> = {
   'local-sports': '#003D7A',
@@ -35,7 +72,27 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
 }
 
-export default function SportsPage({ posts, navItems }: Props) {
+export default function SportsPage({ posts: initialPosts, initialEndCursor, initialHasNextPage, navItems }: Props) {
+  const [posts, setPosts] = useState<Post[]>(initialPosts)
+  const [endCursor, setEndCursor] = useState<string | null>(initialEndCursor)
+  const [hasNextPage, setHasNextPage] = useState(initialHasNextPage)
+  const [loading, setLoading] = useState(false)
+
+  const loadMore = useCallback(async () => {
+    if (!endCursor || loading) return
+    setLoading(true)
+    try {
+      const result = await fetchMoreSports(endCursor)
+      setPosts(prev => [...prev, ...result.posts])
+      setEndCursor(result.endCursor)
+      setHasNextPage(result.hasNextPage)
+    } catch (e) {
+      console.error('Load more failed:', e)
+    } finally {
+      setLoading(false)
+    }
+  }, [endCursor, loading])
+
   const featured = posts[0]
   const rest = posts.slice(1)
   return (
@@ -156,6 +213,27 @@ export default function SportsPage({ posts, navItems }: Props) {
                   <p>No sports stories found. Check back soon.</p>
                 </div>
               )}
+
+              {/* Load More button */}
+              {hasNextPage && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loading}
+                    className="inline-flex items-center gap-2 bg-[#003D7A] hover:bg-[#002A5A] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded transition-colors duration-200"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                        Loading…
+                      </>
+                    ) : 'Load More Stories'}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -178,20 +256,13 @@ export default function SportsPage({ posts, navItems }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const [local, college, hs] = await Promise.all([
-      getPostsByCategory('local-sports', 10),
-      getPostsByCategory('college-sports', 10),
-      getPostsByCategory('high-school-sports', 10),
-    ])
-    const allPosts = [
-      ...(local?.posts?.edges?.map((e: { node: Post }) => e.node) || []),
-      ...(college?.posts?.edges?.map((e: { node: Post }) => e.node) || []),
-      ...(hs?.posts?.edges?.map((e: { node: Post }) => e.node) || []),
-    ]
-    allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    return { props: { posts: allPosts.slice(0, 25) }, revalidate: 60 }
+    const result = await getPostsByCategory('sports', PAGE_SIZE)
+    const posts: Post[] = result?.posts?.edges?.map((e: { node: Post }) => e.node) || []
+    const initialEndCursor = result?.posts?.pageInfo?.endCursor || null
+    const initialHasNextPage = result?.posts?.pageInfo?.hasNextPage || false
+    return { props: { posts, initialEndCursor, initialHasNextPage }, revalidate: 60 }
   } catch (err) {
     console.error('Error fetching sports:', err)
-    return { props: { posts: [] }, revalidate: 60 }
+    return { props: { posts: [], initialEndCursor: null, initialHasNextPage: false }, revalidate: 60 }
   }
 }

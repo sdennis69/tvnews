@@ -6,6 +6,7 @@ import Header from '../src/components/Header'
 import BreakingNewsTicker from '../src/components/BreakingNewsTicker'
 import Footer from '../src/components/Footer'
 import RevcontentWidget from '../src/components/RevcontentWidget'
+import { useState, useCallback } from 'react'
 import { getFeaturedPosts, getPosts } from '../src/lib/wordpress'
 
 interface Post {
@@ -25,7 +26,41 @@ interface Props {
   featuredPost: Post | null
   sidebarPosts: Post[]
   latestPosts: Post[]
+  initialEndCursor: string | null
+  initialHasNextPage: boolean
   navItems?: NavItem[]
+}
+
+const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || ''
+const PAGE_SIZE = 10
+
+async function fetchMoreLatest(after: string, excludeId: string): Promise<{ posts: Post[]; endCursor: string | null; hasNextPage: boolean }> {
+  const query = `
+    query GetMoreLatest($after: String) {
+      posts(first: ${PAGE_SIZE}, after: $after) {
+        edges { node {
+          id title slug excerpt date
+          featuredImage { node { sourceUrl } }
+          author { node { name } }
+          categories { edges { node { name } } }
+        }}
+        pageInfo { hasNextPage endCursor }
+      }
+    }
+  `
+  const res = await fetch(`${WORDPRESS_URL}/graphql`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables: { after } }),
+  })
+  const json = await res.json()
+  const data = json?.data?.posts
+  const posts = (data?.edges?.map((e: { node: Post }) => e.node) || []).filter((p: Post) => p.id !== excludeId)
+  return {
+    posts,
+    endCursor: data?.pageInfo?.endCursor || null,
+    hasNextPage: data?.pageInfo?.hasNextPage || false,
+  }
 }
 
 function timeAgo(dateStr: string): string {
@@ -36,7 +71,27 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
 }
 
-export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems }: Props) {
+export default function Home({ featuredPost, sidebarPosts, latestPosts: initialLatestPosts, initialEndCursor, initialHasNextPage, navItems }: Props) {
+  const [latestPosts, setLatestPosts] = useState<Post[]>(initialLatestPosts)
+  const [endCursor, setEndCursor] = useState<string | null>(initialEndCursor)
+  const [hasNextPage, setHasNextPage] = useState(initialHasNextPage)
+  const [loading, setLoading] = useState(false)
+
+  const loadMore = useCallback(async () => {
+    if (!endCursor || loading) return
+    setLoading(true)
+    try {
+      const result = await fetchMoreLatest(endCursor, featuredPost?.id || '')
+      setLatestPosts(prev => [...prev, ...result.posts])
+      setEndCursor(result.endCursor)
+      setHasNextPage(result.hasNextPage)
+    } catch (e) {
+      console.error('Load more failed:', e)
+    } finally {
+      setLoading(false)
+    }
+  }, [endCursor, loading, featuredPost?.id])
+
   const lcpImageUrl = featuredPost?.featuredImage?.node?.sourceUrl || ''
 
   return (
@@ -206,6 +261,27 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts, navItems
                   <p className="text-sm">Make sure your WordPress site is connected and has published posts.</p>
                 </div>
               )}
+
+              {/* Load More button */}
+              {hasNextPage && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loading}
+                    className="inline-flex items-center gap-2 bg-[#003D7A] hover:bg-[#002A5A] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded transition-colors duration-200"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                        Loading…
+                      </>
+                    ) : 'Load More Stories'}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Right Sidebar */}
@@ -278,15 +354,21 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 
     // Latest news list: all posts excluding the featured one
-    const latestPosts = allLatest
+    const latestResponse2 = await getPosts(PAGE_SIZE)
+    const allLatestForPage = latestResponse2?.posts?.edges?.map((e: any) => e.node) || []
+    const latestPosts = allLatestForPage
       .filter((p: Post) => p.id !== featuredPost?.id)
-      .slice(0, 10)
+      .slice(0, PAGE_SIZE)
+    const initialEndCursor = latestResponse2?.posts?.pageInfo?.endCursor || null
+    const initialHasNextPage = latestResponse2?.posts?.pageInfo?.hasNextPage || false
 
     return {
       props: {
         featuredPost,
         sidebarPosts,
         latestPosts,
+        initialEndCursor,
+        initialHasNextPage,
       },
       // Regenerate the page in the background at most once every 60 seconds
       // when a new request comes in — keeps content fresh without SSR overhead

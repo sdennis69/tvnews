@@ -217,12 +217,12 @@ export async function getPostBySlug(slug: string) {
 }
 
 /**
- * Fetch posts by category
+ * Fetch posts by category with cursor-based pagination
  */
-export async function getPostsByCategory(categorySlug: string, first: number = 10) {
+export async function getPostsByCategory(categorySlug: string, first: number = 10, after?: string) {
   const query = `
-    query GetPostsByCategory($categorySlug: String!, $first: Int) {
-      posts(first: $first, where: { categoryName: $categorySlug }) {
+    query GetPostsByCategory($categorySlug: String!, $first: Int, $after: String) {
+      posts(first: $first, after: $after, where: { categoryName: $categorySlug }) {
         edges {
           node {
             id
@@ -240,13 +240,25 @@ export async function getPostsByCategory(categorySlug: string, first: number = 1
                 name
               }
             }
+            categories {
+              edges {
+                node {
+                  name
+                  slug
+                }
+              }
+            }
           }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
         }
       }
     }
   `
 
-  return queryWordPress<PostsResponse>(query, { categorySlug, first })
+  return queryWordPress<PostsResponse>(query, { categorySlug, first, after })
 }
 
 /**

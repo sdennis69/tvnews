@@ -1,16 +1,18 @@
 /**
  * /news — Local News category listing page
  * Layout: horizontal thumbnail-left cards matching homepage style
+ * Pagination: initial 10 posts SSG + client-side "Load More" via WPGraphQL cursor
  */
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState, useCallback } from 'react'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
 import RevcontentWidget from '../src/components/RevcontentWidget'
 import type { NavItem } from './_app'
-import { getPostsByCategory } from '../src/lib/wordpress'
+import { getPostsByCategory, queryWordPress } from '../src/lib/wordpress'
 
 interface Post {
   id: string; title: string; slug: string; excerpt?: string
@@ -18,7 +20,12 @@ interface Post {
   author?: { node: { name: string } }
   categories?: { edges: Array<{ node: { name: string; slug: string } }> }
 }
-interface Props { posts: Post[]; navItems?: NavItem[] }
+interface Props {
+  posts: Post[]
+  initialEndCursor: string | null
+  initialHasNextPage: boolean
+  navItems?: NavItem[]
+}
 
 function timeAgo(dateStr: string): string {
   const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000)
@@ -28,9 +35,61 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
 }
 
-export default function NewsPage({ posts, navItems }: Props) {
+const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || ''
+const PAGE_SIZE = 10
+
+async function fetchMorePosts(after: string): Promise<{ posts: Post[]; endCursor: string | null; hasNextPage: boolean }> {
+  const query = `
+    query GetMoreNews($after: String) {
+      posts(first: ${PAGE_SIZE}, after: $after, where: { categoryName: "local-news" }) {
+        edges { node {
+          id title slug excerpt date
+          featuredImage { node { sourceUrl } }
+          author { node { name } }
+          categories { edges { node { name slug } } }
+        }}
+        pageInfo { hasNextPage endCursor }
+      }
+    }
+  `
+  const res = await fetch(`${WORDPRESS_URL}/graphql`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables: { after } }),
+  })
+  const json = await res.json()
+  const data = json?.data?.posts
+  return {
+    posts: data?.edges?.map((e: { node: Post }) => e.node) || [],
+    endCursor: data?.pageInfo?.endCursor || null,
+    hasNextPage: data?.pageInfo?.hasNextPage || false,
+  }
+}
+
+export default function NewsPage({ posts: initialPosts, initialEndCursor, initialHasNextPage, navItems }: Props) {
+  const [posts, setPosts] = useState<Post[]>(initialPosts)
+  const [endCursor, setEndCursor] = useState<string | null>(initialEndCursor)
+  const [hasNextPage, setHasNextPage] = useState(initialHasNextPage)
+  const [loading, setLoading] = useState(false)
+
+  const loadMore = useCallback(async () => {
+    if (!endCursor || loading) return
+    setLoading(true)
+    try {
+      const result = await fetchMorePosts(endCursor)
+      setPosts(prev => [...prev, ...result.posts])
+      setEndCursor(result.endCursor)
+      setHasNextPage(result.hasNextPage)
+    } catch (e) {
+      console.error('Load more failed:', e)
+    } finally {
+      setLoading(false)
+    }
+  }, [endCursor, loading])
+
   const featured = posts[0]
   const rest = posts.slice(1)
+
   return (
     <>
       <Head>
@@ -144,6 +203,27 @@ export default function NewsPage({ posts, navItems }: Props) {
                   <p>No stories found. Check back soon.</p>
                 </div>
               )}
+
+              {/* Load More button */}
+              {hasNextPage && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loading}
+                    className="inline-flex items-center gap-2 bg-[#003D7A] hover:bg-[#002A5A] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded transition-colors duration-200"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                        Loading…
+                      </>
+                    ) : 'Load More Stories'}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -166,11 +246,13 @@ export default function NewsPage({ posts, navItems }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const result = await getPostsByCategory('local-news', 25)
+    const result = await getPostsByCategory('local-news', PAGE_SIZE)
     const posts: Post[] = result?.posts?.edges?.map((e: { node: Post }) => e.node) || []
-    return { props: { posts }, revalidate: 60 }
+    const initialEndCursor = result?.posts?.pageInfo?.endCursor || null
+    const initialHasNextPage = result?.posts?.pageInfo?.hasNextPage || false
+    return { props: { posts, initialEndCursor, initialHasNextPage }, revalidate: 60 }
   } catch (err) {
     console.error('Error fetching local news:', err)
-    return { props: { posts: [] }, revalidate: 60 }
+    return { props: { posts: [], initialEndCursor: null, initialHasNextPage: false }, revalidate: 60 }
   }
 }
