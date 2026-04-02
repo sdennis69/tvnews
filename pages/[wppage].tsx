@@ -26,6 +26,7 @@ interface WPPage {
   id: string
   title: string
   content: string
+  wpbakeryContent?: string | null
   slug: string
   date: string
   featuredImage?: { node: { sourceUrl: string } }
@@ -89,10 +90,17 @@ export default function WordPressPage({ page, navItems }: Props) {
                 {page.title}
               </h1>
 
-              {/* Page Body — rendered by WordPress (supports WPBakery, Gutenberg, Classic) */}
+              {/* Page Body — rendered by WordPress (supports WPBakery, Gutenberg, Classic)
+               *
+               * Priority order:
+               *  1. wpbakeryContent — custom WPGraphQL field that calls WPBMap::addAllMappedShortcodes()
+               *     before do_shortcode(), ensuring [vc_row] etc. are fully rendered to HTML.
+               *  2. content (format: RENDERED) — fallback for Gutenberg / Classic editor pages
+               *     that don't use WPBakery shortcodes.
+               */}
               <div
                 className="prose prose-lg max-w-none wp-content"
-                dangerouslySetInnerHTML={{ __html: page.content }}
+                dangerouslySetInnerHTML={{ __html: page.wpbakeryContent || page.content }}
               />
             </div>
 

@@ -437,6 +437,16 @@ export async function getSiteSettings() {
 /**
  * Fetch a WordPress PAGE (not post) by its slug.
  * Used by the catch-all page route to render any WP page linked from the nav.
+ *
+ * NOTE: We request `wpbakeryContent` (a custom WPGraphQL field registered via
+ * functions.php / mu-plugins) instead of `content(format: RENDERED)` because
+ * WPGraphQL's built-in RENDERED format does not trigger WPBakery's shortcode
+ * registration, leaving [vc_row] etc. as raw text on the frontend.
+ * The custom field calls WPBMap::addAllMappedShortcodes() before do_shortcode()
+ * so all WPBakery elements are converted to proper HTML before delivery.
+ *
+ * Falls back to `content(format: RENDERED)` if wpbakeryContent is null/empty
+ * (i.e. for pages that use Gutenberg or Classic editor instead of WPBakery).
  */
 export async function getPageBySlug(slug: string) {
   const query = `
@@ -445,6 +455,7 @@ export async function getPageBySlug(slug: string) {
         id
         title
         content(format: RENDERED)
+        wpbakeryContent
         slug
         date
         featuredImage {
@@ -469,6 +480,7 @@ export async function getPageBySlug(slug: string) {
       id: string
       title: string
       content: string
+      wpbakeryContent?: string | null
       slug: string
       date: string
       featuredImage?: { node: { sourceUrl: string } }
