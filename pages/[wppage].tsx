@@ -106,8 +106,8 @@ export default function WordPressPage({ page, navItems }: Props) {
 
             {/* ── RIGHT: Sidebar ── */}
             <aside
-              className="space-y-6 hidden lg:block"
-              style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}
+              className="space-y-6 w-full lg:block"
+              style={{ maxWidth: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}
             >
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
                 <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">

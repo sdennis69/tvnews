@@ -275,7 +275,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
               </div>
 
               {/* ── RIGHT: Sidebar ── */}
-              <aside className="space-y-6" style={{ width: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
+              <aside className="space-y-6 w-full" style={{ maxWidth: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
 
                 {/* Revcontent Widget */}
                 {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
