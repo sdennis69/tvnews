@@ -18,7 +18,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
-import RevcontentWidget from '../src/components/RevcontentWidget'
 import type { NavItem } from './_app'
 import { getPageBySlug, getAllPageSlugs } from '../src/lib/wordpress'
 
@@ -66,10 +65,10 @@ export default function WordPressPage({ page, navItems }: Props) {
         <Header navItems={navItems} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex gap-8" style={{ alignItems: 'flex-start' }}>
+          <div>
 
-            {/* ── LEFT: Page Content ── */}
-            <div style={{ flex: '1 1 500px', minWidth: 0 }}>
+            {/* ── Page Content — full width (WPBakery pages manage their own layout) ── */}
+            <div style={{ minWidth: 0 }}>
 
               {/* Featured Image */}
               {image && (
@@ -103,20 +102,6 @@ export default function WordPressPage({ page, navItems }: Props) {
                 dangerouslySetInnerHTML={{ __html: page.wpbakeryContent || page.content }}
               />
             </div>
-
-            {/* ── RIGHT: Sidebar ── */}
-            <aside
-              className="space-y-6 w-full lg:block"
-              style={{ position: 'sticky', top: '1rem' }}
-            >
-              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
-                <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
-                  <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
-                  <span className="text-white/60 text-xs">Ads By Revcontent</span>
-                </div>
-                <RevcontentWidget className="p-2" />
-              </div>
-            </aside>
 
           </div>
         </div>
