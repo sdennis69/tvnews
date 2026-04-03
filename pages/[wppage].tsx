@@ -59,6 +59,12 @@ export default function WordPressPage({ page, navItems }: Props) {
         <meta property="og:title" content={page.seo?.opengraphTitle || page.title} />
         <meta property="og:description" content={page.seo?.opengraphDescription || seoDesc} />
         <meta property="og:type" content="website" />
+        {/* WPBakery CSS — loaded only on WPBakery pages, non-blocking */}
+        <link
+          rel="stylesheet"
+          href="https://tvnews2.wpenginepowered.com/wp-content/plugins/js_composer/assets/css/js_composer.min.css"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <main className="min-h-screen bg-[#F5F5F5]">

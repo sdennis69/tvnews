@@ -18,12 +18,6 @@ export default function Document() {
         <link rel="dns-prefetch" href="https://delivery.revcontent.com" />
         <link rel="dns-prefetch" href="https://trends.revcontent.com" />
         <link rel="dns-prefetch" href="https://api.revcontent.com" />
-        {/* WPBakery grid + column CSS — required for vc_row/vc_column layouts */}
-        <link
-          rel="stylesheet"
-          href="https://tvnews2.wpenginepowered.com/wp-content/plugins/js_composer/assets/css/js_composer.min.css"
-          crossOrigin="anonymous"
-        />
       </Head>
       <body>
         <Main />
