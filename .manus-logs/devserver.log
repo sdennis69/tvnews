@@ -1083,3 +1083,45 @@
 [2026-03-16T15:45:13.128Z] event - compiled client and server successfully in 106 ms (230 modules)
 [2026-03-16T15:49:29.869Z] wait  - compiling...
 [2026-03-16T15:49:30.037Z] event - compiled client and server successfully in 168 ms (230 modules)
+[2026-03-18T15:38:38.288Z] Starting dev server with command: pnpm run dev
+[2026-03-18T15:38:39.801Z] 
+[2026-03-18T15:38:39.802Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-18T15:38:39.802Z] > next dev
+[2026-03-18T15:38:39.803Z] 
+[2026-03-18T15:38:40.994Z] (node:135932) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-18T15:38:40.998Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-18T15:38:41.000Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-18T15:38:42.647Z] warn  - You have enabled experimental features (browsersListForSwc, legacyBrowsers) in next.config.js.
+[2026-03-18T15:38:42.650Z] warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+[2026-03-18T15:38:42.652Z] 
+[2026-03-18T15:38:57.807Z] event - compiled client and server successfully in 11.6s (150 modules)
+[2026-03-18T15:38:57.808Z] wait  - compiling...
+[2026-03-18T15:38:57.925Z] event - compiled successfully in 117 ms (124 modules)
+[2026-03-25T15:34:26.321Z] Starting dev server with command: pnpm run dev
+[2026-03-25T15:34:26.577Z] 
+[2026-03-25T15:34:26.578Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-25T15:34:26.579Z] > next dev
+[2026-03-25T15:34:26.579Z] 
+[2026-03-25T15:34:26.667Z] (node:141397) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-25T15:34:26.668Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-25T15:34:26.670Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-25T15:34:26.873Z] warn  - You have enabled experimental features (browsersListForSwc, legacyBrowsers) in next.config.js.
+[2026-03-25T15:34:26.873Z] warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+[2026-03-25T15:34:26.874Z] 
+[2026-03-25T15:34:28.176Z] event - compiled client and server successfully in 934 ms (150 modules)
+[2026-03-25T15:34:28.177Z] wait  - compiling...
+[2026-03-25T15:34:28.286Z] event - compiled successfully in 108 ms (124 modules)
+[2026-03-30T17:53:19.952Z] Starting dev server with command: pnpm run dev
+[2026-03-30T17:53:20.205Z] 
+[2026-03-30T17:53:20.206Z] > tv-station-wpengine@1.0.0 dev /home/ubuntu/tv-station-website
+[2026-03-30T17:53:20.206Z] > next dev
+[2026-03-30T17:53:20.206Z] 
+[2026-03-30T17:53:20.295Z] (node:150708) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[2026-03-30T17:53:20.295Z] (Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-03-30T17:53:20.297Z] ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+[2026-03-30T17:53:20.484Z] warn  - You have enabled experimental features (browsersListForSwc, legacyBrowsers) in next.config.js.
+[2026-03-30T17:53:20.485Z] warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+[2026-03-30T17:53:20.486Z] 
+[2026-03-30T17:53:21.716Z] event - compiled client and server successfully in 879 ms (150 modules)
+[2026-03-30T17:53:21.717Z] wait  - compiling...
+[2026-03-30T17:53:21.809Z] event - compiled successfully in 91 ms (124 modules)

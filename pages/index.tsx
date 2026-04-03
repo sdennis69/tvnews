@@ -285,7 +285,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
             </div>
 
             {/* Right Sidebar */}
-            <aside className="space-y-6 w-full" style={{ maxWidth: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
+            <aside className="space-y-6 w-full" style={{ width: '100%', maxWidth: '288px', position: 'sticky', top: '1rem' }}>
 
               {/* Revcontent Widget */}
               {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
