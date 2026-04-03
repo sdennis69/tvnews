@@ -140,3 +140,15 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration: 20s;
   }
 }
+
+/* ── Sidebar responsive fix ──────────────────────────────────────
+   On mobile the sidebar wraps below the main content column.
+   Remove the 288px maxWidth cap so it stretches to full width.
+   On desktop (1024px+) the inline maxWidth:288px takes effect.
+   ---------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  aside.space-y-6 {
+    max-width: 100% !important;
+    flex-shrink: 1 !important;
+  }
+}
