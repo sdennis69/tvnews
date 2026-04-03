@@ -237,7 +237,7 @@ export default function SportsPage({ posts: initialPosts, initialEndCursor, init
             </div>
 
             {/* Sidebar */}
-            <aside className="space-y-6 w-full" style={{ width: '100%', maxWidth: '288px', position: 'sticky', top: '1rem' }}>
+            <aside className="space-y-6 w-full lg:max-w-[288px] lg:flex-shrink-0" style={{ position: 'sticky', top: '1rem' }}>
               <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
                 <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
                   <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
