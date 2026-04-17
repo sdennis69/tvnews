@@ -40,12 +40,40 @@ interface Props {
 }
 
 /* ── Helpers ────────────────────────────────────────────────────── */
-function timeAgo(dateStr: string): string {
+/**
+ * Hydration-safe date formatter: renders a stable string from the post date.
+ * We do NOT use Date.now() here because that produces different values on
+ * server vs. client, causing React hydration error #425.
+ * Instead we format the date statically; relative time is applied client-side
+ * via a useEffect in the card components.
+ */
+function formatDate(dateStr: string): string {
+  try {
+    const d = new Date(dateStr)
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  } catch {
+    return dateStr
+  }
+}
+
+/**
+ * Client-side only relative time — call from useEffect, never during SSR render.
+ */
+function timeAgoClient(dateStr: string): string {
   const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000)
   if (diff < 60) return `${diff}s ago`
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
   return `${Math.floor(diff / 86400)}d ago`
+}
+
+/** Renders a timestamp that shows a static date on SSR and relative time after hydration */
+function TimeStamp({ dateStr }: { dateStr: string }) {
+  const [label, setLabel] = useState(() => formatDate(dateStr))
+  useEffect(() => {
+    setLabel(timeAgoClient(dateStr))
+  }, [dateStr])
+  return <>{label}</>
 }
 
 function getCategory(post: Post): string {
@@ -161,7 +189,7 @@ function ArticleCard({ post }: { post: Post }) {
           <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          {timeAgo(post.date)}
+          <TimeStamp dateStr={post.date} />
         </div>
       </div>
     </Link>
@@ -190,7 +218,7 @@ function CompactCard({ post }: { post: Post }) {
         {post.title}
       </h3>
       <div className="mt-1 text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
-        {timeAgo(post.date)}
+        <TimeStamp dateStr={post.date} />
       </div>
     </Link>
   )
@@ -238,7 +266,7 @@ function HorizontalCard({ post, rank }: { post: Post; rank?: number }) {
           {post.title}
         </h3>
         <div className="mt-1.5 text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
-          {timeAgo(post.date)}
+          <TimeStamp dateStr={post.date} />
         </div>
       </div>
     </Link>
@@ -288,7 +316,7 @@ function FeatureCard({ post }: { post: Post }) {
         <div className="mt-3 flex items-center gap-3 text-xs text-white/70">
           {post.author?.node?.name && <span>{post.author.node.name}</span>}
           {post.author?.node?.name && <span>•</span>}
-          <span>{timeAgo(post.date)}</span>
+          <span><TimeStamp dateStr={post.date} /></span>
         </div>
       </div>
     </Link>
@@ -297,8 +325,14 @@ function FeatureCard({ post }: { post: Post }) {
 
 /** Live video player widget */
 function LiveVideoPlayer() {
-  const [muted, setMuted] = useState(true)
-  const [playing, setPlaying] = useState(true)
+  // Start with null so SSR and initial client render are identical (no state-dependent SVG branches).
+  // After hydration, useEffect sets the real values — avoids React error #418/#423.
+  const [muted, setMuted] = useState<boolean | null>(null)
+  const [playing, setPlaying] = useState<boolean | null>(null)
+  useEffect(() => {
+    setMuted(true)
+    setPlaying(true)
+  }, [])
   return (
     <div
       className="rounded-xl overflow-hidden"
@@ -343,41 +377,46 @@ function LiveVideoPlayer() {
             </span>
             Live
           </div>
-          {/* Play/pause overlay */}
-          <button
-            onClick={() => setPlaying(!playing)}
-            className="absolute inset-0 grid place-items-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
-            aria-label={playing ? 'Pause' : 'Play'}
-          >
-            <span className="grid place-items-center rounded-full bg-black/60 backdrop-blur-sm h-16 w-16">
-              {playing ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              )}
-            </span>
-          </button>
+          {/* Play/pause overlay — only rendered client-side to avoid hydration mismatch */}
+          {playing !== null && (
+            <button
+              onClick={() => setPlaying(!playing)}
+              className="absolute inset-0 grid place-items-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+              aria-label={playing ? 'Pause' : 'Play'}
+            >
+              <span className="grid place-items-center rounded-full bg-black/60 backdrop-blur-sm h-16 w-16">
+                {playing ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                )}
+              </span>
+            </button>
+          )}
           {/* Bottom bar */}
           <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 p-3">
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-white text-sm truncate">WCBI News at Noon — Live</div>
             </div>
-            <button
-              onClick={() => setMuted(!muted)}
-              className="grid h-8 w-8 place-items-center rounded-md text-white hover:bg-white/20"
-              aria-label={muted ? 'Unmute' : 'Mute'}
-            >
-              {muted ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-3.536-9.536a5 5 0 000 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                </svg>
-              )}
-            </button>
+            {/* Mute button — only rendered client-side to avoid hydration mismatch */}
+            {muted !== null && (
+              <button
+                onClick={() => setMuted(!muted)}
+                className="grid h-8 w-8 place-items-center rounded-md text-white hover:bg-white/20"
+                aria-label={muted ? 'Unmute' : 'Mute'}
+              >
+                {muted ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-3.536-9.536a5 5 0 000 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -503,15 +542,7 @@ export default function Home({
         <title>WCBI TV — Columbus, MS Local News, Weather &amp; Sports</title>
         <meta name="description" content="Columbus, Mississippi's trusted source for breaking news, weather, sports, and community stories." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {lcpImageUrl && (
-          <link
-            rel="preload"
-            as="image"
-            href={`/_next/image?url=${encodeURIComponent(lcpImageUrl)}&w=1200&q=75`}
-            // @ts-ignore
-            fetchpriority="high"
-          />
-        )}
+        {/* LCP image preload removed: Next.js 12 handles priority images automatically via the priority prop */}
       </Head>
 
       <div className="min-h-screen flex flex-col" style={{ background: 'hsl(var(--background))' }}>
