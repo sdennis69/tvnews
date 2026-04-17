@@ -1,3 +1,5 @@
+// WCBI TV Homepage — Deep Navy + Breaking Red Design
+// Design: Modern Broadcast News — dark bg #0A1628, red accent #DC2626, Barlow Condensed headlines
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -65,10 +67,18 @@ async function fetchMoreLatest(after: string, excludeId: string): Promise<{ post
 
 function timeAgo(dateStr: string): string {
   const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000)
-  if (diff < 60) return `${diff} seconds ago`
-  if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`
-  if (diff < 86400) return `${Math.floor(diff / 3600)} hour${Math.floor(diff / 3600) > 1 ? 's' : ''} ago`
-  return `${Math.floor(diff / 86400)} day${Math.floor(diff / 86400) > 1 ? 's' : ''} ago`
+  if (diff < 60) return `${diff}s ago`
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
+  return `${Math.floor(diff / 86400)}d ago`
+}
+
+function CategoryBadge({ name }: { name: string }) {
+  return (
+    <span className="inline-block text-[0.6rem] font-black tracking-widest uppercase text-[#DC2626] bg-[#DC2626]/10 border border-[#DC2626]/30 px-2 py-0.5">
+      {name}
+    </span>
+  )
 }
 
 export default function Home({ featuredPost, sidebarPosts, latestPosts: initialLatestPosts, initialEndCursor, initialHasNextPage, navItems }: Props) {
@@ -97,158 +107,154 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
   return (
     <>
       <Head>
-        <title>{`${process.env.NEXT_PUBLIC_STATION_NAME || 'TV News'} - Local News, Weather & More`}</title>
-        <meta name="description" content="Your local source for breaking news, weather, sports, and community stories." />
+        <title>{`WCBI TV - Columbus, MS Local News, Weather & Sports`}</title>
+        <meta name="description" content="Columbus, Mississippi's trusted source for breaking news, weather, sports, and community stories." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Preload LCP image — URL is known at server render time so browser fetches it immediately */}
         {lcpImageUrl && (
           <link
             rel="preload"
             as="image"
             href={`/_next/image?url=${encodeURIComponent(lcpImageUrl)}&w=828&q=75`}
-            // @ts-ignore — fetchpriority is valid HTML but not yet in TS types
+            // @ts-ignore
             fetchpriority="high"
           />
         )}
       </Head>
-      <main className="min-h-screen bg-[#F5F5F5]">
+
+      <main className="min-h-screen bg-[#0A1628]">
         <Header navItems={navItems} />
         <BreakingNewsTicker />
 
-        {/* Main Content Area */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* ── HERO: Featured + Sidebar Stories ── */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-          {/* Featured Section — full width above the sidebar layout */}
-          <div className="mb-[30px]">
-            <div className="mb-4">
-              <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
-                Featured
-              </span>
+            {/* Large featured story */}
+            <div className="lg:col-span-2">
+              {featuredPost ? (
+                <Link href={`/article/${featuredPost.slug}`}>
+                  <a className="block group relative overflow-hidden rounded-lg bg-[#0D1E35]">
+                    {featuredPost.featuredImage?.node?.sourceUrl ? (
+                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
+                        <Image
+                          src={featuredPost.featuredImage.node.sourceUrl}
+                          alt={featuredPost.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 66vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          priority
+                          fetchPriority="high"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/40 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-black tracking-widest uppercase text-white bg-[#DC2626] px-2.5 py-1">
+                              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse inline-block"></span>
+                              LIVE COVERAGE
+                            </span>
+                            <span className="text-[#9CA3AF] text-xs">{timeAgo(featuredPost.date)}</span>
+                          </div>
+                          <h2 className="text-2xl md:text-3xl font-black text-white leading-tight group-hover:text-[#FCA5A5] transition-colors" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                            {featuredPost.title}
+                          </h2>
+                          <p className="text-[#D1D5DB] text-sm mt-2 line-clamp-2 leading-relaxed">
+                            {featuredPost.excerpt?.replace(/<[^>]*>/g, '') || ''}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-6">
+                        <h2 className="text-2xl font-black text-white" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{featuredPost.title}</h2>
+                      </div>
+                    )}
+                  </a>
+                </Link>
+              ) : (
+                <div className="rounded-lg bg-[#0D1E35] flex items-center justify-center" style={{ aspectRatio: '16/9' }}>
+                  <p className="text-[#4B5563] text-sm">No featured story available.</p>
+                </div>
+              )}
             </div>
-            {/* Two-column layout: large story left, 4 smaller right */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-              {/* Left: Large Featured Story — rendered from SSR data */}
-              <div>
-                {featuredPost ? (
-                  <Link href={`/article/${featuredPost.slug}`}>
-                    <a className="block group">
-                      {featuredPost.featuredImage?.node?.sourceUrl && (
-                        <div className="w-full relative overflow-hidden rounded bg-[#E8E8E8] mb-3" style={{ aspectRatio: '16/9' }}>
+
+            {/* Right: 4 sidebar stories */}
+            <div className="flex flex-col gap-3">
+              {sidebarPosts.slice(0, 4).map((post) => {
+                const cat = post.categories?.edges?.[0]?.node?.name || 'NEWS'
+                return (
+                  <Link key={post.id} href={`/article/${post.slug}`}>
+                    <a className="flex gap-3 group bg-[#0D1E35] hover:bg-[#152844] rounded-lg p-3 transition-colors border border-[#1E3A5F] hover:border-[#DC2626]/30">
+                      {post.featuredImage?.node?.sourceUrl && (
+                        <div className="w-20 h-16 flex-shrink-0 relative overflow-hidden rounded bg-[#152844]">
                           <Image
-                            src={featuredPost.featuredImage.node.sourceUrl}
-                            alt={featuredPost.title}
+                            src={post.featuredImage.node.sourceUrl}
+                            alt={post.title}
                             fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            sizes="80px"
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            priority
-                            fetchPriority="high"
                           />
                         </div>
                       )}
-                      <h2 className="text-xl font-bold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug mb-2">
-                        {featuredPost.title}
-                      </h2>
-                      <p className="text-sm text-[#555555]">
-                        <span>by {featuredPost.author?.node?.name || 'Staff'}</span>
-                        <span className="mx-2">·</span>
-                        <span>{timeAgo(featuredPost.date)}</span>
-                      </p>
+                      <div className="flex-1 min-w-0">
+                        <CategoryBadge name={cat} />
+                        <h3 className="text-sm font-bold text-white group-hover:text-[#FCA5A5] transition-colors leading-snug mt-1 line-clamp-2" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                          {post.title}
+                        </h3>
+                        <span className="text-[#4B5563] text-xs">{timeAgo(post.date)}</span>
+                      </div>
                     </a>
                   </Link>
-                ) : (
-                  <div className="text-center py-12 text-[#555555]">
-                    <p>No posts available. Check your WordPress connection.</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Right: 4 Smaller Articles — rendered from SSR data */}
-              <div>
-                {sidebarPosts.length > 0 ? (
-                  <div className="divide-y divide-[#EEEEEE]">
-                    {sidebarPosts.map((post) => (
-                      <Link key={post.id} href={`/article/${post.slug}`}>
-                        <a className="flex gap-4 py-4 first:pt-0 last:pb-0 group hover:bg-[#F9F9F9] transition-colors -mx-4 px-4">
-                          {post.featuredImage?.node?.sourceUrl && (
-                            <div className="w-28 h-20 flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]">
-                              <Image
-                                src={post.featuredImage.node.sourceUrl}
-                                alt={post.title}
-                                fill
-                                sizes="112px"
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                          )}
-                          <div className="flex-1 flex flex-col justify-between">
-                            <h3 className="text-sm font-semibold text-[#222222] group-hover:text-[#003D7A] transition-colors leading-snug line-clamp-3">
-                              {post.title}
-                            </h3>
-                            <p className="text-xs text-[#555555] mt-1">
-                              <span className="font-medium">by {post.author?.node?.name || 'Staff'}</span>
-                              <span className="mx-1">·</span>
-                              <span>{timeAgo(post.date)}</span>
-                            </p>
-                          </div>
-                        </a>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-[#555555] text-sm">
-                    <p>No articles available.</p>
-                  </div>
-                )}
-              </div>
+                )
+              })}
             </div>
           </div>
+        </section>
 
-          {/* Latest News + Right Sidebar */}
+        {/* ── LATEST NEWS + SIDEBAR ── */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
-            {/* Latest News (main column) — rendered from SSR data */}
+            {/* Latest News column */}
             <div style={{ flex: '1 1 500px', minWidth: 0 }}>
-              <div className="mb-4">
-                <span className="bg-[#003D7A] text-white text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block">
-                  Latest News
-                </span>
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#1E3A5F]">
+                <div className="w-1 h-5 bg-[#DC2626] rounded-full"></div>
+                <h2 className="text-sm font-black tracking-widest uppercase text-white" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Latest News</h2>
               </div>
+
               {latestPosts.length > 0 ? (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {latestPosts.map((post) => {
                     const category = post.categories?.edges?.[0]?.node?.name || 'NEWS'
-                    const author = post.author?.node?.name || 'Staff'
                     const image = post.featuredImage?.node?.sourceUrl || ''
                     return (
                       <Link key={post.id} href={`/article/${post.slug}`}>
-                        <a className="flex gap-4 bg-white rounded-lg overflow-hidden hover:shadow-lg border border-[#CCCCCC] transition-all duration-200 group">
+                        <a className="flex gap-4 bg-[#0D1E35] hover:bg-[#152844] rounded-lg overflow-hidden transition-colors group border border-[#1E3A5F] hover:border-[#DC2626]/30">
                           {image && (
-                            <div className="w-40 h-28 flex-shrink-0 relative overflow-hidden bg-[#E8E8E8]">
+                            <div className="w-36 h-24 flex-shrink-0 relative overflow-hidden bg-[#152844]">
                               <Image
                                 src={image}
                                 alt={post.title}
                                 fill
-                                sizes="160px"
+                                sizes="144px"
                                 className="object-cover group-hover:scale-110 transition-all duration-300"
                               />
                             </div>
                           )}
-                          <div className="flex-1 p-4 flex flex-col justify-between">
+                          <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
                             <div>
-                              <div className="flex items-center gap-3 mb-2">
-                                <span className="bg-[#003D7A] text-white text-xs font-bold px-2.5 py-1 rounded">
-                                  {category.toUpperCase()}
-                                </span>
-                                <span className="text-xs text-[#666666]">{timeAgo(post.date)}</span>
+                              <div className="flex items-center gap-2 mb-1.5">
+                                <CategoryBadge name={category} />
+                                <span className="text-[#4B5563] text-xs">{timeAgo(post.date)}</span>
                               </div>
-                              <h3 className="text-base font-bold text-[#333333] group-hover:text-[#003D7A] transition-colors mb-2 line-clamp-2 leading-tight">
+                              <h3 className="text-base font-bold text-white group-hover:text-[#FCA5A5] transition-colors line-clamp-2 leading-tight" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                                 {post.title}
                               </h3>
-                              <p className="text-sm text-[#555555] line-clamp-2 leading-relaxed">
+                              <p className="text-xs text-[#6B7280] line-clamp-1 mt-1 leading-relaxed">
                                 {post.excerpt?.replace(/<[^>]*>/g, '') || ''}
                               </p>
                             </div>
-                            <span className="text-xs text-[#666666] mt-2">by {author}</span>
+                            <p className="text-xs text-[#4B5563] mt-1">
+                              by {post.author?.node?.name || 'Staff'}
+                            </p>
                           </div>
                         </a>
                       </Link>
@@ -256,23 +262,21 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                   })}
                 </div>
               ) : (
-                <div className="text-center py-12 text-[#555555]">
-                  <p className="text-lg font-medium mb-2">No articles found</p>
-                  <p className="text-sm">Make sure your WordPress site is connected and has published posts.</p>
+                <div className="text-center py-12 text-[#4B5563]">
+                  <p>No articles available.</p>
                 </div>
               )}
 
-              {/* Load More button */}
               {hasNextPage && (
-                <div className="mt-8 text-center">
+                <div className="mt-6 text-center">
                   <button
                     onClick={loadMore}
                     disabled={loading}
-                    className="inline-flex items-center gap-2 bg-[#003D7A] hover:bg-[#002A5A] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded transition-colors duration-200"
+                    className="inline-flex items-center gap-2 bg-[#DC2626] hover:bg-[#B91C1C] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs tracking-widest uppercase px-8 py-3 transition-colors"
                   >
                     {loading ? (
                       <>
-                        <svg className="animate-spin h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                         </svg>
@@ -285,35 +289,33 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
             </div>
 
             {/* Right Sidebar */}
-            <aside className="space-y-6" style={{ width: '100%', maxWidth: '288px', flexShrink: 0, position: 'sticky', top: '1rem' }}>
-
-              {/* Revcontent Widget */}
-              {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
-              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
-                <div className="bg-[#003D7A] px-3 py-2 flex items-center justify-between">
-                  <span className="text-white text-xs font-bold uppercase tracking-wider">Trending</span>
-                  <span className="text-white/60 text-xs">Ads By Revcontent</span>
+            <aside className="space-y-4" style={{ width: '100%', maxWidth: '288px' }}>
+              <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1E3A5F]">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1 h-4 bg-[#DC2626] rounded-full"></div>
+                    <span className="text-white text-xs font-black uppercase tracking-widest" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Trending</span>
+                  </div>
+                  <span className="text-[#4B5563] text-[0.6rem]">Ads By Revcontent</span>
                 </div>
                 <RevcontentWidget className="p-2" />
               </div>
 
-              {/* Generic Ad / Widget Slot */}
-              <div className="bg-white border border-[#DDDDDD] rounded overflow-hidden">
-                <div className="bg-[#003D7A] px-3 py-2">
-                  <span className="text-white text-xs font-bold uppercase tracking-wider">Advertisement</span>
+              <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#1E3A5F]">
+                  <div className="w-1 h-4 bg-[#1E3A5F] rounded-full"></div>
+                  <span className="text-[#4B5563] text-xs font-bold uppercase tracking-widest">Advertisement</span>
                 </div>
                 <div
                   id="homepage-ad-slot-1"
-                  className="min-h-[250px] flex items-center justify-center text-[#666666] text-xs p-4 text-center"
+                  className="min-h-[250px] flex items-center justify-center text-[#4B5563] text-xs p-4 text-center"
                 >
                   <span>Ad Unit<br />(300×250 or 300×600)</span>
                 </div>
               </div>
-
             </aside>
           </div>
-
-        </div>
+        </section>
 
         <Footer />
       </main>
@@ -321,28 +323,20 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
   )
 }
 
-// Static generation with ISR: page is pre-built at deploy time and regenerated
-// in the background every 60 seconds when a new request comes in.
-// This serves pure static HTML with zero server processing time per request,
-// eliminating the React hydration delay that was causing the 1,100ms LCP render delay.
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    // Fetch featured post (sticky) and latest posts in parallel
     const [stickyResponse, latestResponse] = await Promise.all([
       getFeaturedPosts(6),
       getPosts(12),
     ])
 
-    // Determine featured post: first sticky, fallback to first latest
     let featuredPost: Post | null = null
     let sidebarPosts: Post[] = []
-
     const stickyPosts = stickyResponse?.posts?.edges?.map((e: any) => e.node) || []
     const allLatest = latestResponse?.posts?.edges?.map((e: any) => e.node) || []
 
     if (stickyPosts.length > 0) {
       featuredPost = stickyPosts[0]
-      // Fill sidebar with remaining stickies, then latest (excluding featured)
       const remaining = [
         ...stickyPosts.slice(1),
         ...allLatest.filter((p: Post) => p.id !== featuredPost?.id),
@@ -353,7 +347,6 @@ export const getStaticProps: GetStaticProps = async () => {
       sidebarPosts = allLatest.slice(1, 5)
     }
 
-    // Latest news list: all posts excluding the featured one
     const latestResponse2 = await getPosts(PAGE_SIZE)
     const allLatestForPage = latestResponse2?.posts?.edges?.map((e: any) => e.node) || []
     const latestPosts = allLatestForPage
@@ -370,8 +363,6 @@ export const getStaticProps: GetStaticProps = async () => {
         initialEndCursor,
         initialHasNextPage,
       },
-      // Regenerate the page in the background at most once every 60 seconds
-      // when a new request comes in — keeps content fresh without SSR overhead
       revalidate: 60,
     }
   } catch (error) {
@@ -381,6 +372,8 @@ export const getStaticProps: GetStaticProps = async () => {
         featuredPost: null,
         sidebarPosts: [],
         latestPosts: [],
+        initialEndCursor: null,
+        initialHasNextPage: false,
       },
       revalidate: 30,
     }

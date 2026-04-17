@@ -33,16 +33,16 @@ export default function BreakingNewsTicker() {
   const repeated = [...headlines, ...headlines]
 
   return (
-    <div className="bg-[#003D7A] py-2.5 overflow-hidden">
+    <div className="bg-[#DC2626] py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Label */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
-            <span className="text-white font-bold text-xs uppercase tracking-wider whitespace-nowrap">Breaking News</span>
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <span className="text-white font-black text-xs uppercase tracking-widest whitespace-nowrap" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>BREAKING</span>
           </div>
           {/* Divider */}
-          <div className="w-px h-4 bg-white/30 flex-shrink-0"></div>
+          <div className="w-px h-4 bg-white/40 flex-shrink-0"></div>
           {/* Scrolling Ticker */}
           <div className="flex-1 overflow-hidden" ref={tickerRef}>
             <div
@@ -50,7 +50,7 @@ export default function BreakingNewsTicker() {
               style={{ transform: `translateX(-${offset % (headlines.length * 400)}px)` }}
             >
               {repeated.map((headline, index) => (
-                <span key={index} className="text-white text-sm font-medium">
+                <span key={index} className="text-white text-xs font-semibold tracking-wide">
                   {headline}
                 </span>
               ))}

@@ -2,15 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================
-   41NBC-STYLE DESIGN SYSTEM
-   Design: Professional News Site
-   Theme: Light background, red accents
-   Colors: Background #F5F5F5, Accent #CC0000, Text #333333
-   ============================================ */
+/* ============================================================
+   WCBI TV — Deep Navy + Breaking Red Design System
+   Design Movement: Modern Broadcast News (CNN/WWAY-inspired)
+   Core Palette:
+     --navy-900: #0A1628  (page background)
+     --navy-800: #0D1E35  (card backgrounds)
+     --navy-700: #152844  (elevated cards)
+     --navy-600: #1E3A5F  (borders, dividers)
+     --red-600:  #DC2626  (breaking, accents, CTAs)
+     --red-700:  #B91C1C  (hover states)
+     --white:    #FFFFFF
+     --gray-300: #D1D5DB  (secondary text)
+     --gray-400: #9CA3AF  (timestamps, meta)
+   Typography: Barlow Condensed (headlines) + Inter (body)
+   ============================================================ */
 
-/* Base font settings */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 html {
+  scroll-behavior: smooth;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -18,30 +29,28 @@ html {
 }
 
 body {
-  background-color: #F5F5F5;
-  color: #333333;
+  background-color: #0A1628;
+  color: #FFFFFF;
 }
 
-/* Headline font */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin: 0;
 }
 
-/* ============================================
-   BREAKING NEWS TICKER
-   ============================================ */
+a { color: inherit; text-decoration: none; }
+
+/* ── Breaking News Ticker ── */
 @keyframes ticker-scroll {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .ticker-scroll {
-  animation: ticker-scroll 30s linear infinite;
+  animation: ticker-scroll 45s linear infinite;
   white-space: nowrap;
 }
 
@@ -49,106 +58,114 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
-/* ============================================
-   ARTICLE CARDS
-   ============================================ */
+/* ── Section Headers ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #1E3A5F;
+}
+
+/* ── Category Badge ── */
+.category-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #DC2626;
+  display: inline-block;
+}
+
+/* ── LIVE Badge ── */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #DC2626;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.live-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Article card hover ── */
 .article-card {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .article-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  transform: translateY(-1px);
+  border-color: #DC2626 !important;
+  transform: translateY(-2px);
 }
 
-/* ============================================
-   CATEGORY BADGES
-   ============================================ */
-.badge-local { background-color: #CC0000; color: white; }
-.badge-national { background-color: #1a56db; color: white; }
-.badge-sports { background-color: #057a55; color: white; }
-.badge-weather { background-color: #7e3af2; color: white; }
-.badge-entertainment { background-color: #e3a008; color: white; }
-.badge-community { background-color: #0694a2; color: white; }
-.badge-default { background-color: #6b7280; color: white; }
-
-/* ============================================
-   NAVIGATION
-   ============================================ */
-.nav-dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  min-width: 200px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 100;
-  border-top: 3px solid #CC0000;
-}
-
-.nav-item:hover .nav-dropdown {
-  display: block;
-}
-
-/* ============================================
-   SECTION HEADERS (41NBC style red bar)
-   ============================================ */
-.section-header {
-  background-color: #CC0000;
-  color: white;
-  padding: 6px 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-}
-
-/* ============================================
-   FEATURED STORY IMAGE OVERLAY
-   ============================================ */
+/* ── Featured overlay ── */
 .featured-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
 }
 
-/* ============================================
-   SCROLLBAR STYLING
-   ============================================ */
-::-webkit-scrollbar {
-  width: 6px;
+/* ── Article content ── */
+.article-content {
+  color: #D1D5DB;
+  font-size: 1.05rem;
+  line-height: 1.8;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.article-content p { margin-bottom: 1.25rem; }
+
+.article-content h2,
+.article-content h3 {
+  color: #FFFFFF;
+  margin: 1.75rem 0 0.75rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #CC0000;
-  border-radius: 3px;
+.article-content a { color: #60A5FA; text-decoration: underline; }
+.article-content img { max-width: 100%; height: auto; border-radius: 4px; }
+
+.article-content blockquote {
+  border-left: 4px solid #DC2626;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #9CA3AF;
+  font-style: italic;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #990000;
-}
+/* ── WPBakery dark theme ── */
+.wpbakery-content-wrapper { color: #D1D5DB; }
+.wpbakery-content-wrapper h1,
+.wpbakery-content-wrapper h2,
+.wpbakery-content-wrapper h3,
+.wpbakery-content-wrapper h4 { color: #FFFFFF; }
+.wpbakery-content-wrapper a { color: #60A5FA; }
 
-/* ============================================
-   RESPONSIVE UTILITIES
-   ============================================ */
-@media (max-width: 768px) {
-  .ticker-scroll {
-    animation-duration: 20s;
-  }
-}
-
-/* ── Sidebar responsive fix ──────────────────────────────────────
-   On mobile the sidebar wraps below the main content column.
-   Remove the 288px maxWidth cap so it stretches to full width.
-   On desktop (1024px+) the inline maxWidth:288px takes effect.
-   ---------------------------------------------------------------- */
+/* ── Sidebar responsive fix ── */
 @media (max-width: 1023px) {
-  aside.space-y-6 {
+  aside.news-sidebar {
     max-width: 100% !important;
     flex-shrink: 1 !important;
   }
 }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0A1628; }
+::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #DC2626; }

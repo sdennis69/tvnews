@@ -11,6 +11,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface NavChild {
   label: string
@@ -171,21 +172,21 @@ export default function Header(_props: Props) {
 
   return (
     <header className="sticky top-0 z-50">
-      {/* Top Blue Bar */}
-      <div className="bg-[#003D7A] py-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-white text-sm">
-          <div className="flex items-center gap-2">
-            <span className="font-bold">72°F</span>
-            <span>Partly Cloudy</span>
+      {/* Top Utility Bar */}
+      <div className="bg-[#0D1E35] border-b border-[#1E3A5F] py-1.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-white text-xs">
+          <div className="flex items-center gap-2 text-[#9CA3AF]">
+            <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a1 1 0 011 1v1a1 1 0 01-2 0V3a1 1 0 011-1zm0 15a5 5 0 100-10 5 5 0 000 10zm7.07-12.07a1 1 0 010 1.41l-.71.71a1 1 0 01-1.41-1.41l.71-.71a1 1 0 011.41 0zM21 11h1a1 1 0 010 2h-1a1 1 0 010-2zM4.93 4.93a1 1 0 011.41 0l.71.71A1 1 0 015.64 7.05l-.71-.71a1 1 0 010-1.41zM3 11H2a1 1 0 000 2h1a1 1 0 000-2zm1.93 6.07l.71-.71a1 1 0 011.41 1.41l-.71.71a1 1 0 01-1.41-1.41zM12 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zm7.07-1.93a1 1 0 010 1.41l-.71.71a1 1 0 01-1.41-1.41l.71-.71a1 1 0 011.41 0z"/></svg>
+            <span>72°F Partly Cloudy</span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="https://www.facebook.com/wcbitv" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" aria-label="WCBI on Facebook">
+          <div className="flex items-center gap-4 text-[#9CA3AF]">
+            <a href="https://www.facebook.com/wcbitv" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="WCBI on Facebook">
               <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="https://twitter.com/WCBINEWS" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" aria-label="WCBI on Twitter">
+            <a href="https://twitter.com/WCBINEWS" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="WCBI on Twitter">
               <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 002.856-3.515 10 10 0 01-2.836.856 4.958 4.958 0 002.165-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
             </a>
-            <a href="https://www.youtube.com/user/wcbitv1" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" aria-label="WCBI on YouTube">
+            <a href="https://www.youtube.com/user/wcbitv1" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="WCBI on YouTube">
               <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
           </div>
@@ -193,19 +194,19 @@ export default function Header(_props: Props) {
       </div>
 
       {/* Logo + Leaderboard Ad */}
-      <div className="bg-white shadow-sm py-3">
+      <div className="bg-[#0A1628] border-b border-[#1E3A5F] py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 group">
             <Image src="/wcbi-logo.png" alt="WCBI Logo" width={256} height={70} className="object-contain" priority />
           </a>
           <div
             id="header-leaderboard-ad"
-            className="hidden md:flex items-center justify-center bg-[#F0F0F0] border border-[#DDDDDD] text-[#666666] text-xs font-medium"
+            className="hidden md:flex items-center justify-center bg-[#0D1E35] border border-[#1E3A5F] text-[#4B5563] text-xs font-medium"
             style={{ width: '728px', height: '90px', flexShrink: 0 }}
           >
             728 × 90 Advertisement
           </div>
-          <button className="text-[#003D7A] hover:opacity-80 transition-all hidden md:block" aria-label="Search">
+          <button className="text-[#9CA3AF] hover:text-white transition-all hidden md:block" aria-label="Search">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -214,7 +215,7 @@ export default function Header(_props: Props) {
       </div>
 
       {/* Navigation Bar */}
-      <nav className="bg-[#003D7A] border-b border-[#002A5A]">
+      <nav className="bg-[#0A1628] border-b-2 border-[#DC2626]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center h-14 relative">
 
@@ -231,7 +232,7 @@ export default function Header(_props: Props) {
                     href={item.url}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-3.5 text-sm font-bold text-white hover:bg-[#004A9A] border-b-4 border-transparent hover:border-white transition-all whitespace-nowrap"
+                    className="block px-3 py-3.5 text-xs font-bold text-white hover:text-[#DC2626] border-b-2 border-transparent hover:border-[#DC2626] transition-all whitespace-nowrap tracking-widest"
                   >
                     {item.label}
                     {item.children.length > 0 && (
@@ -240,14 +241,14 @@ export default function Header(_props: Props) {
                   </a>
 
                   {item.children.length > 0 && activeDropdown === item.id && (
-                    <ul className="absolute top-full left-0 bg-[#002A5A] shadow-lg min-w-[220px] py-1 z-50">
+                    <ul className="absolute top-full left-0 bg-[#0D1E35] border border-[#1E3A5F] border-t-2 border-t-[#DC2626] shadow-2xl min-w-[220px] py-1 z-50">
                       {item.children.map((child, i) => (
                         <li key={i}>
                           <a
                             href={child.url}
                             target={child.external ? '_blank' : undefined}
                             rel={child.external ? 'noopener noreferrer' : undefined}
-                            className="block px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#004A9A] transition-colors whitespace-nowrap"
+                            className="block px-4 py-2.5 text-xs font-semibold text-[#D1D5DB] hover:text-white hover:bg-[#152844] transition-colors whitespace-nowrap tracking-wide"
                           >
                             {child.label}
                           </a>
@@ -262,11 +263,11 @@ export default function Header(_props: Props) {
             {/* Mobile Menu Toggle */}
             <div className="md:hidden relative w-full">
               <button
-                className="w-full flex items-center justify-center text-white hover:bg-[#004A9A] transition-all p-2 font-bold"
+                className="w-full flex items-center justify-center text-white hover:bg-[#152844] transition-all p-2 font-bold"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 aria-label="Toggle menu"
               >
-                <span className="mr-2">MENU</span>
+                <span className="mr-2 text-xs tracking-widest">MENU</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className={`h-5 w-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
@@ -279,27 +280,27 @@ export default function Header(_props: Props) {
               </button>
 
               {dropdownOpen && (
-                <ul className="absolute top-full left-0 right-0 bg-[#004A9A] border-t border-[#002A5A] py-2 shadow-lg z-50 max-h-[80vh] overflow-y-auto">
+                <ul className="absolute top-full left-0 right-0 bg-[#0D1E35] border-t border-[#DC2626] py-2 shadow-lg z-50 max-h-[80vh] overflow-y-auto">
                   {NAV_ITEMS.map((item) => (
                     <li key={item.id}>
                       {item.children.length > 0 ? (
                         <>
                           <button
-                            className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-white hover:bg-[#003D7A] transition-all text-left"
+                            className="w-full flex items-center justify-between px-4 py-3 text-xs font-bold text-white hover:bg-[#152844] transition-all text-left tracking-widest"
                             onClick={() => setMobileExpanded(mobileExpanded === item.id ? null : item.id)}
                           >
                             <span>{item.label}</span>
                             <span className="text-xs opacity-70">{mobileExpanded === item.id ? '▲' : '▾'}</span>
                           </button>
                           {mobileExpanded === item.id && (
-                            <ul className="bg-[#003D7A]">
+                            <ul className="bg-[#0A1628]">
                               {item.children.map((child, i) => (
                                 <li key={i}>
                                   <a
                                     href={child.url}
                                     target={child.external ? '_blank' : undefined}
                                     rel={child.external ? 'noopener noreferrer' : undefined}
-                                    className="block px-8 py-2.5 text-sm text-white/80 hover:bg-[#002A5A] transition-all"
+                                    className="block px-8 py-2.5 text-xs text-[#D1D5DB] hover:bg-[#152844] hover:text-white transition-all tracking-wide"
                                     onClick={() => setDropdownOpen(false)}
                                   >
                                     {child.label}
@@ -314,7 +315,7 @@ export default function Header(_props: Props) {
                           href={item.url}
                           target={item.external ? '_blank' : undefined}
                           rel={item.external ? 'noopener noreferrer' : undefined}
-                          className="block px-4 py-3 text-sm font-bold text-white hover:bg-[#003D7A] transition-all"
+                          className="block px-4 py-3 text-xs font-bold text-white hover:bg-[#152844] transition-all tracking-widest"
                           onClick={() => setDropdownOpen(false)}
                         >
                           {item.label}
