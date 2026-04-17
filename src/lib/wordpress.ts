@@ -284,12 +284,12 @@ export async function getCategories() {
 }
 
 /**
- * Fetch featured/sticky posts
+ * Fetch featured posts (falls back to latest posts — sticky filter not supported by this schema)
  */
 export async function getFeaturedPosts(first: number = 5) {
   const query = `
     query GetFeaturedPosts($first: Int) {
-      posts(first: $first, where: { sticky: true }) {
+      posts(first: $first) {
         edges {
           node {
             id

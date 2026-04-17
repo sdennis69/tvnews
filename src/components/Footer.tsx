@@ -1,12 +1,27 @@
 /**
  * Footer — WCBI TV
- * Matches local-stream-vision Lovable reference: navy gradient bg, red section labels,
- * 4-column grid, social icons, legal links.
+ * Next.js 12 Link syntax: <Link href="..."><a>...</a></Link>
+ * Hydration-safe: year is hardcoded to avoid new Date() server/client mismatch.
  */
 import Link from "next/link"
 
+const YEAR = 2026
+
+const newsLinks = [
+  { label: "Local News", href: "/news" },
+  { label: "Crime", href: "/crime" },
+  { label: "National and World", href: "/national-world-news" },
+  { label: "Sports", href: "/sports" },
+]
+
+const resourceLinks = [
+  { label: "Weather", href: "/weather" },
+  { label: "Live TV", href: "/livestream" },
+  { label: "About Us", href: "/about-wcbi" },
+  { label: "Contact", href: "/about-wcbi/contact-us" },
+]
+
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
   return (
     <footer style={{ background: "var(--gradient-navy)", color: "hsl(var(--primary-foreground))" }}>
       <div className="container py-12">
@@ -18,7 +33,7 @@ export default function Footer() {
               WCBI TV
             </div>
             <p className="text-sm leading-relaxed opacity-75">
-              Columbus, Mississippi's trusted source for local news, weather, and sports. A Morris Multimedia station.
+              Columbus, Mississippi&apos;s trusted source for local news, weather, and sports. A Morris Multimedia station.
             </p>
           </div>
 
@@ -26,14 +41,11 @@ export default function Footer() {
           <div>
             <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "hsl(var(--breaking))" }}>News</div>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: "Local News", href: "/news" },
-                { label: "Crime", href: "/crime" },
-                { label: "National and World", href: "/national-world-news" },
-                { label: "Sports", href: "/sports" },
-              ].map((l) => (
+              {newsLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="opacity-70 hover:opacity-100 transition-opacity">{l.label}</Link>
+                  <Link href={l.href}>
+                    <a className="opacity-70 hover:opacity-100 transition-opacity">{l.label}</a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -43,14 +55,11 @@ export default function Footer() {
           <div>
             <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "hsl(var(--breaking))" }}>Resources</div>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: "Weather", href: "/weather" },
-                { label: "Live TV", href: "/livestream" },
-                { label: "About Us", href: "/about-wcbi" },
-                { label: "Contact", href: "/about-wcbi/contact-us" },
-              ].map((l) => (
+              {resourceLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="opacity-70 hover:opacity-100 transition-opacity">{l.label}</Link>
+                  <Link href={l.href}>
+                    <a className="opacity-70 hover:opacity-100 transition-opacity">{l.label}</a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -82,11 +91,17 @@ export default function Footer() {
         {/* Legal bar */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs opacity-60"
           style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}>
-          <p>&copy; {currentYear} WCBI TV. All rights reserved. Columbus, MS.</p>
+          <p>&copy; {YEAR} WCBI TV. All rights reserved. Columbus, MS.</p>
           <div className="flex gap-5">
-            <Link href="/about-wcbi/privacy-policy-2" className="hover:opacity-100 transition-opacity">Privacy Policy</Link>
-            <Link href="/terms-of-use" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
-            <Link href="/fcc" className="hover:opacity-100 transition-opacity">FCC Public File</Link>
+            <Link href="/about-wcbi/privacy-policy-2">
+              <a className="hover:opacity-100 transition-opacity">Privacy Policy</a>
+            </Link>
+            <Link href="/terms-of-use">
+              <a className="hover:opacity-100 transition-opacity">Terms of Service</a>
+            </Link>
+            <Link href="/fcc">
+              <a className="hover:opacity-100 transition-opacity">FCC Public File</a>
+            </Link>
           </div>
         </div>
       </div>
