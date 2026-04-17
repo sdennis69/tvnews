@@ -20,6 +20,29 @@ export default function Document() {
         <link rel="dns-prefetch" href="https://api.revcontent.com" />
       </Head>
       <body>
+        {/*
+         * Blocking theme script — runs synchronously before first paint.
+         * Reads localStorage and applies .dark class immediately so there
+         * is no flash of light mode. Default is dark if no preference saved.
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function(){
+  try {
+    var t = localStorage.getItem('wway-theme');
+    if (t === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {
+    document.documentElement.classList.add('dark');
+  }
+})();
+`,
+          }}
+        />
         <Main />
         <NextScript />
       </body>

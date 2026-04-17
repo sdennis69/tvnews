@@ -46,7 +46,7 @@ interface Props {
 export default function WordPressPage({ page, navItems }: Props) {
   if (!page) return null // 404 handled by getServerSideProps notFound: true
 
-  const seoTitle = page.seo?.title || `${page.title} - WCBI`
+  const seoTitle = page.seo?.title || `${page.title} - WWAYTV3`
   const seoDesc = page.seo?.metaDesc || page.seo?.opengraphDescription || ''
   const image = page.featuredImage?.node?.sourceUrl || page.seo?.opengraphImage?.sourceUrl || ''
 

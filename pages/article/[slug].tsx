@@ -56,7 +56,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
   const author = post?.author?.node?.name || 'Staff'
   const image = post?.featuredImage?.node?.sourceUrl || ''
 
-  const seoTitle = post?.seo?.title || (post ? `${post.title} - WCBI` : 'Article - WCBI')
+  const seoTitle = post?.seo?.title || (post ? `${post.title} - WWAYTV3` : 'Article - WWAYTV3')
   const seoDesc = post?.seo?.metaDesc || (post?.excerpt ? post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160) : '')
   const ogImage = post?.seo?.opengraphImage?.sourceUrl || image
 

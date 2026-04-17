@@ -1,5 +1,5 @@
 /**
- * BreakingNewsTicker — WCBI TV
+ * BreakingNewsTicker — WWAYTV3
  * Matches local-stream-vision Lovable reference exactly.
  * Red gradient bar, AlertTriangle icon, 45s CSS scroll animation.
  */
@@ -12,7 +12,7 @@ const DEFAULT_ITEMS = [
   'BREAKING: Tropical storm watch issued for the Golden Triangle area',
   'I-82 EB reopened after morning crash near exit 45',
   'Columbus City Council approves new downtown development plan',
-  'High school football scoreboard: WCBI Friday Night Lights',
+  'High school football scoreboard: WWAYTV3 Friday Night Lights',
   'Power restored to thousands of customers in Lowndes County',
 ]
 

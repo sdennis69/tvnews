@@ -93,8 +93,8 @@ export default function NationalWorldNewsPage({ posts: initialPosts, initialEndC
   return (
     <>
       <Head>
-        <title>National/World News - WCBI TV | Telling Your Story</title>
-        <meta name="description" content="National and world news coverage from WCBI TV." />
+        <title>National/World News - WWAYTV3 | Telling Your Story</title>
+        <meta name="description" content="National and world news coverage from WWAYTV3." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
         <Header navItems={navItems} />

@@ -93,8 +93,8 @@ export default function CrimePage({ posts: initialPosts, initialEndCursor, initi
   return (
     <>
       <Head>
-        <title>Crime - WCBI TV | Telling Your Story</title>
-        <meta name="description" content="Crime news and public safety stories from WCBI TV." />
+        <title>Crime - WWAYTV3 | Telling Your Story</title>
+        <meta name="description" content="Crime news and public safety stories from WWAYTV3." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
         <Header navItems={navItems} />

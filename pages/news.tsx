@@ -93,15 +93,15 @@ export default function NewsPage({ posts: initialPosts, initialEndCursor, initia
   return (
     <>
       <Head>
-        <title>Local News - WCBI TV | Telling Your Story</title>
-        <meta name="description" content="Latest local news from Columbus, Mississippi and the Golden Triangle." />
+        <title>Local News - WWAYTV3 | Telling Your Story</title>
+        <meta name="description" content="Latest local news from Wilmington, NC and the Cape Fear region." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
         <Header navItems={navItems} />
         <div className="bg-[#003D7A] py-6 border-b-4 border-[#CC0000]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-white uppercase tracking-wide">Local News</h1>
-            <p className="text-blue-200 text-sm mt-1">Columbus, Mississippi &amp; the Golden Triangle</p>
+            <p className="text-blue-200 text-sm mt-1">Wilmington, NC &amp; the Cape Fear Region</p>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

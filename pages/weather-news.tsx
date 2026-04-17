@@ -91,8 +91,8 @@ export default function WeatherNewsPage({ posts: initialPosts, initialEndCursor,
   return (
     <>
       <Head>
-        <title>Weather News - WCBI TV | Telling Your Story</title>
-        <meta name="description" content="Weather forecasts and severe weather alerts from WCBI TV." />
+        <title>Weather News - WWAYTV3 | Telling Your Story</title>
+        <meta name="description" content="Weather forecasts and severe weather alerts from WWAYTV3." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
         <Header navItems={navItems} />

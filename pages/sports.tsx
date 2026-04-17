@@ -98,8 +98,8 @@ export default function SportsPage({ posts: initialPosts, initialEndCursor, init
   return (
     <>
       <Head>
-        <title>Sports - WCBI TV | Telling Your Story</title>
-        <meta name="description" content="Local, college, and high school sports coverage from WCBI TV." />
+        <title>Sports - WWAYTV3 | Telling Your Story</title>
+        <meta name="description" content="Local, college, and high school sports coverage from WWAYTV3." />
       </Head>
       <main className="min-h-screen bg-[#F5F5F5]">
         <Header navItems={navItems} />

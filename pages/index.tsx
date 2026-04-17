@@ -255,7 +255,7 @@ function LiveVideoPlayer() {
           )}
           <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 p-3">
             <div className="min-w-0 flex-1">
-              <div className="font-semibold text-white text-sm truncate">WCBI News at Noon — Live</div>
+              <div className="font-semibold text-white text-sm truncate">WWAYTV3 News at Noon — Live</div>
             </div>
             {muted !== null && (
               <button onClick={() => setMuted(!muted)} className="grid h-8 w-8 place-items-center rounded-md text-white hover:bg-white/20" aria-label={muted ? 'Unmute' : 'Mute'}>
@@ -296,7 +296,7 @@ function WeatherWidget() {
       <div className="p-5 md:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="text-[11px] font-bold uppercase tracking-widest opacity-70">Columbus, MS</div>
+            <div className="text-[11px] font-bold uppercase tracking-widest opacity-70">Wilmington, NC</div>
             <div className="mt-1 flex items-end gap-2">
               <span className="font-display text-5xl md:text-6xl font-extrabold leading-none">82°</span>
               <span className="text-sm opacity-80 mb-1">Feels like 86°</span>
@@ -332,7 +332,7 @@ function WeatherWidget() {
 /* ── Page Component ─────────────────────────────────────────────── */
 export default function Home({ featuredPost, heroSidePosts, localNewsPosts, trendingPosts, communityPosts, navItems }: Props) {
   const watchNowItems = [
-    { slug: 'live-coverage', category: 'Live', title: 'LIVE: Tracking severe weather — WCBI Chief Meteorologist', publishedAt: 'Live now', duration: 'LIVE', image: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=600&q=80' },
+    { slug: 'live-coverage', category: 'Live', title: 'LIVE: Tracking severe weather — WWAYTV3 Chief Meteorologist', publishedAt: 'Live now', duration: 'LIVE', image: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=600&q=80' },
     { slug: 'evening-newscast', category: 'Newscast', title: 'Tonight at 6: Top stories from across the Golden Triangle', publishedAt: 'Tonight at 6:00', duration: '22:08', image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80' },
     { slug: 'council-vote', category: 'Local News', title: 'Watch: Full coverage of the Columbus City Council vote', publishedAt: '2 hours ago', duration: '8:42', image: 'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=600&q=80' },
     { slug: 'community-event', category: 'Community', title: 'Volunteers serve thousands at annual community event', publishedAt: '1 day ago', duration: '3:55', image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80' },
@@ -341,8 +341,8 @@ export default function Home({ featuredPost, heroSidePosts, localNewsPosts, tren
   return (
     <>
       <Head>
-        <title>WCBI TV — Columbus, MS Local News, Weather &amp; Sports</title>
-        <meta name="description" content="Columbus, Mississippi's trusted source for breaking news, weather, sports, and community stories." />
+        <title>WWAYTV3 — Wilmington, NC Local News, Weather &amp; Sports</title>
+        <meta name="description" content="Wilmington, NC's trusted source for breaking news, weather, sports, and community stories. ABC, CBS &amp; CW affiliate." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -462,7 +462,7 @@ export default function Home({ featuredPost, heroSidePosts, localNewsPosts, tren
                   <div className="h-6 w-6 mb-3 p-1 rounded" style={{ background: 'hsl(var(--breaking))', color: 'hsl(var(--breaking-foreground))' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                   </div>
-                  <h3 className="font-display text-xl font-extrabold leading-tight">Get the WCBI Daily newsletter</h3>
+                  <h3 className="font-display text-xl font-extrabold leading-tight">Get the WWAYTV3 Daily newsletter</h3>
                   <p className="mt-2 text-sm opacity-80">The day's top local stories, weather, and sports — delivered every morning.</p>
                   <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
                     <input type="email" placeholder="Email address" className="flex-1 rounded-md px-3 py-2 text-sm outline-none" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'hsl(var(--primary-foreground))' }} />
