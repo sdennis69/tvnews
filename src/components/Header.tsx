@@ -9,7 +9,7 @@
  *  - External / legacy WP pages use full https://www.wcbi.com/... URLs
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -169,17 +169,45 @@ export default function Header(_props: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+
+  useEffect(() => {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('wcbi-theme') : null
+    const initial: 'light' | 'dark' = saved === 'light' ? 'light' : 'dark'
+    setTheme(initial)
+    document.documentElement.classList.toggle('dark', initial === 'dark')
+  }, [])
+
+  const toggleTheme = () => {
+    const next: 'light' | 'dark' = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    document.documentElement.classList.toggle('dark', next === 'dark')
+    localStorage.setItem('wcbi-theme', next)
+  }
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50" style={{ backgroundColor: 'hsl(var(--background))', borderBottom: '1px solid hsl(var(--border))' }}>
       {/* Top Utility Bar */}
-      <div className="bg-[#0D1E35] border-b border-[#1E3A5F] py-1.5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-white text-xs">
-          <div className="flex items-center gap-2 text-[#9CA3AF]">
+      <div style={{ backgroundColor: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }} className="py-1.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2" style={{ color: 'hsl(var(--primary-foreground) / 0.7)' }}>
             <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a1 1 0 011 1v1a1 1 0 01-2 0V3a1 1 0 011-1zm0 15a5 5 0 100-10 5 5 0 000 10zm7.07-12.07a1 1 0 010 1.41l-.71.71a1 1 0 01-1.41-1.41l.71-.71a1 1 0 011.41 0zM21 11h1a1 1 0 010 2h-1a1 1 0 010-2zM4.93 4.93a1 1 0 011.41 0l.71.71A1 1 0 015.64 7.05l-.71-.71a1 1 0 010-1.41zM3 11H2a1 1 0 000 2h1a1 1 0 000-2zm1.93 6.07l.71-.71a1 1 0 011.41 1.41l-.71.71a1 1 0 01-1.41-1.41zM12 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zm7.07-1.93a1 1 0 010 1.41l-.71.71a1 1 0 01-1.41-1.41l.71-.71a1 1 0 011.41 0z"/></svg>
             <span>72°F Partly Cloudy</span>
           </div>
-          <div className="flex items-center gap-4 text-[#9CA3AF]">
+          <div className="flex items-center gap-4" style={{ color: 'hsl(var(--primary-foreground) / 0.7)' }}>
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark/light theme"
+              className="flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-colors"
+            >
+              {theme === 'dark' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              )}
+              <span className="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+            </button>
             <a href="https://www.facebook.com/wcbitv" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="WCBI on Facebook">
               <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
@@ -194,19 +222,19 @@ export default function Header(_props: Props) {
       </div>
 
       {/* Logo + Leaderboard Ad */}
-      <div className="bg-[#0A1628] border-b border-[#1E3A5F] py-3">
+      <div className="py-3" style={{ backgroundColor: 'hsl(var(--background))', borderBottom: '1px solid hsl(var(--border))' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 group">
             <Image src="/wcbi-logo.png" alt="WCBI Logo" width={256} height={70} className="object-contain" priority />
           </a>
           <div
             id="header-leaderboard-ad"
-            className="hidden md:flex items-center justify-center bg-[#0D1E35] border border-[#1E3A5F] text-[#4B5563] text-xs font-medium"
-            style={{ width: '728px', height: '90px', flexShrink: 0 }}
+            className="hidden md:flex items-center justify-center text-xs font-medium"
+            style={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', color: 'hsl(var(--muted-foreground))', width: '728px', height: '90px', flexShrink: 0 }}
           >
             728 × 90 Advertisement
           </div>
-          <button className="text-[#9CA3AF] hover:text-white transition-all hidden md:block" aria-label="Search">
+          <button className="hidden md:block transition-all" aria-label="Search" style={{ color: 'hsl(var(--primary-foreground) / 0.7)' }}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -215,7 +243,7 @@ export default function Header(_props: Props) {
       </div>
 
       {/* Navigation Bar */}
-      <nav className="bg-[#0A1628] border-b-2 border-[#DC2626]">
+      <nav style={{ backgroundColor: 'hsl(var(--primary))', borderBottom: '2px solid hsl(var(--breaking))' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center h-14 relative">
 
@@ -232,7 +260,10 @@ export default function Header(_props: Props) {
                     href={item.url}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-3.5 text-xs font-bold text-white hover:text-[#DC2626] border-b-2 border-transparent hover:border-[#DC2626] transition-all whitespace-nowrap tracking-widest"
+                    className="block px-3 py-3.5 text-xs font-bold border-b-2 border-transparent transition-all whitespace-nowrap tracking-widest"
+                    style={{ color: 'hsl(var(--primary-foreground))', borderBottomColor: 'transparent' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--breaking))'; (e.currentTarget as HTMLElement).style.borderBottomColor = 'hsl(var(--breaking))'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--primary-foreground))'; (e.currentTarget as HTMLElement).style.borderBottomColor = 'transparent'; }}
                   >
                     {item.label}
                     {item.children.length > 0 && (
@@ -241,14 +272,17 @@ export default function Header(_props: Props) {
                   </a>
 
                   {item.children.length > 0 && activeDropdown === item.id && (
-                    <ul className="absolute top-full left-0 bg-[#0D1E35] border border-[#1E3A5F] border-t-2 border-t-[#DC2626] shadow-2xl min-w-[220px] py-1 z-50">
+                    <ul className="absolute top-full left-0 min-w-[200px] py-1 z-50 shadow-lg" style={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderTop: '2px solid hsl(var(--breaking))' }}>
                       {item.children.map((child, i) => (
                         <li key={i}>
                           <a
                             href={child.url}
                             target={child.external ? '_blank' : undefined}
                             rel={child.external ? 'noopener noreferrer' : undefined}
-                            className="block px-4 py-2.5 text-xs font-semibold text-[#D1D5DB] hover:text-white hover:bg-[#152844] transition-colors whitespace-nowrap tracking-wide"
+                            className="block px-4 py-2.5 text-xs font-semibold transition-colors whitespace-nowrap tracking-wide"
+                            style={{ color: 'hsl(var(--card-foreground) / 0.8)' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'hsl(var(--secondary))'; (e.currentTarget as HTMLElement).style.color = 'hsl(var(--breaking))'; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLElement).style.color = 'hsl(var(--card-foreground) / 0.8)'; }}
                           >
                             {child.label}
                           </a>
@@ -263,7 +297,8 @@ export default function Header(_props: Props) {
             {/* Mobile Menu Toggle */}
             <div className="md:hidden relative w-full">
               <button
-                className="w-full flex items-center justify-center text-white hover:bg-[#152844] transition-all p-2 font-bold"
+                className="w-full flex items-center justify-center transition-all p-2 font-bold"
+              style={{ color: 'hsl(var(--primary-foreground))' }}
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 aria-label="Toggle menu"
               >
@@ -280,13 +315,14 @@ export default function Header(_props: Props) {
               </button>
 
               {dropdownOpen && (
-                <ul className="absolute top-full left-0 right-0 bg-[#0D1E35] border-t border-[#DC2626] py-2 shadow-lg z-50 max-h-[80vh] overflow-y-auto">
+                <ul className="absolute top-full left-0 right-0 py-2 shadow-lg z-50 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: 'hsl(var(--card))', borderTop: '2px solid hsl(var(--breaking))' }}>
                   {NAV_ITEMS.map((item) => (
                     <li key={item.id}>
                       {item.children.length > 0 ? (
                         <>
                           <button
-                            className="w-full flex items-center justify-between px-4 py-3 text-xs font-bold text-white hover:bg-[#152844] transition-all text-left tracking-widest"
+                            className="w-full flex items-center justify-between px-4 py-3 text-xs font-bold transition-all text-left tracking-widest"
+                            style={{ color: 'hsl(var(--card-foreground))' }}
                             onClick={() => setMobileExpanded(mobileExpanded === item.id ? null : item.id)}
                           >
                             <span>{item.label}</span>
@@ -300,7 +336,8 @@ export default function Header(_props: Props) {
                                     href={child.url}
                                     target={child.external ? '_blank' : undefined}
                                     rel={child.external ? 'noopener noreferrer' : undefined}
-                                    className="block px-8 py-2.5 text-xs text-[#D1D5DB] hover:bg-[#152844] hover:text-white transition-all tracking-wide"
+                                    className="block px-8 py-2.5 text-xs transition-all tracking-wide"
+                                  style={{ color: 'hsl(var(--muted-foreground))' }}
                                     onClick={() => setDropdownOpen(false)}
                                   >
                                     {child.label}
@@ -315,7 +352,8 @@ export default function Header(_props: Props) {
                           href={item.url}
                           target={item.external ? '_blank' : undefined}
                           rel={item.external ? 'noopener noreferrer' : undefined}
-                          className="block px-4 py-3 text-xs font-bold text-white hover:bg-[#152844] transition-all tracking-widest"
+                          className="block px-4 py-3 text-xs font-bold transition-all tracking-widest"
+                          style={{ color: 'hsl(var(--card-foreground))' }}
                           onClick={() => setDropdownOpen(false)}
                         >
                           {item.label}

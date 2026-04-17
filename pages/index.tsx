@@ -75,7 +75,7 @@ function timeAgo(dateStr: string): string {
 
 function CategoryBadge({ name }: { name: string }) {
   return (
-    <span className="inline-block text-[0.6rem] font-black tracking-widest uppercase text-[#DC2626] bg-[#DC2626]/10 border border-[#DC2626]/30 px-2 py-0.5">
+    <span className="inline-block text-[0.6rem] font-black tracking-widest uppercase text-[hsl(var(--breaking))] bg-[hsl(var(--breaking))]/10 border border-[hsl(var(--breaking))]/30 px-2 py-0.5">
       {name}
     </span>
   )
@@ -121,7 +121,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
         )}
       </Head>
 
-      <main className="min-h-screen bg-[#0A1628]">
+      <main className="min-h-screen bg-[hsl(var(--background))]">
         <Header navItems={navItems} />
         <BreakingNewsTicker />
 
@@ -133,7 +133,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
             <div className="lg:col-span-2">
               {featuredPost ? (
                 <Link href={`/article/${featuredPost.slug}`}>
-                  <a className="block group relative overflow-hidden rounded-lg bg-[#0D1E35]">
+                  <a className="block group relative overflow-hidden rounded-lg bg-[hsl(var(--card))]">
                     {featuredPost.featuredImage?.node?.sourceUrl ? (
                       <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
                         <Image
@@ -148,16 +148,16 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/40 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-5">
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-black tracking-widest uppercase text-white bg-[#DC2626] px-2.5 py-1">
+                            <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-black tracking-widest uppercase text-white bg-[hsl(var(--breaking))] px-2.5 py-1">
                               <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse inline-block"></span>
                               LIVE COVERAGE
                             </span>
-                            <span className="text-[#9CA3AF] text-xs">{timeAgo(featuredPost.date)}</span>
+                            <span className="text-[hsl(var(--muted-foreground))] text-xs">{timeAgo(featuredPost.date)}</span>
                           </div>
                           <h2 className="text-2xl md:text-3xl font-black text-white leading-tight group-hover:text-[#FCA5A5] transition-colors" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                             {featuredPost.title}
                           </h2>
-                          <p className="text-[#D1D5DB] text-sm mt-2 line-clamp-2 leading-relaxed">
+                          <p className="text-[hsl(var(--foreground))] text-sm mt-2 line-clamp-2 leading-relaxed">
                             {featuredPost.excerpt?.replace(/<[^>]*>/g, '') || ''}
                           </p>
                         </div>
@@ -170,7 +170,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                   </a>
                 </Link>
               ) : (
-                <div className="rounded-lg bg-[#0D1E35] flex items-center justify-center" style={{ aspectRatio: '16/9' }}>
+                <div className="rounded-lg bg-[hsl(var(--card))] flex items-center justify-center" style={{ aspectRatio: '16/9' }}>
                   <p className="text-[#4B5563] text-sm">No featured story available.</p>
                 </div>
               )}
@@ -182,9 +182,9 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                 const cat = post.categories?.edges?.[0]?.node?.name || 'NEWS'
                 return (
                   <Link key={post.id} href={`/article/${post.slug}`}>
-                    <a className="flex gap-3 group bg-[#0D1E35] hover:bg-[#152844] rounded-lg p-3 transition-colors border border-[#1E3A5F] hover:border-[#DC2626]/30">
+                    <a className="flex gap-3 group bg-[hsl(var(--card))] hover:bg-[hsl(var(--secondary))] rounded-lg p-3 transition-colors border border-[hsl(var(--border))] hover:border-[hsl(var(--breaking))]/30">
                       {post.featuredImage?.node?.sourceUrl && (
-                        <div className="w-20 h-16 flex-shrink-0 relative overflow-hidden rounded bg-[#152844]">
+                        <div className="w-20 h-16 flex-shrink-0 relative overflow-hidden rounded bg-[hsl(var(--secondary))]">
                           <Image
                             src={post.featuredImage.node.sourceUrl}
                             alt={post.title}
@@ -215,8 +215,8 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
 
             {/* Latest News column */}
             <div style={{ flex: '1 1 500px', minWidth: 0 }}>
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#1E3A5F]">
-                <div className="w-1 h-5 bg-[#DC2626] rounded-full"></div>
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[hsl(var(--border))]">
+                <div className="w-1 h-5 bg-[hsl(var(--breaking))] rounded-full"></div>
                 <h2 className="text-sm font-black tracking-widest uppercase text-white" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Latest News</h2>
               </div>
 
@@ -227,9 +227,9 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                     const image = post.featuredImage?.node?.sourceUrl || ''
                     return (
                       <Link key={post.id} href={`/article/${post.slug}`}>
-                        <a className="flex gap-4 bg-[#0D1E35] hover:bg-[#152844] rounded-lg overflow-hidden transition-colors group border border-[#1E3A5F] hover:border-[#DC2626]/30">
+                        <a className="flex gap-4 bg-[hsl(var(--card))] hover:bg-[hsl(var(--secondary))] rounded-lg overflow-hidden transition-colors group border border-[hsl(var(--border))] hover:border-[hsl(var(--breaking))]/30">
                           {image && (
-                            <div className="w-36 h-24 flex-shrink-0 relative overflow-hidden bg-[#152844]">
+                            <div className="w-36 h-24 flex-shrink-0 relative overflow-hidden bg-[hsl(var(--secondary))]">
                               <Image
                                 src={image}
                                 alt={post.title}
@@ -272,7 +272,7 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                   <button
                     onClick={loadMore}
                     disabled={loading}
-                    className="inline-flex items-center gap-2 bg-[#DC2626] hover:bg-[#B91C1C] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs tracking-widest uppercase px-8 py-3 transition-colors"
+                    className="inline-flex items-center gap-2 bg-[hsl(var(--breaking))] hover:bg-[#B91C1C] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs tracking-widest uppercase px-8 py-3 transition-colors"
                   >
                     {loading ? (
                       <>
@@ -290,10 +290,10 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
 
             {/* Right Sidebar */}
             <aside className="space-y-4" style={{ width: '100%', maxWidth: '288px' }}>
-              <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1E3A5F]">
+              <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-[hsl(var(--border))]">
                   <div className="flex items-center gap-2">
-                    <div className="w-1 h-4 bg-[#DC2626] rounded-full"></div>
+                    <div className="w-1 h-4 bg-[hsl(var(--breaking))] rounded-full"></div>
                     <span className="text-white text-xs font-black uppercase tracking-widest" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Trending</span>
                   </div>
                   <span className="text-[#4B5563] text-[0.6rem]">Ads By Revcontent</span>
@@ -301,9 +301,9 @@ export default function Home({ featuredPost, sidebarPosts, latestPosts: initialL
                 <RevcontentWidget className="p-2" />
               </div>
 
-              <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#1E3A5F]">
-                  <div className="w-1 h-4 bg-[#1E3A5F] rounded-full"></div>
+              <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[hsl(var(--border))]">
+                  <div className="w-1 h-4 bg-[hsl(var(--border))] rounded-full"></div>
                   <span className="text-[#4B5563] text-xs font-bold uppercase tracking-widest">Advertisement</span>
                 </div>
                 <div

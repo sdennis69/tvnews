@@ -1,171 +1,166 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Slab:wght@600;700;800;900&display=swap');
 
 /* ============================================================
-   WCBI TV — Deep Navy + Breaking Red Design System
-   Design Movement: Modern Broadcast News (CNN/WWAY-inspired)
-   Core Palette:
-     --navy-900: #0A1628  (page background)
-     --navy-800: #0D1E35  (card backgrounds)
-     --navy-700: #152844  (elevated cards)
-     --navy-600: #1E3A5F  (borders, dividers)
-     --red-600:  #DC2626  (breaking, accents, CTAs)
-     --red-700:  #B91C1C  (hover states)
-     --white:    #FFFFFF
-     --gray-300: #D1D5DB  (secondary text)
-     --gray-400: #9CA3AF  (timestamps, meta)
-   Typography: Barlow Condensed (headlines) + Inter (body)
+   WCBI TV — Broadcast Design System (local-stream-vision ref)
+   Light: warm off-white + deep navy + breaking red
+   Dark:  deep navy bg + same red accents
+   Fonts: Roboto Slab (display/headlines) + Inter (body)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --background: 38 30% 97%;
+  --foreground: 220 35% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 35% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 35% 12%;
+  --primary: 218 60% 17%;
+  --primary-foreground: 38 40% 98%;
+  --secondary: 220 25% 94%;
+  --secondary-foreground: 218 60% 17%;
+  --muted: 220 20% 94%;
+  --muted-foreground: 220 12% 42%;
+  --accent: 38 30% 92%;
+  --accent-foreground: 218 60% 17%;
+  --breaking: 0 78% 46%;
+  --breaking-foreground: 0 0% 100%;
+  --live: 0 84% 50%;
+  --live-foreground: 0 0% 100%;
+  --destructive: 0 78% 46%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 18% 88%;
+  --input: 220 18% 88%;
+  --ring: 218 60% 17%;
+  --radius: 0.625rem;
+  --gradient-hero: linear-gradient(180deg, hsl(218 60% 17% / 0) 0%, hsl(218 60% 12% / 0.4) 50%, hsl(218 60% 8% / 0.95) 100%);
+  --gradient-navy: linear-gradient(135deg, hsl(218 60% 17%), hsl(218 55% 24%));
+  --gradient-breaking: linear-gradient(90deg, hsl(0 78% 42%), hsl(0 84% 52%));
+  --shadow-card: 0 1px 3px hsl(220 35% 12% / 0.06), 0 4px 12px hsl(220 35% 12% / 0.04);
+  --shadow-card-hover: 0 8px 28px hsl(220 35% 12% / 0.12);
+}
+
+.dark {
+  --background: 220 30% 8%;
+  --foreground: 38 30% 96%;
+  --card: 220 30% 11%;
+  --card-foreground: 38 30% 96%;
+  --popover: 220 30% 11%;
+  --popover-foreground: 38 30% 96%;
+  --primary: 38 40% 96%;
+  --primary-foreground: 218 60% 17%;
+  --secondary: 220 25% 16%;
+  --secondary-foreground: 38 30% 96%;
+  --muted: 220 25% 16%;
+  --muted-foreground: 220 12% 65%;
+  --accent: 220 25% 18%;
+  --accent-foreground: 38 30% 96%;
+  --breaking: 0 78% 52%;
+  --breaking-foreground: 0 0% 100%;
+  --live: 0 84% 55%;
+  --live-foreground: 0 0% 100%;
+  --destructive: 0 78% 52%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 25% 20%;
+  --input: 220 25% 20%;
+  --ring: 38 40% 96%;
+  --gradient-hero: linear-gradient(180deg, hsl(220 30% 8% / 0) 0%, hsl(220 30% 6% / 0.5) 50%, hsl(220 30% 4% / 0.98) 100%);
+  --gradient-navy: linear-gradient(135deg, hsl(220 30% 11%), hsl(220 25% 18%));
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-color: hsl(var(--border));
+}
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: #0A1628;
-  color: #FFFFFF;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  line-height: 1.15;
-  color: #FFFFFF;
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Roboto Slab', Georgia, serif;
+  letter-spacing: -0.01em;
+  color: hsl(var(--foreground));
   margin: 0;
 }
 
 a { color: inherit; text-decoration: none; }
 
-/* ── Breaking News Ticker ── */
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ticker-scroll {
-  animation: ticker-scroll 45s linear infinite;
+/* ── Breaking ticker ── */
+.ticker-track {
+  animation: ticker 45s linear infinite;
   white-space: nowrap;
 }
+.ticker-track:hover { animation-play-state: paused; }
 
-.ticker-scroll:hover {
-  animation-play-state: paused;
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-/* ── Section Headers ── */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #1E3A5F;
-}
-
-/* ── Category Badge ── */
-.category-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #DC2626;
-  display: inline-block;
-}
-
-/* ── LIVE Badge ── */
-.live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: #DC2626;
-  color: white;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 0.2rem 0.5rem;
-  border-radius: 2px;
-  text-transform: uppercase;
-}
-
-.live-badge::before {
+/* ── Live pulse ring ── */
+.live-pulse::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  animation: pulse-dot 1.5s ease-in-out infinite;
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: hsl(var(--live));
+  animation: pulse-ring 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+@keyframes pulse-ring {
+  0%        { transform: scale(0.95); opacity: 0.7; }
+  80%, 100% { transform: scale(1.6);  opacity: 0; }
 }
 
-/* ── Article card hover ── */
-.article-card {
-  transition: border-color 0.2s, transform 0.2s;
+/* ── Fade-in-up entrance ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in-up { animation: fade-in-up 0.4s ease-out both; }
 
-.article-card:hover {
-  border-color: #DC2626 !important;
-  transform: translateY(-2px);
-}
-
-/* ── Featured overlay ── */
-.featured-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
-}
-
-/* ── Article content ── */
+/* ── Article body content ── */
 .article-content {
-  color: #D1D5DB;
-  font-size: 1.05rem;
-  line-height: 1.8;
+  color: hsl(var(--foreground) / 0.9);
+  font-size: 1.0625rem;
+  line-height: 1.75;
 }
-
 .article-content p { margin-bottom: 1.25rem; }
-
 .article-content h2,
-.article-content h3 {
-  color: #FFFFFF;
-  margin: 1.75rem 0 0.75rem;
-}
-
-.article-content a { color: #60A5FA; text-decoration: underline; }
+.article-content h3 { margin: 1.75rem 0 0.75rem; }
+.article-content a { color: hsl(210 80% 60%); text-decoration: underline; }
 .article-content img { max-width: 100%; height: auto; border-radius: 4px; }
-
 .article-content blockquote {
-  border-left: 4px solid #DC2626;
+  border-left: 4px solid hsl(var(--breaking));
   padding-left: 1rem;
   margin: 1.5rem 0;
-  color: #9CA3AF;
+  color: hsl(var(--muted-foreground));
   font-style: italic;
 }
 
-/* ── WPBakery dark theme ── */
-.wpbakery-content-wrapper { color: #D1D5DB; }
-.wpbakery-content-wrapper h1,
-.wpbakery-content-wrapper h2,
-.wpbakery-content-wrapper h3,
-.wpbakery-content-wrapper h4 { color: #FFFFFF; }
-.wpbakery-content-wrapper a { color: #60A5FA; }
+/* ── WPBakery content ── */
+.wpb-content-wrapper { width: 100%; color: hsl(var(--foreground)); }
 
-/* ── Sidebar responsive fix ── */
+/* ── Sidebar mobile full-width fix ── */
 @media (max-width: 1023px) {
   aside.news-sidebar {
     max-width: 100% !important;
     flex-shrink: 1 !important;
+    width: 100%;
   }
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0A1628; }
-::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #DC2626; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--breaking)); }

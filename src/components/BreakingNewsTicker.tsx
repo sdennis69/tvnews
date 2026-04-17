@@ -33,7 +33,7 @@ export default function BreakingNewsTicker() {
   const repeated = [...headlines, ...headlines]
 
   return (
-    <div className="bg-[#DC2626] py-2 overflow-hidden">
+    <div className="bg-[hsl(var(--breaking))] py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Label */}

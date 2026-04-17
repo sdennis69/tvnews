@@ -81,7 +81,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
         )}
       </Head>
 
-      <main className="min-h-screen bg-[#0A1628]">
+      <main className="min-h-screen bg-[hsl(var(--background))]">
         <Header navItems={navItems} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -90,9 +90,9 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
           {notFound && (
             <div className="py-24 text-center">
               <h1 className="text-3xl font-bold text-white mb-4">Article Not Found</h1>
-              <p className="text-[#9CA3AF] mb-8">This article may have been removed or the link is incorrect.</p>
+              <p className="text-[hsl(var(--muted-foreground))] mb-8">This article may have been removed or the link is incorrect.</p>
               <Link href="/">
-                <a className="bg-[#DC2626] text-white px-6 py-3 font-semibold hover:bg-[#B91C1C] transition-colors">
+                <a className="bg-[hsl(var(--breaking))] text-white px-6 py-3 font-semibold hover:bg-[#B91C1C] transition-colors">
                   ← Back to Home
                 </a>
               </Link>
@@ -108,16 +108,16 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
 
                 {/* Breadcrumb */}
                 <nav className="flex items-center gap-2 text-xs mb-4">
-                  <Link href="/"><a className="text-[#9CA3AF] hover:text-[#FCA5A5] transition-colors">Home</a></Link>
+                  <Link href="/"><a className="text-[hsl(var(--muted-foreground))] hover:text-[#FCA5A5] transition-colors">Home</a></Link>
                   <span className="text-[#1E3A5F]">/</span>
-                  <Link href="/news"><a className="text-[#9CA3AF] hover:text-[#FCA5A5] transition-colors">{category}</a></Link>
+                  <Link href="/news"><a className="text-[hsl(var(--muted-foreground))] hover:text-[#FCA5A5] transition-colors">{category}</a></Link>
                   <span className="text-[#1E3A5F]">/</span>
                   <span className="text-[#4B5563] line-clamp-1">{post.title}</span>
                 </nav>
 
                 {/* Category Badge */}
                 <div className="mb-3">
-                  <span className="inline-block text-[0.6rem] font-black tracking-widest uppercase text-[#DC2626] bg-[#DC2626]/10 border border-[#DC2626]/30 px-2 py-0.5">
+                  <span className="inline-block text-[0.6rem] font-black tracking-widest uppercase text-[hsl(var(--breaking))] bg-[hsl(var(--breaking))]/10 border border-[hsl(var(--breaking))]/30 px-2 py-0.5">
                     {category}
                   </span>
                 </div>
@@ -128,15 +128,15 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                 </h1>
 
                 {/* Byline */}
-                <p className="text-sm text-[#9CA3AF] mb-6">
+                <p className="text-sm text-[hsl(var(--muted-foreground))] mb-6">
                   {formatDate(post.date)}
                   {' · '}
-                  <span className="font-medium text-[#D1D5DB]">by {author}</span>
+                  <span className="font-medium text-[hsl(var(--foreground))]">by {author}</span>
                   <span className="text-[#4B5563] ml-2">({timeAgo(post.date)})</span>
                 </p>
 
                 {/* Article body with image floated right */}
-                <div className="text-[#D1D5DB] text-base leading-relaxed">
+                <div className="text-[hsl(var(--foreground))] text-base leading-relaxed">
                   {/* Featured image floated right — explicit dimensions prevent layout shift */}
                   {image && (
                     <div className="hidden sm:block float-right ml-6 mb-4 flex-shrink-0 clear-right" style={{ width: '320px', height: '240px', position: 'relative' }}>
@@ -172,7 +172,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                       prose-headings:text-white prose-headings:font-bold
                       prose-a:text-[#FCA5A5] prose-a:no-underline hover:prose-a:underline
                       prose-img:rounded prose-img:w-full prose-img:clear-both
-                      prose-blockquote:border-l-4 prose-blockquote:border-[#DC2626] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-[#9CA3AF]
+                      prose-blockquote:border-l-4 prose-blockquote:border-[hsl(var(--breaking))] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-[hsl(var(--muted-foreground))]
                       prose-strong:text-white"
                     dangerouslySetInnerHTML={{ __html: post.content || post.excerpt || '' }}
                   />
@@ -180,8 +180,8 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                 </div>
 
                 {/* Share Bar */}
-                <div className="mt-8 pt-6 border-t border-[#1E3A5F]">
-                  <p className="text-xs font-black text-[#9CA3AF] mb-3 uppercase tracking-widest">Share this story</p>
+                <div className="mt-8 pt-6 border-t border-[hsl(var(--border))]">
+                  <p className="text-xs font-black text-[hsl(var(--muted-foreground))] mb-3 uppercase tracking-widest">Share this story</p>
                   <div className="flex gap-3 flex-wrap">
                     <a
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
@@ -205,7 +205,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                           navigator.clipboard.writeText(window.location.href)
                         }
                       }}
-                      className="bg-[#1E3A5F] text-white px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity"
+                      className="bg-[hsl(var(--border))] text-white px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity"
                     >
                       Copy Link
                     </button>
@@ -214,14 +214,14 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
 
                 {/* Author Bio */}
                 {post.author?.node?.description && (
-                  <div className="mt-8 p-5 bg-[#0D1E35] rounded-lg border border-[#1E3A5F]">
+                  <div className="mt-8 p-5 bg-[hsl(var(--card))] rounded-lg border border-[hsl(var(--border))]">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-[#DC2626] flex items-center justify-center text-white text-base font-bold flex-shrink-0">
+                      <div className="w-10 h-10 bg-[hsl(var(--breaking))] flex items-center justify-center text-white text-base font-bold flex-shrink-0">
                         {author.charAt(0).toUpperCase()}
                       </div>
                       <div>
                         <p className="font-bold text-white mb-1">{author}</p>
-                        <p className="text-sm text-[#9CA3AF] leading-relaxed">{post.author.node.description}</p>
+                        <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed">{post.author.node.description}</p>
                       </div>
                     </div>
                   </div>
@@ -230,13 +230,13 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                 {/* Related Articles */}
                 {related.length > 0 && (
                   <div className="mt-10">
-                    <h2 className="text-sm font-black text-white bg-[#DC2626] px-4 py-2 uppercase tracking-widest inline-block mb-5" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                    <h2 className="text-sm font-black text-white bg-[hsl(var(--breaking))] px-4 py-2 uppercase tracking-widest inline-block mb-5" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                       More Stories
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {related.map((rel) => (
                         <Link key={rel.id} href={`/article/${rel.slug}`}>
-                          <a className="group flex gap-3 bg-[#0D1E35] rounded-lg overflow-hidden border border-[#1E3A5F] hover:border-[#DC2626]/40 transition-colors p-3">
+                          <a className="group flex gap-3 bg-[hsl(var(--card))] rounded-lg overflow-hidden border border-[hsl(var(--border))] hover:border-[hsl(var(--breaking))]/40 transition-colors p-3">
                             {rel.featuredImage?.node?.sourceUrl && (
                               <div className="flex-shrink-0 relative overflow-hidden rounded bg-[#E8E8E8]" style={{ width: '96px', height: '64px' }}>
                                 <Image
@@ -249,7 +249,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                               </div>
                             )}
                             <div className="flex-1 min-w-0">
-                              <p className="text-[0.6rem] font-black tracking-widest uppercase text-[#DC2626] mb-1">
+                              <p className="text-[0.6rem] font-black tracking-widest uppercase text-[hsl(var(--breaking))] mb-1">
                                 {rel.categories?.edges?.[0]?.node?.name || 'News'}
                               </p>
                               <h3 className="text-sm font-bold text-white group-hover:text-[#FCA5A5] transition-colors leading-snug line-clamp-3" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
@@ -267,7 +267,7 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                 {/* Back to Home */}
                 <div className="mt-10 mb-4">
                   <Link href="/">
-                    <a className="inline-block border border-[#1E3A5F] text-[#9CA3AF] px-5 py-2 text-sm font-semibold hover:bg-[#0D1E35] hover:text-white transition-colors">
+                    <a className="inline-block border border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))] px-5 py-2 text-sm font-semibold hover:bg-[hsl(var(--card))] hover:text-white transition-colors">
                       ← Back to Home
                     </a>
                   </Link>
@@ -279,10 +279,10 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
 
                 {/* Revcontent Widget */}
                 {/* CLS fix: reserve min-height so widget expanding doesn't shift layout */}
-                <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
-                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1E3A5F]">
+                <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-[hsl(var(--border))]">
                     <div className="flex items-center gap-2">
-                      <div className="w-1 h-4 bg-[#DC2626]"></div>
+                      <div className="w-1 h-4 bg-[hsl(var(--breaking))]"></div>
                       <span className="text-white text-xs font-black uppercase tracking-widest">Trending</span>
                     </div>
                     <span className="text-[#4B5563] text-[0.6rem]">Ads By Revcontent</span>
@@ -291,9 +291,9 @@ export default function ArticlePage({ post, related, notFound, navItems }: Props
                 </div>
 
                 {/* Generic Ad / Widget Slot 3 */}
-                <div className="bg-[#0D1E35] border border-[#1E3A5F] rounded-lg overflow-hidden">
-                  <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#1E3A5F]">
-                    <div className="w-1 h-4 bg-[#1E3A5F]"></div>
+                <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden">
+                  <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[hsl(var(--border))]">
+                    <div className="w-1 h-4 bg-[hsl(var(--border))]"></div>
                     <span className="text-[#4B5563] text-xs font-bold uppercase tracking-widest">Advertisement</span>
                   </div>
                   <div
