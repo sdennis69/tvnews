@@ -202,7 +202,7 @@ function FeatureCard({ post }: { post: Post }) {
         </div>
         <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 text-white">
           <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-white/80 mb-2">{cat}</span>
-          <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-tight group-hover:underline underline-offset-4 decoration-2">
+          <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-tight group-hover:underline underline-offset-4 decoration-2 text-white">
             {post.title}
           </h2>
           {post.excerpt && (
@@ -298,7 +298,7 @@ function WeatherWidget() {
           <div>
             <div className="text-[11px] font-bold uppercase tracking-widest opacity-70">Wilmington, NC</div>
             <div className="mt-1 flex items-end gap-2">
-              <span className="font-display text-5xl md:text-6xl font-extrabold leading-none">82°</span>
+              <span className="font-display text-4xl md:text-5xl font-extrabold leading-none">82°</span>
               <span className="text-sm opacity-80 mb-1">Feels like 86°</span>
             </div>
             <div className="mt-1 text-sm opacity-85">Partly cloudy • H 82° L 68°</div>
