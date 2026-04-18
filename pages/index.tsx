@@ -225,7 +225,7 @@ function LiveVideoPlayer() {
   useEffect(() => { setMuted(true); setPlaying(true) }, [])
   return (
     <div className="rounded-xl overflow-hidden" style={{ background: 'hsl(var(--card))', boxShadow: 'var(--shadow-card)' }}>
-      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}>
+      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: 'hsl(218 60% 17%)', color: '#ffffff' }}>
         <span className="relative inline-flex h-2 w-2">
           <span className="absolute inset-0 rounded-full animate-ping" style={{ background: 'hsl(var(--live))' }} />
           <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: 'hsl(var(--live))' }} />
@@ -292,7 +292,7 @@ function WeatherWidget() {
     { day: 'Mon', hi: 83, lo: 69, icon: '🌤️' },
   ]
   return (
-    <div className="rounded-xl overflow-hidden" style={{ background: 'var(--gradient-navy)', color: 'hsl(var(--primary-foreground))', boxShadow: 'var(--shadow-card)' }}>
+    <div className="rounded-xl overflow-hidden" style={{ background: 'var(--gradient-navy)', color: '#ffffff', boxShadow: 'var(--shadow-card)' }}>
       <div className="p-5 md:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -401,7 +401,7 @@ export default function Home({ featuredPost, heroSidePosts, localNewsPosts, tren
           </section>
 
           {/* ══ WATCH NOW (navy bg) ════════════════════════════════════════ */}
-          <div style={{ background: 'var(--gradient-navy)', color: 'hsl(var(--primary-foreground))' }}>
+          <div style={{ background: 'var(--gradient-navy)', color: '#ffffff' }}>
             <section className="container py-10 md:py-14">
               <div className="flex items-end justify-between gap-4 mb-6">
                 <div>
@@ -414,7 +414,7 @@ export default function Home({ featuredPost, heroSidePosts, localNewsPosts, tren
                   <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight">Watch Now</h2>
                 </div>
                 <Link href="/videos">
-                  <a className="text-sm font-semibold hover:underline opacity-90" style={{ color: 'hsl(var(--primary-foreground))' }}>All videos →</a>
+                  <a className="text-sm font-semibold hover:underline opacity-90" style={{ color: '#ffffff' }}>All videos →</a>
                 </Link>
               </div>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -458,14 +458,14 @@ export default function Home({ featuredPost, heroSidePosts, localNewsPosts, tren
                 </div>
               </div>
               <aside className="lg:col-span-4 space-y-6">
-                <div className="rounded-xl p-6" style={{ background: 'var(--gradient-navy)', color: 'hsl(var(--primary-foreground))', boxShadow: 'var(--shadow-card)' }}>
+                <div className="rounded-xl p-6" style={{ background: 'var(--gradient-navy)', color: '#ffffff', boxShadow: 'var(--shadow-card)' }}>
                   <div className="h-6 w-6 mb-3 p-1 rounded" style={{ background: 'hsl(var(--breaking))', color: 'hsl(var(--breaking-foreground))' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                   </div>
                   <h3 className="font-display text-xl font-extrabold leading-tight">Get the WWAYTV3 Daily newsletter</h3>
                   <p className="mt-2 text-sm opacity-80">The day's top local stories, weather, and sports — delivered every morning.</p>
                   <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder="Email address" className="flex-1 rounded-md px-3 py-2 text-sm outline-none" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'hsl(var(--primary-foreground))' }} />
+                    <input type="email" placeholder="Email address" className="flex-1 rounded-md px-3 py-2 text-sm outline-none" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} />
                     <button type="submit" className="rounded-md px-4 text-sm font-bold uppercase tracking-wide hover:opacity-90" style={{ background: 'hsl(var(--breaking))', color: 'hsl(var(--breaking-foreground))' }}>Sign up</button>
                   </form>
                 </div>
